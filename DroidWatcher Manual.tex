@@ -1,0 +1,133 @@
+\documentclass{article}
+
+\usepackage[scale=0.75]{geometry}
+\usepackage[francais]{babel}    % faire du français
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern,textcomp}
+\usepackage{url}
+\usepackage{color}
+
+\title{Droid Watcher : User manual}
+\author{Martin Trigaux}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+DroidWatcher records the location of the user periodically.
+When connected to a wireless network, it uploads the collected informations to a server.
+
+\section{SMS commands}
+
+The messages are intercepted before arriving to the message application. If the message contains a defined code, the phone will do a defined action in consequence.
+
+\begin{itemize}
+\item The messages are not case sensitive.
+\item The match should be exact (no extra character).
+\item The application does not record the content of messages, the messages not containing the code won't be affected.
+\end{itemize}
+
+\vspace{0.5cm}
+\texttt{BIGB} : starting code for a command.
+\begin{itemize}
+\item \texttt{LOCME} : reply with the last recorded location
+\item \texttt{GPSON} : turn the GPS on
+\item \texttt{WIFION} : turn the wireless on
+\item \texttt{SETSERVER[new\_server\_url]} : set
+  the url of the server, default
+  \url{http://watcher.dotzero.me/collect}
+%\item SETTHRESHOLD[new\_threshold] : set the collect threshold, in millisecond, below 60,000 is not adviced
+\end{itemize}
+
+\vspace{0.5cm}
+Examples of correct messages:
+\begin{itemize}
+\item BIGBGPSON
+\item bigbSetServerhttp://watcher.dotzer.me/collect
+\item Ping
+\end{itemize}
+
+\vspace{0.5cm}
+Examples of incorrect messages
+\begin{itemize}
+\item BIGB GPSON
+\item Ping!
+\end{itemize}
+\vspace{0.5cm}
+To easily test if the app is running send the message \texttt{PING} it will reply with message containing \texttt{PONG}.\\
+Turning on the GPS is done by exploiting a bug in some Android roms. It was reported as working on v2 Android ROM and CyonengMod 7.
+
+\section{What collects the application ?}
+
+\begin{itemize}
+\item Estimated location and time of the recording
+\item Google username
+\item IMSI (International Mobile Subscriber Identity)
+\item Phone number (if written in the SIM card, usually not)
+\end{itemize}
+
+The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
+Note that the IMSI and phone number do not requiere any permission and that any application can collect it.
+
+\section{What collects the application ?}
+
+\begin{itemize}
+\item Estimated location and time of the recording
+\item Google username
+\item IMSI (International Mobile Subscriber Identity)
+\item Phone number (if written in the SIM card, usually not)
+\end{itemize}
+
+The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
+Note that the IMSI and phone number do not requiere any permission and that any application can collect it.
+
+\section{When run the application ?}
+
+The application start at the phone boots and when the user unlock its phone. Killing the process will only stop it until the next time the phone is unlocked. Uninstalling the application \texttt{DroidWatcher} will fully remove it.
+
+\section{What is stored on my phone ?}
+
+The last collected cell towers and last locations are collected in the file \texttt{.log.obj} at the root of the SD card. You can remove this file safely.
+
+\section{Who can see my location ?}
+
+To ensure privacy, only the owner of the server is able to see the collected location.
+
+\section{Install application on its own server}
+
+To see the information collected, you can install the DroidWatcher collecting website on your own web server.
+The server use the python framework Django 1.3\footnote{Available at \url{https://www.djangoproject.com/}}.
+The following steps explain the deployement of the application on a Debian Lenny server running Apache and mod-wsgi. The full configuration and securitization of the apache server is considered as out of the scoop of these explanations.
+
+\begin{enumerate}
+\item Download the latest version of Django\\
+  \texttt{\$ wget http://www.djangoproject.com/download/1.3.1/tarball/ -O django.tar.gz}
+\item Extract and install\\
+  \texttt{\$ tar -xzvf django.tar.gz\\\$ cd Django-1.3.1\\\$ sudo python setup.py install}
+\item Extract and deploy the DroidWatcher Django application from the DroidWatcher package\\
+  \texttt{\$ tar -xzvf watcher.tar.gz\\\$ sudo mv watcher /var/www/watcher}
+\item Change the ownership to the apache user\\
+  \texttt{\$ sudo chown -R www-data:www-data /var/www/watcher}
+\item Update the apache configuration file (probably \texttt{/etc/apache2/sites-enabled/000-default}) and add
+\begin{verbatim}
+<VirtualHost *:80>
+             ServerName SERVERURL
+             Alias /static/ /var/www/watcher/static/
+             <Directory /var/www/watcher/static>
+             Order deny,allow
+             Allow from all
+             </Directory>
+             WSGIScriptAlias / /var/www/watcher/apache/django.wsgi
+</VirtualHost>
+\end{verbatim}
+\item Update eventually the django setting in \texttt{watcher/settings.py} files if you want to configure your email or have changed the location of the application folder.
+\item Generate the database. In the application folder, execute\\
+  \texttt{\$ python manage.py syncdb}\\
+  and choose an admin password.
+\item Restart the apache module\\
+  \texttt{\$ sudo service apache2 restart}
+\item Access the received location by going to \url{http://SERVERURL/admin} to log in and them access to the recorded location at \url{http://SERVERURL/}
+\end{enumerate}
+
+\end{document}

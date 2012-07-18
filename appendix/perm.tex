@@ -1,0 +1,134 @@
+\newgeometry{textwidth=450pt}
+
+\section*{List of permissions}
+
+\label{perm-list}
+
+% \begin{longtable}[h]
+%   \centering
+%  \begin{tabular*}{\textwidth}[h]{|c|l|l|}
+  \begin{longtable}{|c|l|p{8cm}|}
+    \hline
+    String & ACCESS\_CHECKIN\_PROPERTIES & Allows read/write access to the "properties" table in the checkin database, to change values that get uploaded. \\  \hline 
+String & ACCESS\_COARSE\_LOCATION & Allows an application to access coarse (e.g., Cell-ID, WiFi) location \\  \hline 
+String & ACCESS\_FINE\_LOCATION & Allows an application to access fine (e.g., GPS) location \\  \hline 
+String & ACCESS\_LOCATION\_EXTRA\_COMMANDS & Allows an application to access extra location provider commands \\  \hline 
+String & ACCESS\_MOCK\_LOCATION & Allows an application to create mock location providers for testing \\  \hline 
+String & ACCESS\_NETWORK\_STATE & Allows applications to access information about networks \\  \hline 
+String & ACCESS\_SURFACE\_FLINGER & Allows an application to use SurfaceFlinger's low level features \\  \hline 
+String & ACCESS\_WIFI\_STATE & Allows applications to access information about Wi-Fi networks \\  \hline 
+String & ACCOUNT\_MANAGER & Allows applications to call into AccountAuthenticators. \\  \hline 
+String & AUTHENTICATE\_ACCOUNTS & Allows an application to act as an AccountAuthenticator for the AccountManager \\  \hline 
+String & BATTERY\_STATS & Allows an application to collect battery statistics \\  \hline 
+String & BIND\_APPWIDGET & Allows an application to tell the AppWidget service which application can access AppWidget's data. \\  \hline 
+String & BIND\_DEVICE\_ADMIN & Must be required by device administration receiver, to ensure that only the system can interact with it. \\  \hline 
+String & BIND\_INPUT\_METHOD & Must be required by an InputMethodService, to ensure that only the system can bind to it. \\  \hline 
+String & BIND\_REMOTEVIEWS & Must be required by a RemoteViewsService, to ensure that only the system can bind to it. \\  \hline 
+String & BIND\_WALLPAPER & Must be required by a WallpaperService, to ensure that only the system can bind to it. \\  \hline 
+String & BLUETOOTH & Allows applications to connect to paired bluetooth devices \\  \hline 
+String & BLUETOOTH\_ADMIN & Allows applications to discover and pair bluetooth devices \\  \hline 
+String & BRICK & Required to be able to disable the device (very dangerous!). \\  \hline 
+String & BROADCAST\_PACKAGE\_REMOVED & Allows an application to broadcast a notification that an application package has been removed. \\  \hline 
+String & BROADCAST\_SMS & Allows an application to broadcast an SMS receipt notification \\  \hline 
+String & BROADCAST\_STICKY & Allows an application to broadcast sticky intents. \\  \hline 
+String & BROADCAST\_WAP\_PUSH & Allows an application to broadcast a WAP PUSH receipt notification \\  \hline 
+String & CALL\_PHONE & Allows an application to initiate a phone call without going through the Dialer user interface for the user to confirm the call being placed. \\  \hline 
+String & CALL\_PRIVILEGED & Allows an application to call any phone number, including emergency numbers, without going through the Dialer user interface for the user to confirm the call being placed. \\  \hline 
+String & CAMERA & Required to be able to access the camera device. \\  \hline 
+String & CHANGE\_COMPONENT\_ENABLED\_STATE & Allows an application to change whether an application component (other than its own) is enabled or not. \\  \hline 
+String & CHANGE\_CONFIGURATION & Allows an application to modify the current configuration, such as locale. \\  \hline 
+String & CHANGE\_NETWORK\_STATE & Allows applications to change network connectivity state \\  \hline 
+String & CHANGE\_WIFI\_MULTICAST\_STATE & Allows applications to enter Wi-Fi Multicast mode \\  \hline 
+String & CHANGE\_WIFI\_STATE & Allows applications to change Wi-Fi connectivity state \\  \hline 
+String & CLEAR\_APP\_CACHE & Allows an application to clear the caches of all installed applications on the device. \\  \hline 
+String & CLEAR\_APP\_USER\_DATA & Allows an application to clear user data \\  \hline 
+String & CONTROL\_LOCATION\_UPDATES & Allows enabling/disabling location update notifications from the radio. \\  \hline 
+String & DELETE\_CACHE\_FILES & Allows an application to delete cache files. \\  \hline 
+String & DELETE\_PACKAGES & Allows an application to delete packages. \\  \hline 
+String & DEVICE\_POWER & Allows low-level access to power management \\  \hline 
+String & DIAGNOSTIC & Allows applications to RW to diagnostic resources. \\  \hline 
+String & DISABLE\_KEYGUARD & Allows applications to disable the keyguard \\  \hline 
+String & DUMP & Allows an application to retrieve state dump information from system services. \\  \hline 
+String & EXPAND\_STATUS\_BAR & Allows an application to expand or collapse the status bar. \\  \hline 
+String & FACTORY\_TEST & Run as a manufacturer test application, running as the root user. \\  \hline 
+String & FLASHLIGHT & Allows access to the flashlight \\  \hline 
+String & FORCE\_BACK & Allows an application to force a BACK operation on whatever is the top activity. \\  \hline 
+String & GET\_ACCOUNTS & Allows access to the list of accounts in the Accounts Service \\  \hline 
+String & GET\_PACKAGE\_SIZE & Allows an application to find out the space used by any package. \\  \hline 
+String & GET\_TASKS & Allows an application to get information about the currently or recently running tasks: a thumbnail representation of the tasks, what activities are running in it, etc. \\  \hline 
+String & GLOBAL\_SEARCH & This permission can be used on content providers to allow the global search system to access their data. \\  \hline 
+String & HARDWARE\_TEST & Allows access to hardware peripherals. \\  \hline 
+String & INJECT\_EVENTS & Allows an application to inject user events (keys, touch, trackball) into the event stream and deliver them to ANY window. \\  \hline 
+String & INSTALL\_LOCATION\_PROVIDER & Allows an application to install a location provider into the Location Manager \\  \hline 
+String & INSTALL\_PACKAGES & Allows an application to install packages. \\  \hline 
+String & INTERNAL\_SYSTEM\_WINDOW & Allows an application to open windows that are for use by parts of the system user interface. \\  \hline 
+String & INTERNET & Allows applications to open network sockets. \\  \hline 
+String & KILL\_BACKGROUND\_PROCESSES & Allows an application to call killBackgroundProcesses(String). \\  \hline 
+String & MANAGE\_ACCOUNTS & Allows an application to manage the list of accounts in the AccountManager \\  \hline 
+String & MANAGE\_APP\_TOKENS & Allows an application to manage (create, destroy, Z-order) application tokens in the window manager. \\  \hline 
+String & MASTER\_CLEAR &  \\  \hline 
+String & MODIFY\_AUDIO\_SETTINGS & Allows an application to modify global audio settings \\  \hline 
+String & MODIFY\_PHONE\_STATE & Allows modification of the telephony state - power on, mmi, etc. \\  \hline 
+String & MOUNT\_FORMAT\_FILESYSTEMS & Allows formatting file systems for removable storage. \\  \hline 
+String & MOUNT\_UNMOUNT\_FILESYSTEMS & Allows mounting and unmounting file systems for removable storage. \\  \hline 
+String & NFC & Allows applications to perform I/O operations over NFC \\  \hline 
+String & PERSISTENT\_ACTIVITY &  This constant is deprecated. This functionality will be removed in the future; please do not use. Allow an application to make its activities persistent. \\  \hline 
+String & PROCESS\_OUTGOING\_CALLS & Allows an application to monitor, modify, or abort outgoing calls. \\  \hline 
+String & READ\_CALENDAR & Allows an application to read the user's calendar data. \\  \hline 
+String & READ\_CONTACTS & Allows an application to read the user's contacts data. \\  \hline 
+String & READ\_FRAME\_BUFFER & Allows an application to take screen shots and more generally get access to the frame buffer data \\  \hline 
+String & READ\_HISTORY\_BOOKMARKS & Allows an application to read (but not write) the user's browsing history and bookmarks. \\  \hline 
+String & READ\_INPUT\_STATE & Allows an application to retrieve the current state of keys and switches. \\  \hline 
+String & READ\_LOGS & Allows an application to read the low-level system log files. \\  \hline 
+String & READ\_PHONE\_STATE & Allows read only access to phone state. \\  \hline 
+String & READ\_SMS & Allows an application to read SMS messages. \\  \hline 
+String & READ\_SYNC\_SETTINGS & Allows applications to read the sync settings \\  \hline 
+String & READ\_SYNC\_STATS & Allows applications to read the sync stats \\  \hline 
+String & REBOOT & Required to be able to reboot the device. \\  \hline 
+String & RECEIVE\_BOOT\_COMPLETED & Allows an application to receive the ACTION\_BOOT\_COMPLETED that is broadcast after the system finishes booting. \\  \hline 
+String & RECEIVE\_MMS & Allows an application to monitor incoming MMS messages, to record or perform processing on them. \\  \hline 
+String & RECEIVE\_SMS & Allows an application to monitor incoming SMS messages, to record or perform processing on them. \\  \hline 
+String & RECEIVE\_WAP\_PUSH & Allows an application to monitor incoming WAP push messages. \\  \hline 
+String & RECORD\_AUDIO & Allows an application to record audio \\  \hline 
+String & REORDER\_TASKS & Allows an application to change the Z-order of tasks \\  \hline 
+String & RESTART\_PACKAGES &  This constant is deprecated. The restartPackage(String) API is no longer supported. \\  \hline 
+String & SEND\_SMS & Allows an application to send SMS messages. \\  \hline 
+String & SET\_ACTIVITY\_WATCHER & Allows an application to watch and control how activities are started globally in the system. \\  \hline 
+String & SET\_ALARM & Allows an application to broadcast an Intent to set an alarm for the user. \\  \hline 
+String & SET\_ALWAYS\_FINISH & Allows an application to control whether activities are immediately finished when put in the background. \\  \hline 
+String & SET\_ANIMATION\_SCALE & Modify the global animation scaling factor. \\  \hline 
+String & SET\_DEBUG\_APP & Configure an application for debugging. \\  \hline 
+String & SET\_ORIENTATION & Allows low-level access to setting the orientation (actually rotation) of the screen. \\  \hline 
+String & SET\_POINTER\_SPEED & Allows low-level access to setting the pointer speed. \\  \hline 
+String & SET\_PREFERRED\_APPLICATIONS &  This constant is deprecated. No longer useful, see addPackageToPreferred(String) for details. \\  \hline 
+String & SET\_PROCESS\_LIMIT & Allows an application to set the maximum number of (not needed) application processes that can be running. \\  \hline 
+String & SET\_TIME & Allows applications to set the system time \\  \hline 
+String & SET\_TIME\_ZONE & Allows applications to set the system time zone \\  \hline 
+String & SET\_WALLPAPER & Allows applications to set the wallpaper \\  \hline 
+String & SET\_WALLPAPER\_HINTS & Allows applications to set the wallpaper hints \\  \hline 
+String & SIGNAL\_PERSISTENT\_PROCESSES & Allow an application to request that a signal be sent to all persistent processes \\  \hline 
+String & STATUS\_BAR & Allows an application to open, close, or disable the status bar and its icons. \\  \hline 
+String & SUBSCRIBED\_FEEDS\_READ & Allows an application to allow access the subscribed feeds ContentProvider. \\  \hline 
+String & SUBSCRIBED\_FEEDS\_WRITE &  \\  \hline 
+String & SYSTEM\_ALERT\_WINDOW & Allows an application to open windows using the type TYPE\_SYSTEM\_ALERT, shown on top of all other applications. \\  \hline 
+String & UPDATE\_DEVICE\_STATS & Allows an application to update device statistics. \\  \hline 
+String & USE\_CREDENTIALS & Allows an application to request authtokens from the AccountManager \\  \hline 
+String & USE\_SIP & Allows an application to use SIP service \\  \hline 
+String & VIBRATE & Allows access to the vibrator \\  \hline 
+String & WAKE\_LOCK & Allows using PowerManager WakeLocks to keep processor from sleeping or screen from dimming \\  \hline 
+String & WRITE\_APN\_SETTINGS & Allows applications to write the apn settings \\  \hline 
+String & WRITE\_CALENDAR & Allows an application to write (but not read) the user's calendar data. \\  \hline 
+String & WRITE\_CONTACTS & Allows an application to write (but not read) the user's contacts data. \\  \hline 
+String & WRITE\_EXTERNAL\_STORAGE & Allows an application to write to external storage \\  \hline 
+String & WRITE\_GSERVICES & Allows an application to modify the Google service map. \\  \hline 
+String & WRITE\_HISTORY\_BOOKMARKS & Allows an application to write (but not read) the user's browsing history and bookmarks. \\  \hline 
+String & WRITE\_SECURE\_SETTINGS & Allows an application to read or write the secure system settings. \\  \hline 
+String & WRITE\_SETTINGS & Allows an application to read or write the system settings. \\  \hline 
+String & WRITE\_SMS & Allows an application to write SMS messages. \\  \hline 
+String & WRITE\_SYNC\_SETTINGS & Allows applications to write the sync settings \\ 
+\hline
+  \end{longtable}
+%   \caption{List of available permissions}
+% \end{longtable}
+
+\restoregeometry
