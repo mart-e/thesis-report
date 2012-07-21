@@ -189,11 +189,21 @@ He affirms there is no proof the location is anonymized due to the presence of t
 \section{Personal researches}
 Several facts about the storage of information and privacy have been announced.
 To verify these facts, a set of personal researches have been made.
-The applications used to realize the analyses are present in the appendix.
+The applications used to realize the analyses are present in the appendix.\\
+
+To realise the experiments a rooted smartphone using Android 2.3 was used.
+As most of the location information, including the cache databases files are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
 
 \subsection{Database suppression}
-When the option \emph{Use wireless networks} is disabled, Google ensured the cache files are deleted.
-To ensure the information is deleted from the system when the option is opt out, the following experiment was done:
+
+\subsubsection{Goal}
+
+When the option \emph{Use wireless networks} in the system settings is disabled, Google ensured the cache files are deleted.
+The cache files have been located long ago but the asked question was to know if it was the only place that stored this location information.\\
+
+Durning this experiment, the content of the device is inspected before and after opting out the option \emph{Use wireless networks} and the two versions are compared to detect the change files.
+
+\subsubsection{Methodology}
 
 \begin{enumerate}
 \item Make a dump of the internal memory
@@ -202,19 +212,31 @@ To ensure the information is deleted from the system when the option is opt out,
 \item Compare the two dumps
 \end{enumerate}
 
+The dump is done using the script \texttt{androdump.py} present in Appendix X which uses the Android Debug Bridge (adb) program connecting the device to a computer.
+The comparaison is done using the script \texttt{compare_dump.py} present in Appendix X which use a hash function on each file present in the dump to detect a modification.
+
+\subsubsection{Result}
+
 The goal of the comparison was to ensure that only the folder containing the databases is altered and the information is not stored somewhere else.
 The analysis reveal that, with the exception of some irrelevant system files (battery state...) modified, the database files and also Google Maps cache have been deleted.\\
 
-\subsection{Analysis of location requests}
+\subsection{Location requests impact}
+
+\subsubsection{Goal}
 
 When a location is requested on an Android device, the system sends an encrypted request to the Google's location servers.
 The Google's servers reply to the request with the location of surrounding GSM cell towers and access points.\\
 
-To understand the content of the requests, two analyses have been made.
-The first one aimed to ensure the location informations are stored only in the two cache folders.
-The second one is an analysis of the volume of transmitted data correlated to the number of entries added in cache.\\
+The goal of the experiment was to detect the impact of a location request.
+It is known that the surrounding wireless access points and cell towers information is stored in the cache file but other location related information could be stored somewhere else.
+This experiment inspects the content of the system before and after a localization request is made.
 
-To ensure that the location information is only stored inside the cache files, the following experiment was done :
+% To understand the content of the requests, two analyses have been made.
+% The first one aimed to ensure the location informations are stored only in the two cache folders.
+% The second one is an analysis of the volume of transmitted data correlated to the number of entries added in cache.\\
+
+\subsubsection{Methodology}
+
 \begin{enumerate}
 \item Make a dump of the internal memory
 \item Request a location update
@@ -222,7 +244,13 @@ To ensure that the location information is only stored inside the cache files, t
 \item Compare the two dumps
 \end{enumerate}
 
+The location request is made using the \texttt{LocateMe} Android application present in Appendix X which does a single location request using the network provider (including GSM cell towers and wifi access points).
+
+\subsubsection{Result}
+
 The analysis reveal that, with the exception of irrelevant system files, only the database cache files have been modified.\\
+
+\subsection{Correlation between request size and cache}
 
 The second experiment used the tool tcpdump to correlate a request with the content of the cache files.
 The application \emph{LocateMe} has been developed to make a simple location request using the network resources.
