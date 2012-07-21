@@ -26,7 +26,7 @@ Without a permission, an application can not access to certain resources or meth
 \subsection{Technical details}
 In appendix \ref{perm-list}, the list of available permissions are mentioned.
 These permissions are defined in the configuration file \texttt{AndroidManifest.xml} present in every application.
-Without the correct permission, an application will throw an exception when the method accessing the forbidden resource is launched.
+Without the correct permission, an application throws an exception when the method accessing the forbidden resource is launched.
 
 \begin{lstlisting}[breaklines,caption={Example of permission violation log},label={lst:gpsexception},numbers=none]
 E/AndroidRuntime( 1274): FATAL EXCEPTION: main
@@ -37,7 +37,7 @@ E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps re
 \end{lstlisting}
 
 In the listing \ref{lst:gpsexception}, is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
-If the error is not caught properly, the execution of the application will be interrupted and the users will receive a notification of the crash of the application.\\
+If the error is not caught properly, the execution of the application is interrupted and the users receives a notification of the crash of the application.\\
 
 The permission processed is conceived to control the access to an information and not a phone characteristic.
 For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers informations (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
@@ -60,7 +60,7 @@ Only a deep analysis such as network monitoring can detect malicious behaviour o
 
 Finally, if a user disagree with the need of a suspicious permission, it has no other choice than not install the application.
 There is no possibility to partially accept the permissions.
-We can assume than most of the users will accept, whatever the asked permissions if they want to use the application.
+Due to this restriction, if they want to use the application, we can assume than most users will accept, whatever the asked permissions are.
 
 \section{Applications installation}
 
@@ -94,7 +94,7 @@ If the approval by Google of each application is a considerable protection it is
 
 On the website \url{https://play.google.com/store}, the content of the Android Play Store is available from a browser.
 An important feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
-The next time the Android device is connected to the internet, it will automatically download and install the selected application.
+The next time the Android device is connected to the internet, it will automatically download and install the selected application without any user interaction requiered.
 A simple notice is displayed on the phone once the application is installed.\\
 
 To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
@@ -109,13 +109,13 @@ The developed application \emph{DroidWatcher} is an example of what would be pos
 
 \subsection{Other sources}
 By default, installing applications from other source than the Play Store is disallowed.
-Changing this setting will be proposed when a user is trying to install a software from another source for the first time.
+Changing this setting is proposed when a user is trying to install a software from another source for the first time.
 
 \subsubsection{.apk file}
 The \emph{.apk} extension is the convention for installable applications on the Android operating system in the same way as \emph{.deb} or \emph{.rpm} are on Debian and Fedora operating systems.\\
 
-A user trying to open such files on his device will launch the installation process in the same way as if he was using the Android Play Store.
-The required permissions will be displayed and ask for the approval of the user.
+A user trying to open such files on his device launches the installation process in the same way as if he was using the Android Play Store.
+The required permissions are displayed and ask for the approval of the user.
 The figure \ref{fig:perm-dw} shows the permission screen when a user tries to install the application DroidWatcher.
 This is the same screen while using either the Google Play Store or installing an \emph{.apk} file.\\
 
@@ -172,16 +172,16 @@ There is two main types of Android malwares:\\
 The one that uses security flows as DroidDream did.
 This kind of malware is possible due to the slow update process.
 The manufacturers tends to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
-A device older than a year will usually not be maintain anymore.
+A device older than a year is usually not maintained anymore.
 The only solution for users owning such devices is to install alternative ROMs such as CyanogenMod that provides a longer support for a big range of devices.
-When a security flow is discovered and a patch published, only a very small percentage of users will apply the patch through an update in the months following the flow discovered.
+When a security flow is discovered and a patch published, only a very small percentage of users beneficiate from the patch through an update in the months following the flow discovered.
 Malware writers can them wrote programs taking advantage of that flow.\\
 
 The second kind of malware take advantage of the lack of suspicions from the users and simply ask for permissions permitting the malicious behaviour.
 This is usually the case for applications sending text messages to overtaxed number or stealing contact information from the address book.
-This kind of malware tends to be timeless and will work as long as the users do not inspect attentively the permission screen whatever the operating system version he is running.
-As some ``honest'' applications have a large range of features (that the user will maybe never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered by decompiling the downloaded application from the Android Play Store}).
-The reasons of the asked permissions is usually not mentioned by the application makers.
+This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen whatever the operating system version he is running.
+As some ``honest'' applications have a large range of features (that the user may never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered by decompiling the downloaded application from the Android Play Store}).
+The reasons of the asked permissions is usually not mentioned by the application makers\footnote{Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.
 
 \subsection{Protection}
 Observing the large increase of malware applications on the Android platform\footnote{Between 2011 and 2012, the number of Android malware families has increased from 10 to 37 according to F-Secure \url{http://www.zdnet.com/blog/security/android-malware-families-nearly-quadruple-from-2011-to-2012/12171}}, users and developers wonder about the need of antivirus software.

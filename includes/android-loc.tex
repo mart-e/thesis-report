@@ -7,8 +7,8 @@ Many applications use this functionality, as a feature of the application or as 
 It allows for example to directly show the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to gives statistical information of the country usage of an application...
 
 The details on the location methods used by the Android system are often unclear.
-This chapter will explain how the Android system manage the location of a device and how this has been subject to privacy concerns.
-The efficiency and limits of the DroidWatcher application presented in the chapter \ref{chap:droidwatcher} are dependent of the location techniques detailed in this chapter.
+This chapter explains how the Android system manages the location of a device and how this has been subject to privacy concerns.
+The efficiency and limits of the DroidWatcher application presented in Chapter \ref{chap:droidwatcher} are dependent of the location techniques detailed in this chapter.
 As also been verified through experiences several facts concerning the location data storage.
 
 \section{Available techniques}
@@ -21,7 +21,7 @@ The GPS, for Global Positioning System is a technology based on satellites trila
 GPS satellites are navigating around the earth in a way to maximize the number of visible satellites anywhere at any time.
 There is currently 31 working satellites in orbit.
 The location-aware device is equipped with a GPS receiver chip.
-This receiver will retrieve broadcasted messages from the reachable satellites.
+This receiver retrieves broadcasted messages from the reachable satellites.
 The messages contains :
 
 \begin{itemize}
@@ -42,7 +42,7 @@ If theoretically, three satellites are enough, at least four is required to avoi
 
 
 The accuracy of this method depends of the surrounding of the user.
-In clear sight, the accuracy will be of a few meters but it will degrade if the receiver is surrounded by high buildings or inside a dense forest.\\
+In clear sight, the GPS is accurate to a few meters but it will degrade if the receiver is surrounded by high buildings or inside a dense forest.\\
 
 The time to first fix (TTFF) depends on the state of the GPS.
 In a cold start scenario\footnote{Device is in factory state or the GPS data are not relevant (several months old or inaccurate)}, the GPS needs to retrieve the full almanac.
@@ -207,7 +207,7 @@ In reaction, the data collected was asked to be deleted and the CNIL (independen
 Some users considered the automatically collected data by the Google Cars and Android devices as private.
 In November 2011, in reaction to criticism, Google created a way to opt out recording of its access point.
 The proposition of Google is to end the ESSID of the wireless access point with \texttt{\_nomap}.
-The next time it will be scanned by a Google Cars or an Android device, the access point will be removed from the database.
+The next time it is scanned by a Google Cars or an Android device, the access point is removed from the database.
 Google hopes than over time, the \texttt{\_nomap} string will be adopted by other location providers\cite{nomap}.\\
 
 This proposition was received with much scepticism and did not satisfied the pro-privacy groups.
@@ -236,7 +236,7 @@ He affirms there is no proof the location is anonymized due to the presence of t
 
 Personal researches showed that this string is contained inside a file next to the cache database and it is renewed every time the \emph{Use wireless networks} option is toggled.
 %\texttt{/data/data/com.google.android.location/files/gls.platform.key} 
-If it is relatively easy to change this value, we can imagine that very few users are aware of the existence of this value and will apply this manipulation regulary.
+If it is relatively easy to change this value, we can however imagine that very few users are aware of the existence of this value and will apply this manipulation regulary.
 % \subsection{Android API}
 % When an application wants to locate the device position, the Android system provides some higher level methods to use the available technologies listed above. Getting a user location in Android works by means of callback. A \texttt{LocationListener} is defined and will react to event such as \texttt{onLocationChanged} or \texttt{onProviderEnabled}. On the relevent event, the callback function is executed and the location retrieved \cite{doc-location}.
 
