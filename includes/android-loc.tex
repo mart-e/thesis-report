@@ -30,7 +30,7 @@ The messages contains :
 \item the general system health and rough orbits of all GPS satellites (the almanac)
 \end{itemize}
 
-Trilateration is used based on the received messages as shown in figure \ref{fig:gps-earth}.
+Trilateration is used based on the received messages as shown in Figure \ref{fig:gps-earth}.
 If theoretically, three satellites are enough, at least four is required to avoid clock desynchronization errors (at the speed of light, even an small clock error can lead to huge error).\\
 
 \begin{figure}[h]
@@ -63,7 +63,7 @@ Similar as for the method used with wireless access points, a cell tower as a un
 On the GSM network, a cell tower is characterized by a Location Area Code and a Cell-ID.
 A cellphone can them be located using trilateration based on the surrounding cell towers.\\
 
-In the DroidWatcher application (see chapter \ref{chap:droidwatcher}), the application implements its own trilateration algorithm for offline computation.
+In the DroidWatcher application (see Chapter \ref{chap:droidwatcher}), the application implements its own trilateration algorithm for offline computation.
 
 
 \section{Access points and cells databases}
@@ -102,7 +102,7 @@ This way, the database of wireless access points and cell tower is always up to 
 Previous cells and access points locations are stored in an unencrypted system files.
 This allows to locate the user quickly and still be able to use the network resource, even when the user is not connected to the Internet.
 %This local cache file is stored in the folder \texttt{/data/data/com.google.android.location/files} in the files \texttt{cache.wifi} and \texttt{cache.cell}.
-Each entries in the cache file is linked with a timestamp representing the date of the retrieval as seen in figure \ref{fig:locmap}.\\
+Each entries in the cache file is linked with a timestamp representing the date of the retrieval as seen in Figure \ref{fig:locmap}.\\
 
 \begin{figure}[h]
   \centering
@@ -191,7 +191,7 @@ After observation and repeating the experiment, the following pattern was derive
 \item The size of the downloaded data is directly linked to the number of entries in the cache files.
 \end{itemize}
 
-The figure \ref{fig:loc-req-tcpdump} shows an example of collected trace confirming the derived pattern.
+Figure \ref{fig:loc-req-tcpdump} shows an example of collected trace confirming the derived pattern.
 These observations do not allow to validate the suppositions concerning the packet contents but the patterns are coherent to the model explained before.
 
 
@@ -229,7 +229,7 @@ The security researcher Samy Kamkar has also looked at the location requested.\\
 \end{figure}
 
 He succeeded to decrypt the request made to Google servers and realized that it contains a unique identifier\cite{cnet-andr-samy}.
-The figure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
+Rigure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
 The identifier is unique to the cell phone and present in every request.
 If this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then trace him.
 He affirms there is no proof the location is anonymized due to the presence of this identifier.\\

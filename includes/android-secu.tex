@@ -12,7 +12,7 @@ Knowing that, a user should be able to reduce his infection risk by adopting sim
 Is also explained the different procedures to install an application on a device with the risks associated.
 The forensic aspect to retrieve information from a device without the owner consent have not been analysed here.\\
 
-These clarifications are essentials to understand the limits and possibilities for the developed \emph{DroidWatcher} (see chapter \ref{chap:droidwatcher}) application to be effective.
+These clarifications are essentials to understand the limits and possibilities for the developed \emph{DroidWatcher} (see Chapter \ref{chap:droidwatcher}) application to be effective.
 
 \section{Permissions}
 For an application to run inside the Android operating system and access to critical resources, it should have explicitly been allowed to do so.
@@ -24,7 +24,7 @@ The permission system is designed to control the usage of internal Android metho
 Without a permission, an application can not access to certain resources or method in the Android system.
 
 \subsection{Technical details}
-In appendix \ref{perm-list}, the list of available permissions are mentioned.
+In Appendix \ref{perm-list}, the list of available permissions are mentioned.
 These permissions are defined in the configuration file \texttt{AndroidManifest.xml} present in every application.
 Without the correct permission, an application throws an exception when the method accessing the forbidden resource is launched.
 
@@ -36,7 +36,7 @@ E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps re
 ...
 \end{lstlisting}
 
-In the listing \ref{lst:gpsexception}, is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
+In Listing \ref{lst:gpsexception}, is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
 If the error is not caught properly, the execution of the application is interrupted and the users receives a notification of the crash of the application.\\
 
 The permission processed is conceived to control the access to an information and not a phone characteristic.
@@ -69,7 +69,7 @@ Unlike iOS where the App Store is the only permitted source of applications\foot
 \subsection{Play Store}
 By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is not and compatible to approved devices only.}, the Android Play Store (previously named Android Market before its merging with Google Music) is the only source of application.
 Once a Google account associated to the user's phone, it can use the application Google Play Store which list the available applications and install it quickly.
-The figure \ref{fig:market} shows an example of the interface of the application.\\
+Figure \ref{fig:market} shows an example of the interface of the application.\\
 
 \begin{figure}[h]
   \centering
@@ -116,7 +116,7 @@ The \emph{.apk} extension is the convention for installable applications on the 
 
 A user trying to open such files on his device launches the installation process in the same way as if he was using the Android Play Store.
 The required permissions are displayed and ask for the approval of the user.
-The figure \ref{fig:perm-dw} shows the permission screen when a user tries to install the application DroidWatcher.
+Figure \ref{fig:perm-dw} shows the permission screen when a user tries to install the application DroidWatcher.
 This is the same screen while using either the Google Play Store or installing an \emph{.apk} file.\\
 
 \begin{figure}[h]

@@ -23,9 +23,9 @@
 
 \section{The aim behind DroidWatcher}
 
-In the chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
+In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
 What are the methods and how work the localization using wireless.
-In the chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
+In Chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
 What is the control of the user, what are the limits of the permission system and how malwares abuse from the user confidence.\\
 
 DroidWatcher is an application that request several permissions including the one to access the user location.
@@ -52,7 +52,7 @@ This database has been selected as it is one of the most complete compared to th
 
 \emph{schema du méchanisme utilisé}
 
-This triangulation mechanism is however known as unprecise as explained in the section \ref{sec:dw-difficult-cell} about technical difficulties.
+This triangulation mechanism is however known as unprecise as explained in Section \ref{sec:dw-difficult-cell} about technical difficulties.
 
 \section{Technical difficulties}
 
@@ -65,13 +65,14 @@ Some applications will be paused in there running process.
 The effectiveness of the localization process done by DroidWatcher is affected by this idle purpose.\\
 
 This is the case for example of the GPS that needs to constant update of the position.
-The GPS will sometime stop monitoring the postion of the user if it can not get a fix\footnote{cf section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
+The GPS will sometime stop monitoring the postion of the user if it can not get a fix\footnote{cf Section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
 This effect is undependant of the application but the direct consequence of the system behaviour for battery saving. 
 This issue is often a complain related to the tracking application (eg: sport monitoring application).
 A solution is avoid the phone to going to idle state by keeping it in awake state.
 This solution as however not been used in DroidWatcher as it would have greatly compromised the battery usage of the phone and consequently the effectiveness of the application in monitoring the location the logest and more discrete way as possible.
 
 \subsection{Android 4.0}
+\label{sec:dw-ics}
 
 As the author of this thesis owns only a device with the Android version 2.3.
 At the time of development, end 2011, the fourth version\footnote{The third version of the operating system was limited to tablet devices and not phones limiting greatly the propagation of this version of the system.} of Android was just released and very few devices were capable of running it.
@@ -100,9 +101,15 @@ The main imprecision comes from the fact that all cell tower do not emit signal 
 
 As efficient computation of the signal strength would have requiered long monitoring, the compuation and ponderation of the variables has been done based on personal observation.
 This is known as unprecise but achieve the purpose to be able to record an approximate location at all time when GSM connectivity is available.\\
-x
 
 \section{User manual}
+
+\subsection{Interface}
+\label{sec:dw-gui}
+
+For configuration ease and to solve the restriction appearing on Android 4.0 as explained in Section \ref{sec:dw-ics}, a configuration interface has been created.
+This interface allows to see the last location computed and the date of the last synchronisation to the remote server.
+The option are also given to specify a specific data collection URL and choose if the phone will or not reply to SMS commands.
 
 \subsection{SMS commands}
 \label{sec:dw-smscom}
@@ -117,7 +124,7 @@ The messages are intercepted before arriving to the message application. If the 
 \end{itemize}
 
 \vspace{0.5cm}
-\texttt{BIGB} : starting code for a command.
+\texttt{BIGBRO} : starting code for a command.
 \begin{itemize}
 \item \texttt{LOCME} : reply with the last recorded location
 \item \texttt{GPSON} : turn the GPS on
@@ -143,7 +150,7 @@ Examples of incorrect messages
 \item Ping!
 \end{itemize}
 \vspace{0.5cm}
-To easily test if the app is running send the message \texttt{PING} it will reply with message containing \texttt{PONG}.\\
+To easily test if the app is running send the message \texttt{PING}, the target cell phone replies with message containing \texttt{PONG}.\\
 Turning on the GPS is done by exploiting a bug in some Android roms. It was reported as working on v2 Android ROM and CyonengMod 7.
 
 \section{What collects the application ?}
