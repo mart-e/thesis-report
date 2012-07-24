@@ -89,23 +89,10 @@ The Android Play Store as several features that can be handy for the average use
 \item paid system with Google Checkout
 \end{itemize}
 
-Even when an application is distributed by the Play Store, the user should check the asked permissions carefully.
-This is valid at each update where the permissions can change.
-Several cases of malicious applications on the Play Store have been detected in the past (see below).
-If the approval by Google of each application is a considerable protection it is not perfect and the Play Store should not be considered as a fully safe application distribution medium.\\
-
 On the website \url{https://play.google.com/store}, the content of the Android Play Store is available from a browser.
 An important feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
 The next time the Android device is connected to the internet, it will automatically download and install the selected applications without any user interaction requiered.
 A simple notice is displayed on the phone once the application is installed.\\
-
-To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
-There is no control before the publication of an application.\\
-
-In the case of an attacker gaining access to the Google account of an Android user, it could remotely install any application.
-This would allow the attacker to do almost any kind of actions the device is capable of.
-It would be possible to monitor the activity of the user or remotely command the phone.
-The developed application \emph{DroidWatcher} is an example of what would be possible with a focus on the geolocalization.
 
 %http://androidforums.com/android-applications/36936-android-permissions-explained-security-tips-avoiding-malware.html
 
@@ -129,9 +116,6 @@ This is the same screen while using either the Google Play Store or installing a
 \end{figure}
 
 An apk file is produced after the compilation of a program and is often proposed on small projects or for beta versions.
-Also, websites have appear as proposing apk files of non-free applications on the Play Store.
-These applications should be considered as are the warrez websites on the Windows operating system: highly risky in term of malware propagation, these applications could have been manipulated to inject malicious code.\\
-
 Once an application is installed on the system, the apk file is stored on the system.
 
 \subsubsection{Alternative marketplace}
@@ -148,16 +132,93 @@ If the debug mode of an android device is turned on (done in the configuration s
 Using the official Android Debug Bridge toolkit\footnote{Documentation \url{https://developer.android.com/tools/help/adb.html}}, an application can be installed in a few seconds from a computer without any notification on the device connected to a computer (connection done typically using a usb cable).
 The device does not need to be unlocked to allow the installation.
 
+\section{Attack schemes}
+
+As the multiple installation procedures make the propagation of application easier, it also allows abuses and permit the propagation of malwares.
+Figure \ref{fig:secu-graph} presents the different possibilities for a malicious applications to propagate and be installed on a device.
+The attack types are described in Section \ref{sec:malware-type}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{images/secu-graph.png}
+  \caption{Malicious applications propagation possibilities}
+  \label{fig:secu-graph}
+\end{figure}
+
+\subsection{Play Store publication policy}
+
+In comparaison to the Apple iOS system, Google has adopted an open policy of application publication.
+This strategy choice makes the Android system a better target in term of malware propagation on the official applications distribution plateform.
+
+To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
+There is no control before the publication of an application.
+The upload of a malicious application would be detected only after its publication which can lead to infected users.
+In comparaison, when submitting an iOS application, Apple will review the application which can takes several days.\\
+
+To become a registered developer, the owner of a Google account has only to pay a 25\$ fee and no other information than a name and a phone number.
+In comparaison, to become a registered Apple developer, a minimum of 99\$/year fee to subscribe to the developer program is required and more personal information such as credit card information for identity verification.\\
+
+This difference in the verification process and ease to create a developer profile between Google and Apple may lead to the precense of more malicious applications on the Android platerform than on iOS.
+The presence of an application on the Android Play Store is then by no means a guarantee of safety and the user should check the asked permissions carefully.
+
+\subsection{Play Store website}
+
+In the case of an attacker gaining access to the Google account of an Android user, it could remotely install any application.
+This would allow the attacker to do almost any kind of actions the device is capable of.
+It would be possible to monitor the activity of the user or remotely command the phone.
+%The developed application \emph{DroidWatcher} is an example of what would be possible with a focus on the geolocalization.
+A simple notification is displayed at the application installation that can be unoticed or not understood as an infection sign by inexperienced users.
+
+\subsection{Social engineering}
+
+As the developer policy of Google is open by nature, the description of an application published on the Play Store may not describe the real behaviour of an application.
+Free games or widgets are often attractives and are an ideal target for a malicious application writer that can use social engineering.
+Pretending another purpose than the actual behaviour of an application leads to its installation willingly from the user.\\
+
+This attack scheme is relevant for applications on the Play Store or installed using any of the other sources.
+However, there is frequently confusion supposing the Play Store is more secure than it actually is.
+This may lead to less suspicion from the users and makes the attack more effective.\\
+
+Also, websites have appear on the web proposing applications that are non-free on the Play Store.
+These applications can be instead a malware or have been manipulated to inject malicious code in the original application.
+Therefore, applications downloaded on such websites should be considered as are the warrez websites on the Windows operating system: highly risky in term of malware propagation.
+
+\subsection{Physical access}
+
+If a malicious user has a physical acces to a device, it can install an application from a computer using the \emph{adb} utility in debug mode.
+The micro-USB connectivity is an European standard recommandation for smartphone connectivity.
+It is them easy to connect any smartphone to a computer.
+If the debug mode is enabled\footnote{The debug mode is required for any interaction between a computer and a smartphone}, there is no need to activate the phone which makes the presence of screen lock uneffective.\\
+
+When a malicious application is installed using this method, no notification is displayed, the only detection possibility is the presence of the application in the installed applications list.
+
 \section{Malwares}
 
+\subsection{General malware type}
+\label{sec:malware-type}
+
+
+There is two main types of Android malwares: abuse of permission or use of security flaws.\\
+
+The first kind of malware takes advantage of the lack of suspicions from the users and simply ask for permissions permitting a malicious behaviour.
+This is usually the case for applications sending text messages to overtaxed number or stealing contact information from the address book.
+This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen whatever the operating system version he is running.
+As some ``honest'' applications have a large range of features (that the user may never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered by decompiling the downloaded application from the Android Play Store}).
+The reasons of the asked permissions is usually not mentioned by the application makers\footnote{Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.
+
+The usage of security flaws is possible due to the slow update process.
+The manufacturers tends to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
+A device older than a year is usually not maintained anymore.
+The only solution for users owning such devices is to install alternative ROMs such as CyanogenMod that provides a longer support for a big range of devices.
+When a security flow is discovered and a patch published, only a very small percentage of users beneficiate from the patch through an update in the months following the flow discovered.
+Malware writers can them wrote programs taking advantage of that flow.\\
+
 \subsection{The DroidDream malware}
-%In May 2012 there were about 200 new applications published on the Android Play Store every day\footnote{Based on estimations by AppBrain \url{http://www.appbrain.com/stats/number-of-android-apps}}.
-%Due to the high number of applications to review, some malicious applications may pass through the control of Google.\\
 
 In spring 2011, a malware named \emph{DroidDream} has widely spread across the Android devices.
 The particular of this malware was that he used the official Android Play Store (called Android Market at that time).
 The attackers created several developers accounts and malicious applications (above 50 different applications were detected) on the Play Store.
-The applications took the name of popular applications or modified versions of the application to trick the users into downloading them.
+The applications used social engineering by taking the name of popular applications and using modified versions of the application to trick the users into downloading them.
 The malware used exploits effective until the version 2.2 (99\% of the devices at that time\footnote{Data collected from \url{https://developer.android.com/about/dashboards/index.html}}) to break the sandboxing mechanism, root the device and install other applications preventing the removal.
 The malware has been called DroidDream as it was set up to run between 11pm and 8am to act as a botnet.
 Due to its ability to install other applications, the Kaspersky Lab's analysts suppose it could have been monetized in the future to be used as a botnet for example.\\
@@ -166,24 +227,6 @@ In reaction to the discovery of this malware, Google activated the \emph{kill sw
 It was the first known example of widely spread command-and-control malware on mobile devices.
 Researchers estimated the number of infected users between 50,000 and 200,000 devices\footnote{According to the number of time the applications have been downloaded in total}.
 Variants of this malware called DroidDream Lite have been detected a few months later.
-
-\subsection{General malware type}
-
-There is two main types of Android malwares:\\
-
-The one that uses security flows as DroidDream did.
-This kind of malware is possible due to the slow update process.
-The manufacturers tends to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
-A device older than a year is usually not maintained anymore.
-The only solution for users owning such devices is to install alternative ROMs such as CyanogenMod that provides a longer support for a big range of devices.
-When a security flow is discovered and a patch published, only a very small percentage of users beneficiate from the patch through an update in the months following the flow discovered.
-Malware writers can them wrote programs taking advantage of that flow.\\
-
-The second kind of malware take advantage of the lack of suspicions from the users and simply ask for permissions permitting the malicious behaviour.
-This is usually the case for applications sending text messages to overtaxed number or stealing contact information from the address book.
-This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen whatever the operating system version he is running.
-As some ``honest'' applications have a large range of features (that the user may never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered by decompiling the downloaded application from the Android Play Store}).
-The reasons of the asked permissions is usually not mentioned by the application makers\footnote{Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.
 
 \subsection{Protection}
 Observing the large increase of malware applications on the Android platform\footnote{Between 2011 and 2012, the number of Android malware families has increased from 10 to 37 according to F-Secure \url{http://www.zdnet.com/blog/security/android-malware-families-nearly-quadruple-from-2011-to-2012/12171}}, users and developers wonder about the need of antivirus software.
