@@ -68,7 +68,7 @@ In 2000, Bill Clinton ordered to discontinue the usage of the Selective Availabi
 \section{Wireless access point}
 \label{sec:andro-wifi}
 Each wireless access point has a unique identifier\footnote{BSSID for Basic Service Set IDentification, a unique 48 bits address}.
-If the wireless is turned on, the device can retrieve the surrounding access points.
+When the wireless option of the phone is turned on, the device can retrieve the surrounding access points.
 Assuming the geographical coordinates of all the access points are known, it is possible to estimate the location of the user by trilateration.\\
 
 The advantage of this method is that for an accuracy of about 100 meters, the localization is faster than using GPS, it works indoors, consumes less battery power than a GPS receiver chip and only one access point is enough to locate a device.\\
@@ -109,7 +109,7 @@ This way, the database of wireless access points and cell towers is always up to
 \subsection{Location cache files}
 
 Previous cell tower and access point locations are stored in an unencrypted system files.
-This allows to locate the user quickly and the device still is able to use the network ressource, even when not connected to the Internet.
+This allows to locate the user quickly and the device is still able to use the network ressource, even when not connected to the Internet.
 %This local cache file is stored in the folder \texttt{/data/data/com.google.android.location/files} in the files \texttt{cache.wifi} and \texttt{cache.cell}.
 Each entrie in the cache file is linked with a timestamp representing the date of the retrieval as seen in Figure \ref{fig:locmap}.\\
 
@@ -132,7 +132,8 @@ The DroidWatcher application relays on this fact to monitor the location of the 
 To show the ease of retrieving such information, a python script has been developed\cite{soft-locdump} to parse the content of these two files and produce a GPS trace file in GPX format representing the approximate movement of the device.
 However, a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the warranty.}.
 This could prevent malicious applications retrieving these data.
-Also this cache folder is only composed when the \emph{Use wireless networks} option is enabled in the Android settings, however this option is often required by common applications such as Google Maps which may lead to a large percentage of devices having this option enabled.\\
+This cache folder is only created when the \emph{Use wireless networks} option is enabled in the Android settings.
+However, this option is often required by common applications such as Google Maps which may lead to a large percentage of devices having this option enabled.\\
 
 \section{Cell tower}
 Similar to the method used with wireless access points, a cell tower can be identified in a unique way.
