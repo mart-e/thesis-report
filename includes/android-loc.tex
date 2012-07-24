@@ -151,13 +151,13 @@ The advantage of using cell tower location over the wireless is the fact it allo
 
 \subsection{Google Cars}
 In May 2010, Google admitted to German authorities having collected more than what it was supposed to.
-In addition to access point unique identifier, it had ``been mistakenly collecting samples of payload data from open networks''.
+In addition to access point's unique identifier, it had ``been mistakenly collecting samples of payload data from open networks''.
 These data chunks could include parts of web surf, email, text...\footnote{TechEYE, May 2012, \url{http://news.techeye.net/security/google-admits-it-sniffed-out-peoples-data}}.
 In reaction, the data collected was asked to be deleted and the CNIL (independent French administrative authority) fined Google with €100.000\footnote{BBC UK, mar 2011, http://www.bbc.co.uk/news/technology-12809076}.\\
 
 \subsection{\_nomap}
 
-Some users considered the automatically collected data by the Google Cars and Android devices as private.
+Some users considered the collected data by the Google Cars and Android devices as private.
 In November 2011, in reaction to criticism, Google created a way to opt out recording of its access point.
 The proposition of Google is to end the ESSID of the wireless access point with \texttt{\_nomap}.
 The next time it is scanned by a Google Cars or an Android device, the access point is removed from the database.
@@ -183,7 +183,8 @@ The security researcher Samy Kamkar has also looked at the location requested.\\
 % \end{figure}
 
 He succeeded to decrypt the request made to Google servers and realized that it contains a unique identifier\cite{cnet-andr-samy}.
-Rigure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
+%Figure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
+% TODO rewrite the graph ?
 The identifier is unique to the cell phone and present in every request.
 If this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then trace him.
 He affirms there is no proof the location is anonymized due to the presence of this identifier.\\
@@ -203,7 +204,7 @@ As most of the location information, including the cache databases files are loc
 When the option \emph{Use wireless networks} in the system settings is disabled, Google ensured the cache files are deleted.
 The cache files have been located long ago but the asked question was to know if it was the only place that stored this location information.\\
 
-Durning this experiment, the content of the device is inspected before and after opting out the option \emph{Use wireless networks} and the two versions are compared to detect the change files.
+Durning this experiment, the content of the device is inspected before and after opting out the option \emph{Use wireless networks} and the two versions are compared to detect the modified or deleted files.
 
 \subsubsection{Methodology}
 
@@ -220,9 +221,11 @@ The comparaison is done using the script \texttt{compare\_dump.py} present in Ap
 \subsubsection{Result}
 
 The goal of the comparison was to ensure that only the folder containing the databases is altered and the information is not stored somewhere else.
-The analysis reveal that, with the exception of some irrelevant system files (battery state...) modified, the database files and also Google Maps cache have been deleted.\\
+The analysis reveal that, with the exception of some irrelevant system files (battery state...) modified, the database files.
+The cache data of Google Maps application has been also deleted.
+This confirms the assumption concerning the deletation of location data.\\
 
-\subsection{Location requests impact}
+\subsection{Impact of location requests}
 
 \subsubsection{Goal}
 
@@ -252,7 +255,7 @@ The location request is made using the \texttt{LocateMe} Android application pre
 
 The analysis reveals that, with the exception of irrelevant system files, only the database cache files have been modified.\\
 
-\subsection{Correlation between request size and cache}
+\subsection{Correlation between size and cache of requests}
 
 \subsubsection{Goal}
 
@@ -304,7 +307,7 @@ Figure \ref{fig:loc-req-tcpdump} shows an example of collected trace confirming 
 The packets number 46 and 64 contain 269 bytes and are the initiating packets of a request for cell towers and wireless access points.
 The packets number 47 and 65 are the surrounding cell towers and access points uploaded to Google servers.
 The packets number 49 and 67 are the reply from Google's servers containing the coordinates of the known cell towers and access points.
-These observations do not allow to validate the suppositions concerning the packet contents but the patterns are coherent to the model explained before.
+These observations do not allow to validate the suppositions concerning the content of the packet but the patterns are coherent to the model explained before.
 
 \subsection{Unique identifier}
 
@@ -322,7 +325,7 @@ When the option is enabled, new cache files and unique identifier are create.
 The content of the identifier file \texttt{gls.platform.key} is different to the previous value every time the option is toggled.
 %\texttt{/data/data/com.google.android.location/files/gls.platform.key} 
 
-\subsubsection{Conclusion}
+\subsubsection{Conclusions}
 
 The tracability possibility are limited due to this constrain.
 If it is relatively easy to change this value, we can however imagine that very few users are aware of the existence of this value and will apply this manipulation regulary.
