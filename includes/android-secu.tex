@@ -1,15 +1,16 @@
-\chapter{Security under Android}
+\chapter{Security of Android}
 \label{chap:and-secu}
 
 \section*{Introduction}
 As the number of smartphones is in constant raise, concerns about the security of the system appears.
-Paradoxically, the users tends to store more and more personal informations on their smartphone and are not aware of the security issues of such devices.
+Paradoxically, the users tend to store more and more personal informations on their smartphones and are not aware of the security issues of such devices.
 Malwares have been discovered on the official applications store and antivirus softwares for Android are now sold.
-Android runs on top of a Linux kernel which is reputed to be virus free.\\
+Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
 
-The aim of this chapter is to explain in detail the actual security mechanisms used to protect the users against malicious applications.
-Knowing that, a user should be able to reduce his infection risk by adopting simple security principles.
-Is also explained the different procedures to install an application on a device with the risks associated.
+The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
+Using the presented information, a user should be able to reduce his infection risk by adopting simple security principles.
+The focus of this chapter is the application capabilities and propagation.
+The different procedures from the publication to the installation of an application on a device with the risks associated is particularly examined.
 The forensic aspect to retrieve information from a device without the owner consent have not been analysed here.\\
 
 These clarifications are essentials to understand the limits and possibilities for the developed \emph{DroidWatcher} (see Chapter \ref{chap:droidwatcher}) application to be effective.
@@ -21,7 +22,7 @@ These tasks are, for example, accessing the current location of the user, update
 At the installation of an application, the permissions necessary are mentioned.\\
 
 The permission system is designed to control the usage of internal Android methods and resources.
-Without a permission, an application can not access to certain resources or method in the Android system.
+Without a permission, an application can not access to certain resources or methods in the Android system.
 
 \subsection{Technical details}
 In Appendix \ref{perm-list}, the list of available permissions are mentioned.
@@ -45,30 +46,31 @@ For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to 
 \subsection{Weaknesses}
 
 The way the permission system is implemented does not fully prevent malicious behaviours.
-The permission description is unclear and can include different purpose.
-For example, the permission \texttt{READ\_PHONE\_STATE} has many purpose.
+The permission description is unclear and can include different purposes.
+For example, the permission \texttt{READ\_PHONE\_STATE} has many purposes.
 It allows an application to be aware when a phone call is processed or when the device is locked, it also gives information about the phone unique identifier and SIM id.
 This permission is often used to suspend services or simply track a device using the unique identifier.
-The problem is that, in case of a phone call, it also provide the access to methods allowing to retrieve the caller phone number.
+The problem is that, in case of a phone call, it also provides the access to methods allowing to retrieve the caller phone number.
 This is an information leakage that could have been avoided.\\
 
 Also, it is unclear when and why an application requires a permission at the installation process.
 Many free applications display advertisements to fund their development.
-These kind of applications require the permission to access the internet to download the advertisement content.
-A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the microSD card of the device) for advertising and score storing. Using these permission, it could upload the full content of the SD card (which may contains personal informations from the other applications) to a server.
-Only a deep analysis such as network monitoring can detect malicious behaviour of an application.\\
+This kind of applications requires the permission to access the internet to download the advertisement content.
+A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the microSD card of the device) for advertising and score storing.
+Using these permissions, it could upload the full content of the SD card (which may contains personal information from the other applications) to a server.
+Only a deep analysis such as network monitoring can detect malicious behaviours of an application.\\
 
 Finally, if a user disagree with the need of a suspicious permission, it has no other choice than not install the application.
 There is no possibility to partially accept the permissions.
 Due to this restriction, if they want to use the application, we can assume than most users will accept, whatever the asked permissions are.
 
-\section{Applications installation}
+\section{Application installation}
 
-Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exists on iOS but they require jailbreaking which is not allow by Apple}, the Android operating system propose several way to install an application.
+Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jailbreaking which is not allowed by Apple}, the Android operating system proposes several ways to install an application.
 
 \subsection{Play Store}
-By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is not and compatible to approved devices only.}, the Android Play Store (previously named Android Market before its merging with Google Music) is the only source of application.
-Once a Google account associated to the user's phone, it can use the application Google Play Store which list the available applications and install it quickly.
+By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources. The installation of applications is then limited to approved devices only.}, the Android Play Store (previously named Android Market before its merging with Google Music) is the only source of applications.
+Once a Google account is associated to the user's phone, it can use the application Google Play Store which lists the available applications and install them quickly.
 Figure \ref{fig:market} shows an example of the interface of the application.\\
 
 \begin{figure}[h]
@@ -87,14 +89,14 @@ The Android Play Store as several features that can be handy for the average use
 \item paid system with Google Checkout
 \end{itemize}
 
-Even when distributed by the Play Store, the user should check the asked permission carefully.
+Even when an application is distributed by the Play Store, the user should check the asked permissions carefully.
 This is valid at each update where the permissions can change.
-Several cases of malicious applications on the Play Store have been detected in the past (see bellow).
+Several cases of malicious applications on the Play Store have been detected in the past (see below).
 If the approval by Google of each application is a considerable protection it is not perfect and the Play Store should not be considered as a fully safe application distribution medium.\\
 
 On the website \url{https://play.google.com/store}, the content of the Android Play Store is available from a browser.
 An important feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
-The next time the Android device is connected to the internet, it will automatically download and install the selected application without any user interaction requiered.
+The next time the Android device is connected to the internet, it will automatically download and install the selected applications without any user interaction requiered.
 A simple notice is displayed on the phone once the application is installed.\\
 
 To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
@@ -108,7 +110,7 @@ The developed application \emph{DroidWatcher} is an example of what would be pos
 %http://androidforums.com/android-applications/36936-android-permissions-explained-security-tips-avoiding-malware.html
 
 \subsection{Other sources}
-By default, installing applications from other source than the Play Store is disallowed.
+By default, the possibility to install applications from other sources than the Play Store is disabled.
 Changing this setting is proposed when a user is trying to install a software from another source for the first time.
 
 \subsubsection{.apk file}
@@ -122,13 +124,13 @@ This is the same screen while using either the Google Play Store or installing a
 \begin{figure}[h]
   \centering
   \includegraphics[width=5cm]{images/permissions.png}
-  \caption{Permissions requiered to install DroidWatcher}
+  \caption{Permissions required to install DroidWatcher}
   \label{fig:perm-dw}
 \end{figure}
 
 An apk file is produced after the compilation of a program and is often proposed on small projects or for beta versions.
 Also, websites have appear as proposing apk files of non-free applications on the Play Store.
-These applications should be considered as are the warrez websites on the Windows operating system: highly risky in term of malwares propagation, these applications could have been manipulated to inject malicious code.\\
+These applications should be considered as are the warrez websites on the Windows operating system: highly risky in term of malware propagation, these applications could have been manipulated to inject malicious code.\\
 
 Once an application is installed on the system, the apk file is stored on the system.
 
