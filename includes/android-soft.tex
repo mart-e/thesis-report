@@ -2,37 +2,29 @@
 \chapter{DroidWatcher}
 \label{chap:droidwatcher}
 
+\section{Presentation}
 
-% \begin{itemize}
-% \item But du logiciel
-% \item Manuel d'utilisation
-% \item Fonctionnement technique
-%   \begin{itemize}
-%   \item Méthodes utilisées
-%   \item Triangulation antennes GSM home-made
-%   \item Activation GPS via bug
-%   \end{itemize}
+% In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
+% What are the methods and how work the localization using wireless.
+% In Chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
+% What is the control of the user, what are the limits of the permission system and how malwares abuse from the user confidence.\\
 
-% \item Problèmes de développement
-%   \begin{itemize}
-%   \item Développé principalement sur un modèle de smartphone en particulier
-%   \item Limitation accès Android 4
-%   \item Android met en veille des process arbitrairement
-%   \end{itemize}
-% \end{itemize}
-
-\section{The aim of DroidWatcher}
-
-In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
-What are the methods and how work the localization using wireless.
-In Chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
-What is the control of the user, what are the limits of the permission system and how malwares abuse from the user confidence.\\
-
-DroidWatcher is an application that request several permissions including the one to access the user location.
+DroidWatcher is an application that requests several permissions including the one to access the user location.
 Using this permission the application can record the user permission at all time and monitor its movements.
-The application can be also controled via text messaging invisibly and sends the recorded location over the internet to a remote server.
+The application can be also controlled via text messaging invisibly and sends the recorded location over the internet to a remote server.
 The application purpose is not to create a malware tracing devices but making the users realising what a device is capable of and how important it is to estimate the risk of malicious behaviour before installing an application.
 Also having having this application installed could be useful in case of loss or theft of the device.\\
+
+\subsection{Monitoring}
+
+Every specified time interval (15min by default), DroidWatcher records the location of the device.
+Depending on what is available, it can use the GPS, wireless or GSM cell location capabilities, keeping the most accurate one.
+The locations received are stored in a file on the SD card.
+Once the device is connected to internet, it will sync to a remote server to upload the last recorded coordinates.\\
+
+All these operations are done automatically and does not require any user interaction.
+The application keeps recording locations when the user do not use its smartphone.
+The application starts at phone boot or when unlocked (exception with Android 4.0 or above, see Section \ref{sec:dw-ics}).
 
 \section{Location features}
 
@@ -46,14 +38,14 @@ Even if the security flaw has been revealed in April 2010 and a patch released i
 
 \subsection{Cell triangulation}
 The native triangulation mechanism using GSM cell towers is inefficient if the device is not connected to the Internet at the time of the location request.
-To resolve this constraint, the DroidWatcher application monitors the surroung cell towers identification information and will use this information to compute the location in the futur, the next time the device is connected to internet.\\
+To resolve this constraint, the DroidWatcher application monitors the surrounding cell towers identification information and will use this information to compute the location in the future, the next time the device is connected to internet.\\
 
 An unofficial API to the Google GSM cell tower database has been discovered and is used to retrieve the location of each cell tower.
 This database has been selected as it is one of the most complete compared to the other free alternatives.\\
 
 %\emph{schema du méchanisme utilisé}
 
-This triangulation mechanism is however known as unprecise as explained in Section \ref{sec:dw-difficult-cell} about technical difficulties.
+This triangulation mechanism is however known as imprecise as explained in Section \ref{sec:dw-difficult-cell} about technical difficulties.
 
 \section{Technical difficulties}
 
@@ -63,11 +55,11 @@ To develop this application, several constrains were met that limited the effect
 
 Once going in idle state (once the device is not used by the user for a certain amount of time), the operating system will limit the possibility of the system to save battery.
 Some applications will be paused in there running process.
-The effectiveness of the localization process done by DroidWatcher is affected by this idle purpose.\\
+The effectiveness of the localisation process done by DroidWatcher is affected by this idle purpose.\\
 
 This is the case, for example, of the GPS that needs to constantly update of the position.
-The GPS will sometime stop monitoring the postion of the user if it can not get a fix\footnote{See Section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
-This effect is undependant of the application but the direct consequence of the system behaviour for battery saving. 
+The GPS will sometime stop monitoring the position of the user if it can not get a fix\footnote{See Section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
+This effect is independent of the application but the direct consequence of the system behaviour for battery saving. 
 This issue is often a complain related to the tracking application (eg: sport monitoring application).
 A solution is avoid the phone to going to idle state by keeping it in awake state.
 However, this solution is not used in DroidWatcher as it would have greatly compromised the battery usage of the phone and consequently the effectiveness of the application in monitoring the location the longest and most discrete way as possible.
@@ -80,8 +72,8 @@ At the time of development, end 2011, the fourth version\footnote{The third vers
 Consequently the testing has been done mainly on devices running the second version of the operating system\footnote{The third version of Android was available only for tablets and not smartphones}.\\
 
 An unexpected change introduced in the 4.0 version of Android is the way a device manage the start of an application in background.
-DroidWatcher has been concieved to be started when a device is booting or waked from idle.
-This feature participated in the aim to be fully discrete and that the application was not noticable without analysis.
+DroidWatcher has been conceived to be started when a device is booting or waked from idle.
+This feature participated in the aim to be fully discrete and that the application was not noticeable without analysis.
 With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched a first time.\\
 
 To fix this problem, an interface screen has been developed.
@@ -94,15 +86,15 @@ However malicious applications often use a fake interface (weather forecast, gam
 \label{sec:dw-difficult-cell}
 
 To compute the location of the user, a triangulation algorithm has been developed.
-This algorithm is however known as unprecise for several reason.
+This algorithm is however known as imprecise for several reason.
 To compute the location, the algorithm uses the signal strength of captured GSM cell towers nearby.
 The signal strength is a very fluctuating variable.
-At a same distance to a cell tower, the signal variates if the device is inside or outside a building or if monitored by two different devices with different GSM receiver.
+At a same distance to a cell tower, the signal varies if the device is inside or outside a building or if monitored by two different devices with different GSM receiver.
 The main imprecision comes from the fact that all cell tower do not emit signal at the same signal strength (rural areas are usually covered with less cell towers emitting using higher signal strengths.\\
 
 As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas.
-The computation and ponderation of the variables has been done based on personal observations.
-This is known as unprecise but achieves the purpose to be able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
+The computation and weighting of the variables has been done based on personal observations.
+This is known as imprecise but achieves the purpose to be able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 
 \section{User manual}
 
@@ -116,7 +108,7 @@ The option are also given to specify a specific data collection URL and choose i
 \subsection{SMS commands}
 \label{sec:dw-smscom}
 
-The application can be controled through SMS commands sent to the phones running the application.
+The application can be controlled through SMS commands sent to the phones running the application.
 The messages are intercepted before arriving to the message application.
 If the message contains a pre-defined code, the phone will execute an action in consequence.
 
@@ -203,7 +195,7 @@ To ensure privacy, only the owner of the server is able to see the collected loc
 
 To watch the collected information, the DroidWatcher collecting website can be installed on your own web server.
 The server use the python framework Django 1.3\footnote{Available at \url{https://www.djangoproject.com/}}.
-The following steps explain the deployement of the application on a Debian Lenny server running Apache and mod-wsgi. The full configuration and securitization of the apache server is considered as out of the scoop of these explanations.
+The following steps explain the deployment of the application on a Debian Lenny server running Apache and mod-wsgi. The full configuration and security of the apache server is considered as out of the scoop of these explanations.
 
 \begin{enumerate}
 \item Download the latest version of Django\\
