@@ -2,18 +2,42 @@
 \chapter{DroidWatcher}
 \label{chap:droidwatcher}
 
-\section{Presentation}
+Droidwatcher aims at demonstrating the concrete accessibility of localisation services.
+In the context of this thesis the application takes only acceptable actions.
+But of course more invasive actions could be taken by malicious developers.
 
-% In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
-% What are the methods and how work the localization using wireless.
-% In Chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
-% What is the control of the user, what are the limits of the permission system and how malwares abuse from the user confidence.\\
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=9cm]{images/dw-archi.png}
+  \caption{DroidWatcher system architecture}
+  \label{fig:dw-archi}
+\end{figure}
 
-DroidWatcher is an application that requests several permissions including the one to access the user location.
-Using this permission the application can record the user permission at all time and monitor its movements.
-The application can be also controlled via text messaging invisibly and sends the recorded location over the internet to a remote server.
-The application purpose is not to create a malware tracing devices but making the users realising what a device is capable of and how important it is to estimate the risk of malicious behaviour before installing an application.
-Also having having this application installed could be useful in case of loss or theft of the device.\\
+DroidWatcher is made of two major components as represented in Figure \ref{fig:dw-archi}: 
+
+\begin{itemize}
+\item A mobile application running on a smartphone\\
+  The application essentially collects location data on a regular basis.
+\item A server-based application\\
+  The application centralizes the data pushed the smartphones as soon as those smartphones have an internet access.
+\end{itemize}
+
+This chapter presents more specifically the mobile application.
+Installation guide and user manual on the complete DroidWatcher solution can be found in appendix \ref{dw-guide}
+% \section{Presentation}
+
+% % In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
+% % What are the methods and how work the localization using wireless.
+% % In Chapter \ref{chap:and-secu}, it has been explained how an application could behave through the Android system.
+% % What is the control of the user, what are the limits of the permission system and how malwares abuse from the user confidence.\\
+
+% DroidWatcher is an application that requests several permissions including the one to access the user location.
+% Using this permission, the application can record the user permission at all time and monitor its movements.
+% The application can be also controlled via text messaging invisibly and sends the recorded location over the internet to a remote server.
+% The application purpose is not to create a malware tracing devices but making the users realising what a device is capable of and how important it is to estimate the risk of malicious behaviour before installing an application.
+% Also having having this application installed could be useful in case of loss or theft of the device.\\
+
+% Appendix \ref{sec:dw-user-manual} contains the user manual and Appendix \ref{sec:dw-django} describe how to install the remote server application.
 
 \subsection{Monitoring}
 
@@ -23,8 +47,78 @@ The locations received are stored in a file on the SD card.
 Once the device is connected to internet, it will sync to a remote server to upload the last recorded coordinates.\\
 
 All these operations are done automatically and does not require any user interaction.
-The application keeps recording locations when the user do not use its smartphone.
+The application keeps recording locations when the user does not use its smartphone.
 The application starts at phone boot or when unlocked (exception with Android 4.0 or above, see Section \ref{sec:dw-ics}).
+
+\section{Cell tower triangulation}
+
+When a device needs to record the current location but is not capable to access the Internet, the program records the surrounding cell towers information.
+The described triangulation algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connect to the Internet.
+
+\subsection{Scenarios}
+
+To triangulate a device using the cell towers, the following scenarios have been considered:
+
+\begin{enumerate}
+\item One GSM tower is within range
+\item Two GSM towers are within range
+\item More than two GSM towers are within range
+\end{enumerate}
+
+The case where no GSM tower is within range is not considered as the location can not be estimated and the algorithm is not used.
+To evaluate the location, a \emph{centre point} is decided and a \emph{confidence range} is computed.
+The device is estimated to be located within the area covered by the circle drawn using the centre point and the confidence as radius.\\
+
+It has been decided not to differentiate the eventuality of more than three different cell towers as it will greatly increase the complexity of the algorithm without increasing the accuracy of the method proportionally, as intended by the limitations explained in Section \ref{sec:dw-difficult-cell}.
+
+\subsection{Determine the position}
+
+Depending of theses three scenarios, the according centres will be decided as:
+
+\begin{enumerate}
+\item The location of the only GSM tower within range
+\item Along the median between the two GSM towers
+\item \emph{The intersection between the two closest towers that is on the side of the third closest tower} Reformuler
+\end{enumerate}
+
+If more than three GSM towers are within range, the closest towers are determined as the ones with the strongest signal strength.\\
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{images/tower-schema.png}
+  \caption{Triangulation scenario with 3 GSM towers}
+  \label{fig:triangulation-scenario-3}
+\end{figure}
+The third scenario is illustrated in Figure \ref{fig:triangulation-scenario-3}.
+The tower A and B are considered as the closest to the device as received with the highest signal strength, the tower C is the third closest to the phone.
+For each tower, a circle of a radius size related to the signal strength is drawn.
+Two points D and E are computed as the intersection between the circles of centre A and B.
+The point D is determined as the best centre point as it is the one closest to the tower C and is then evaluated as the location of the device.\\
+
+In the three considered cases, the confidence range is determined as
+\begin{enumerate}
+\item The conversion of the signal strength to meters
+\item The distance between the two intersections
+\item The half of the distance between the two intersections
+\end{enumerate}
+
+\emph{Comment justifier l'utilisation de la distance ?}
+
+\subsection{Signal strength conversion}
+
+If a device receive a GSM signal at a determined strength, it is possible to estimate its distance from the cell tower.
+A circle is drawn around the GSM tower representing every position the device could be.
+The strongest the signal is, the closest is the device to the tower.\\
+
+The signal strength collected by the Android device is expressed in \emph{ASU}, for Arbitrary Strength Unit, which is a value between 0 and 31 derived from the signal strength usually computed in decibel\footnote{For the GSM network, $dBm = 2 × ASU - 113$}.
+0 ASU representing the lowest signal and 31 the strongest.
+The way to express the conversion is made using the following formula :\\
+
+\[
+ (-\sqrt{asu}+6)*900
+\]
+
+The weighting of the factors has been decided based on personal observations using the author's smartphone.
 
 \section{Location features}
 
@@ -69,12 +163,12 @@ However, this solution is not used in DroidWatcher as it would have greatly comp
 
 As the author of this thesis owns only a device with the Android version 2.3.
 At the time of development, end 2011, the fourth version\footnote{The third version of the operating system was limited to tablet devices and not phones limiting greatly the propagation of this version of the system.} of Android was just released and very few devices were capable of running it.
-Consequently the testing has been done mainly on devices running the second version of the operating system\footnote{The third version of Android was available only for tablets and not smartphones}.\\
+Consequently the testing has been done mainly on devices running the second version of the operating system.\\
 
-An unexpected change introduced in the 4.0 version of Android is the way a device manage the start of an application in background.
+An unexpected change introduced in the 4.0 version\footnote{The change was already present since the version 3.1 for tablets but reflected to smartphones only since the version 4.0} of Android is the way a device manage the start of an application in background.
 DroidWatcher has been conceived to be started when a device is booting or waked from idle.
 This feature participated in the aim to be fully discrete and that the application was not noticeable without analysis.
-With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched a first time.\\
+With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched a first time~\cite{boot-restrictions}.\\
 
 To fix this problem, an interface screen has been developed.
 This screen allows the user to see location information and basic configuration.\\
@@ -96,59 +190,6 @@ As efficient computation of the signal strength would have required long monitor
 The computation and weighting of the variables has been done based on personal observations.
 This is known as imprecise but achieves the purpose to be able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 
-\section{User manual}
-
-\subsection{Interface}
-\label{sec:dw-gui}
-
-For configuration ease and to solve the restriction appearing on Android 4.0 as explained in Section \ref{sec:dw-ics}, a configuration interface has been created.
-This interface allows to see the last location computed and the date of the last synchronisation to the remote server.
-The option are also given to specify a specific data collection URL and choose if the phone will or not reply to SMS commands.
-
-\subsection{SMS commands}
-\label{sec:dw-smscom}
-
-The application can be controlled through SMS commands sent to the phones running the application.
-The messages are intercepted before arriving to the message application.
-If the message contains a pre-defined code, the phone will execute an action in consequence.
-
-\begin{itemize}
-\item The messages are not case sensitive.
-\item The match should be exact (no extra character).
-\item The application does not record the content of messages, the messages not containing the code will not be affected.
-\end{itemize}
-
-\vspace{0.5cm}
-\texttt{BIGBRO} : starting code for a command.
-\begin{itemize}
-\item \texttt{LOCME} : reply with the last recorded location
-\item \texttt{GPSON} : turn the GPS on
-\item \texttt{WIFION} : turn the wireless on
-\item \texttt{SETSERVER[new\_server\_url]} : set
-  the url of the server, default
-  \url{http://watcher.dotzero.me/collect}
-%\item SETTHRESHOLD[new\_threshold] : set the collect threshold, in millisecond, below 60,000 is not adviced
-\end{itemize}
-
-\vspace{0.5cm}
-Examples of correct messages:
-\begin{itemize}
-\item BIGBROGPSON
-\item bigbroSetServerhttp://watcher.dotzer.me/collect
-\item Ping
-\end{itemize}
-
-\vspace{0.5cm}
-Examples of incorrect messages
-\begin{itemize}
-\item BIGBRO GPSON
-\item Ping!
-\end{itemize}
-\vspace{0.5cm}
-To easily test if the application is running, the message \texttt{PING} can be send, the targeted cell phone replies with message containing \texttt{PONG}.\\
-
-Turning on the GPS is done by exploiting a bug in some Android roms.
-It was reported as working on v2 Android ROM and CyonengMod 7.
 
 \section{FAQ}
 \label{sec:faq}
@@ -190,39 +231,3 @@ The last collected cell towers and last locations are collected in the file \tex
 \subsection{Who is able to see the recorded location ?}
 
 To ensure privacy, only the owner of the server is able to see the collected location.
-
-\section{Installation of the web application}
-
-To watch the collected information, the DroidWatcher collecting website can be installed on your own web server.
-The server use the python framework Django 1.3\footnote{Available at \url{https://www.djangoproject.com/}}.
-The following steps explain the deployment of the application on a Debian Lenny server running Apache and mod-wsgi. The full configuration and security of the apache server is considered as out of the scoop of these explanations.
-
-\begin{enumerate}
-\item Download the latest version of Django\\
-  \texttt{\$ wget http://www.djangoproject.com/download/1.3.1/tarball/ -O django.tar.gz}
-\item Extract and install\\
-  \texttt{\$ tar -xzvf django.tar.gz\\\$ cd Django-1.3.1\\\$ sudo python setup.py install}
-\item Extract and deploy the DroidWatcher Django application from the DroidWatcher package\\
-  \texttt{\$ tar -xzvf watcher.tar.gz\\\$ sudo mv watcher /var/www/watcher}
-\item Change the ownership to the apache user\\
-  \texttt{\$ sudo chown -R www-data:www-data /var/www/watcher}
-\item Update the apache configuration file (probably \texttt{/etc/apache2/sites-enabled/000-default}) and add
-\begin{verbatim}
-<VirtualHost *:80>
-             ServerName SERVERURL
-             Alias /static/ /var/www/watcher/static/
-             <Directory /var/www/watcher/static>
-             Order deny,allow
-             Allow from all
-             </Directory>
-             WSGIScriptAlias / /var/www/watcher/apache/django.wsgi
-</VirtualHost>
-\end{verbatim}
-\item Update eventually the django setting in \texttt{watcher/settings.py} files if you want to configure your email or have changed the location of the application folder.
-\item Generate the database. In the application folder, execute\\
-  \texttt{\$ python manage.py syncdb}\\
-  and choose an admin password.
-\item Restart the apache module\\
-  \texttt{\$ sudo service apache2 restart}
-\item Access the received location by going to \url{http://SERVERURL/admin} to log in and them access to the recorded location at \url{http://SERVERURL/}
-\end{enumerate}

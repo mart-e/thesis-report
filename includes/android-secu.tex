@@ -3,7 +3,7 @@
 
 \section*{Introduction}
 As the number of smartphones is in constant raise, concerns about the security of the system appears.
-Paradoxically, the users tend to store more and more personal informations on their smartphones and are not aware of the security issues of such devices.
+Paradoxically, the users tend to store more and more personal information on their smartphones and are not aware of the security issues of such devices.
 Malwares have been discovered on the official applications store and antivirus softwares for Android are now sold.
 Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
 
@@ -43,7 +43,7 @@ In Listing \ref{lst:gpsexception}, is shown the Android debugger trace of an app
 If the error is not caught properly, the execution of the application is interrupted and the users receives a notification of the crash of the application.\\
 
 The permission processed is conceived to control the access to an information and not a phone characteristic.
-For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers informations (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
+For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
 \subsection{Weaknesses}
 
@@ -58,7 +58,7 @@ This is an information leakage that could have been avoided.\\
 Also, it is unclear when and why an application requires a permission at the installation process.
 Many free applications display advertisements to fund their development.
 This kind of applications requires the permission to access the internet to download the advertisement content.
-A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the microSD card of the device) for advertising and score storing.
+A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the micro-SD card of the device) for advertising and score storing.
 Using these permissions, it could upload the full content of the SD card (which may contains personal information from the other applications) to a server.
 Only a deep analysis such as network monitoring can detect malicious behaviours of an application.\\
 
@@ -68,7 +68,7 @@ Due to this restriction, if they want to use the application, we can assume than
 
 \section{Installation of application}
 
-Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jailbreaking which is not allowed by Apple}, the Android operating system proposes several ways to install an application.
+Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jail-breaking which is not allowed by Apple}, the Android operating system proposes several ways to install an application.
 
 \subsection{Play Store}
 By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources and compatible with only the official Android devices.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
@@ -122,7 +122,7 @@ Once an application is installed on the system, the apk file is stored on the sy
 
 \subsubsection{Alternative marketplace}
 In the same way as the Android Play Store, it exists several alternative market places.
-Alternative market places are a way to download apk files from a centralized interface.
+Alternative market places are a way to download apk files from a centralised interface.
 It is seen as an alternative to the Google Play Store with the advantages of a centralised distribution medium (paid system, users reviews, moderation...).
 Manufacturers or service providers sometimes sell smartphones with their own marketplace instead of the Google Play Store.\\
 
@@ -130,7 +130,7 @@ Manufacturers or service providers sometimes sell smartphones with their own mar
 
 \subsubsection{Debug mode}
 If the debug mode of an android device is turned on (done in the configuration settings of the device), interaction between a computer and the device is possible.
-Using the official Android Debug Bridge toolkit\footnote{Documentation \url{https://developer.android.com/tools/help/adb.html}}, an application can be installed in a few seconds from a computer without any notifications or user interactions on the device connected to a computer (connection done typically using a usb cable).
+Using the official Android Debug Bridge toolkit\footnote{Documentation \url{https://developer.android.com/tools/help/adb.html}}, an application can be installed in a few seconds from a computer without any notifications or user interactions on the device connected to a computer (connection done typically using a USB cable).
 %The device does not need to be unlocked to allow the installation.
 
 \section{Attack schemes}
@@ -148,18 +148,18 @@ The attack types are described in Section \ref{sec:malware-type}.
 
 \subsection{Play Store publication policy}
 
-In comparaison to the Apple iOS system, Google has adopted an open policy of application publication.
-This strategy choice makes the Android system an easier target in term of malware propagation on the official applications distribution plateform.\\
+In comparison to the Apple iOS system, Google has adopted an open policy of application publication.
+This strategy choice makes the Android system an easier target in term of malware propagation on the official applications distribution platform.\\
 
 To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
 There is no control before the publication of an application.
 The upload of a malicious application would be detected only after its publication which can lead to infected users.
-In comparaison, when submitting an iOS application, Apple will review the application which can takes several days.\\
+In comparison, when submitting an iOS application, Apple will review the application which can takes several days.\\
 
 To become a registered developer, the owner of a Google account has only to pay a 25\$ fee and no other information than a name and a phone number.
-In comparaison, to become a registered Apple developer, a minimum of 99\$/year fee\footnote{According to Apple Developer Programs \url{https://developer.apple.com/programs/}} to subscribe to the developer program is required and more personal information such as credit card information for identity verification.\\
+In comparison, to become a registered Apple developer, a minimum of 99\$/year fee\footnote{According to Apple Developer Programs \url{https://developer.apple.com/programs/}} to subscribe to the developer program is required and more personal information such as credit card information for identity verification.\\
 
-This difference in the verification process and ease to create a developer profile between Google and Apple may lead to the precense of more malicious applications on the Android platerform than on iOS.
+This difference in the verification process and ease to create a developer profile between Google and Apple may lead to the presence of more malicious applications on the Android platform than on iOS.
 The presence of an application on the Android Play Store is then, by no means, a guarantee of safety and a user should check carefully before installing any application.\\
 
 As for the Play Store, alternative market places are as secured as the control of their owners over the applications acceptance process.
@@ -171,12 +171,12 @@ In the case of an attacker gaining access to the Google account of an Android us
 This would allow the attacker to do almost any kind of actions the device is capable of.
 It would be possible to monitor the activity of the user or remotely command the phone.
 %The developed application \emph{DroidWatcher} is an example of what would be possible with a focus on the geolocalization.
-A simple notification is displayed at the application installation that can be unoticed or not understood as an infection sign by inexperienced users.
+A simple notification is displayed at the application installation that can be unnoticed or not understood as an infection sign by inexperienced users.
 
 \subsection{Social engineering}
 
 As the developer policy of Google is open by nature, the description of an application published on the Play Store may not describe the real behaviour of an application.
-Free games or widgets are often attractives and are an ideal target for a malicious application writer that can use social engineering.
+Free games or widgets are often attractive and are an ideal target for a malicious application writer that can use social engineering.
 Pretending another purpose than the actual behaviour of an application leads to its installation willingly from the user.\\
 
 This attack scheme is relevant for applications on the Play Store or installed using any of the other sources.
@@ -185,18 +185,18 @@ This may lead to reduce the suspicion of the users and makes the attack more eff
 
 Also, websites have appear on the web proposing applications that are non-free on the Play Store.
 These applications can be instead a malware or have been manipulated to inject malicious code in the original application.
-Therefore, applications downloaded on such websites should be considered as are the warrez websites on the Windows operating system: highly risky in term of malware propagation.
+Therefore, applications downloaded on such websites should be considered as are the warez websites on the Windows operating system: highly risky in term of malware propagation.
 
 \subsection{Physical access}
 
-If a malicious user has a physical acces to a device, it can install an application from a computer using the \emph{adb} utility in debug mode.
-The micro-USB connectivity is an European standard recommandation for smartphone connectivity.
+If a malicious user has a physical access to a device, it can install an application from a computer using the \emph{adb} utility in debug mode.
+The micro-USB connectivity is an European standard recommendation for smartphone connectivity.
 It is then easy to connect any smartphone to a computer with this connectivity.
-If the debug mode is enabled\footnote{The debug mode is required for any interaction between a computer and a smartphone}, there is no need to activate the phone which makes the presence of screen lock uneffective.\\
+If the debug mode is enabled\footnote{The debug mode is required for any interaction between a computer and a smartphone}, there is no need to activate the phone which makes the presence of screen lock ineffective.\\
 
 When a malicious application is installed using this method, no notification is displayed, the only detection possibility is the presence of the application in the installed applications list.\\
 
-It is adviced to disable the debug mode when not required and 
+It is recommended to disable the debug mode when not required and 
 
 \section{Malwares}
 
@@ -216,20 +216,20 @@ The usage of security flaws is possible due to the slow update process.
 The manufacturers tends to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
 A device older than a year is usually not maintained anymore.
 The only solution for users owning such devices is to install alternative ROMs such as CyanogenMod that provides a longer support for a large range of devices.
-When a security flaw is discovered and a patch published, only a very small percentage of users beneficiate from the patch through an update in the months following the flaw discovered.
+When a security flaw is discovered and a patch published, only a very small percentage of users benefit from the patch through an update in the months following the flaw discovered.
 Malware writers can them wrote programs taking advantage of that flaw.\\
 
 \subsection{The DroidDream malware}
 
 In spring 2011, a malware named \emph{DroidDream} has widely spread across the Android devices.
 The particularity of this malware was that he used the official Android Play Store (called Android Market at that time).
-Refering to Figure \ref{fig:secu-graph}, it is classified as using social engineering to exploit a system vulnerability.\\
+Referring to Figure \ref{fig:secu-graph}, it is classified as using social engineering to exploit a system vulnerability.\\
 
 The attackers created several developers accounts and malicious applications (above 50 different applications were detected) on the Play Store.
 The applications used social engineering by taking the name of popular applications and using modified versions of the application to trick the users into downloading them.
 The malware used exploits effective until the version 2.2 (99\% of the devices at that time\footnote{Data collected from \url{https://developer.android.com/about/dashboards/index.html}}) to break the sandboxing mechanism, root the device and install other applications preventing the removal.
 The malware has been called DroidDream as it was set up to run between 11pm and 8am to act as a botnet.
-Due to its ability to install other applications, the Kaspersky Lab's analysts suppose it could have been monetized in the future to be used as a botnet for example.\\
+Due to its ability to install other applications, the Kaspersky Lab's analysts suppose it could have been monetised in the future to be used as a botnet for example.\\
 
 In reaction to the discovery of this malware, Google activated the \emph{kill switch} which deleted the malware from the user devices remotely.
 It was the first known example of widely spread command-and-control malware on mobile devices.
