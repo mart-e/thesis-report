@@ -1,4 +1,5 @@
-\documentclass{report}
+%\documentclass{report}
+\documentclass[11pt,a4paper,english,twoside,openright,oldfontcommands,final]{memoir}
 
 \include{header}
 
@@ -6,13 +7,13 @@
 
 \begin{document}
 
-\maketitle
+\include{includes/titlepage}
+%\maketitle
 
 \tableofcontents
 
 \include{includes/intro}
 \include{includes/stateart}
-%\include{includes/android}
 
 \part{Android}
 \label{chap:android}
@@ -22,6 +23,11 @@
 \include{includes/android-secu}
 \include{includes/android-soft}
 
+\part{Camera}
+
+\include{includes/camera}
+
+
 %\chapter*{Conclusion}
 
 %\include{includes/camera}
@@ -29,7 +35,7 @@
 
 \appendix
 %\part*{Appendix}
-\include{appendix/perm}
+%\include{appendix/perm}
 \include{appendix/dw-guide}
 
 \printbibliography

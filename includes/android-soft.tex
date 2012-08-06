@@ -2,7 +2,12 @@
 \chapter{DroidWatcher}
 \label{chap:droidwatcher}
 
-Droidwatcher aims at demonstrating the concrete accessibility of localisation services.
+\section{Presentation}
+\label{sec:dw-presentation}
+
+DroidWatcher is an application developed in the context of the current thesis.
+It aims at demonstrating the concrete accessibility of localisation services.
+By exploiting the official capabilities\footnote{A known bug has however been exploited for the remote GPS activation feature as explained in Section \ref{sec:dw-gps-bug}} of the Android operating system, a system monitoring actively the device movement has been developed.
 In the context of this thesis the application takes only acceptable actions.
 But of course more invasive actions could be taken by malicious developers.
 
@@ -16,14 +21,14 @@ But of course more invasive actions could be taken by malicious developers.
 DroidWatcher is made of two major components as represented in Figure \ref{fig:dw-archi}: 
 
 \begin{itemize}
-\item A mobile application running on a smartphone\\
-  The application essentially collects location data on a regular basis.
-\item A server-based application\\
-  The application centralizes the data pushed the smartphones as soon as those smartphones have an internet access.
+\item A mobile application running on a smartphone:\\
+  the application essentially collects location data on a regular basis.
+\item A server-based application:\\
+  the application centralises the data collected by the smartphones as soon as those smartphones have an internet access.
 \end{itemize}
 
 This chapter presents more specifically the mobile application.
-Installation guide and user manual on the complete DroidWatcher solution can be found in appendix \ref{dw-guide}
+Installation guide and user manual on the complete DroidWatcher solution, on the mobile and server side, can be found in Appendix \ref{dw-guide}
 % \section{Presentation}
 
 % % In Chapter \ref{chap:and-loc}, it has been explained how the localization works in the Android devices.
@@ -33,24 +38,99 @@ Installation guide and user manual on the complete DroidWatcher solution can be 
 
 % DroidWatcher is an application that requests several permissions including the one to access the user location.
 % Using this permission, the application can record the user permission at all time and monitor its movements.
-% The application can be also controlled via text messaging invisibly and sends the recorded location over the internet to a remote server.
+% The application can be also controlled via text messaging invisibly and sends the recorded location over the Internet to a remote server.
 % The application purpose is not to create a malware tracing devices but making the users realising what a device is capable of and how important it is to estimate the risk of malicious behaviour before installing an application.
 % Also having having this application installed could be useful in case of loss or theft of the device.\\
 
 % Appendix \ref{sec:dw-user-manual} contains the user manual and Appendix \ref{sec:dw-django} describe how to install the remote server application.
 
-\subsection{Monitoring}
+\section{Mobile application execution}
 
-Every specified time interval (15min by default), DroidWatcher records the location of the device.
-Depending on what is available, it can use the GPS, wireless or GSM cell location capabilities, keeping the most accurate one.
-The locations received are stored in a file on the SD card.
-Once the device is connected to internet, it will sync to a remote server to upload the last recorded coordinates.\\
+\subsection{Application structure}
+\label{sec:dw-app-structure}
 
-All these operations are done automatically and does not require any user interaction.
-The application keeps recording locations when the user does not use its smartphone.
-The application starts at phone boot or when unlocked (exception with Android 4.0 or above, see Section \ref{sec:dw-ics}).
+Once the device is connected to the Internet, it synchronises itself to a remote server to upload the last recorded coordinates.\\
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{images/dw-schema.png}
+  \caption{DroidWatcher execution process}
+  \label{fig:dw-schema}
+\end{figure}
+
+Figure \ref{fig:dw-schema} shows the execution of the mobile application.
+The application starts at phone boot, when unlocked or when the interface is used\footnote{Except with Android 4.0 or above where the interface should be launched at least once, see Section \ref{sec:dw-ics} for technical information}.
+When starting, the application has three main components:
+\begin{itemize}
+\item Periodic recording of the location and cell information
+\item SMS commands management
+\item Internet requests and synchronisation%Detection when the phone is connected to the Internet
+\end{itemize}
+
+%\section{Location features}
+
+\subsection{Location recording}
+
+At the installation, the mobile application requests the localisation permissions\footnote{See Section \ref{sec:permissions} for details about the permission model}.
+Using these permissions, every specified time interval (15min by default), DroidWatcher records the location of the device.
+The application works in background and keeps recording locations when the user does not use its smartphone.
+Only the most accurate location is kept in an interval of 15min.
+Both GPS and network\footnote{The network resource is defined as the usage of wireless and cell tower access points as described in Section \ref{sec:andro-wifi} and \ref{sec:loc-cell-tower}} resources are monitored using the official provided methods in Android.
+If a new location is not available (the system keeps in cache the last recorded location), it will be ignored.
+%Depending on what is available, it can use the GPS, wireless or GSM cell location capabilities, keeping the most accurate one.
+The locations received are stored in a file on the SD card.\\
+
+The surrounding cell data are also collected for future location.
+The cell towers identifiers and signal strengths are recorded at the same frequency as the GPS and network locations.
+The geographical coordinates of the collected GSM cell towers are retrieved once the phone is connected to the Internet and computed afterwards by using triangulation.
+
+\subsection{Internet actions}
+\label{sec:dw-internet-actions}
+
+Periodically and when the wireless is enable on the smartphone, the application verifies if the device is connected to the Internet.
+When it is the case, the application takes two actions:
+
+\begin{itemize}
+\item Retrieve the geographical coordinates of the collected GSM cell towers and compute the previous locations using triangulation
+\item Synchronise the collected locations to the remote server
+\end{itemize}
+
+The coordinates of the GSM towers are collected using an unofficial Google database available at \url{http://www.google.com/glm/mmap}.
+This database has been selected as it is one of the most complete compared to the other free alternatives.
+However, due to its unofficial state, it is possible the data will not be available in the future.\\
+
+Using the geographical coordinates of the cell towers, the application is able to compute by triangulation of the previous location of the device.
+The method developed to triangulate a device is explained in Section \ref{sec:dw-cell-triangu}.
+
+\subsection{SMS management}
+\label{sec:dw-sms-manag}
+
+The mobile application provides a SMS-based command interface.
+These commands allow to configure the application (frequency of retrieval, server url...) and take direct actions related to the location (enable GPS, returns current location...).
+The application intercepts the received SMS before the main SMS application\footnote{The application is set to use the maximal priority in the chain of events. However if another application has also set the maximal priority, it may retrieve the SMS before the DroidWatcher application.}.
+If a predefined code is detected, it will discard the text message and will take an action accordingly.
+Otherwise, the SMS is ignored and will be delivered to the main SMS application.\\
+
+The complete list of SMS commands is available at Appendix \ref{sec:dw-smscom}.
+
+\subsection{GPS activation}
+\label{sec:dw-gps-bug}
+
+The GPS of a device can be remotely activated using an SMS command.
+This feature is possible due to a bug discovered in the power control widget\footnote{Issue 7890 \url{https://code.google.com/p/android/issues/detail?id=7890}}.
+Even if the security flaw has been revealed in April 2010 and a patch released in April 2011, the flaw has been observed as still exploitable on devices running Android 2.3.\\
+
+This is the only part of the software where a bug is exploited in this application instead of using the official systems capabilities.
+However it is important for an user to understand such flows exists and, even when corrected, can affect a large part of devices (in August 2012, Android 2.3 and below represented 81\% of the Android market share).
+
+%\emph{TODO: tester sur un Android 4.0}
+
 
 \section{Cell tower triangulation}
+
+\label{sec:dw-cell-triangu}
+
+
 
 When a device needs to record the current location but is not capable to access the Internet, the program records the surrounding cell towers information.
 The described triangulation algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connect to the Internet.
@@ -78,7 +158,7 @@ Depending of theses three scenarios, the according centres will be decided as:
 \begin{enumerate}
 \item The location of the only GSM tower within range
 \item Along the median between the two GSM towers
-\item \emph{The intersection between the two closest towers that is on the side of the third closest tower} Reformuler
+\item \emph{The intersection between the two closest towers that is on the side of the third closest tower} Reformer
 \end{enumerate}
 
 If more than three GSM towers are within range, the closest towers are determined as the ones with the strongest signal strength.\\
@@ -120,30 +200,9 @@ The way to express the conversion is made using the following formula :\\
 
 The weighting of the factors has been decided based on personal observations using the author's smartphone.
 
-\section{Location features}
+\section{Technical challenges}
 
-\subsection{GPS activation}
-
-The GPS of a device can be remotely activated (see SMS commands Section \ref{sec:dw-smscom}).
-This feature is possible due to a bug discovered in the power control widget\footnote{Issue 7890 \url{https://code.google.com/p/android/issues/detail?id=7890}}.
-Even if the security flaw has been revealed in April 2010 and a patch released in April 2011, the flaw has been observed as still exploitable on most Android devices running Android 2.3.
-
-%\emph{TODO: tester sur un Android 4.0}
-
-\subsection{Cell triangulation}
-The native triangulation mechanism using GSM cell towers is inefficient if the device is not connected to the Internet at the time of the location request.
-To resolve this constraint, the DroidWatcher application monitors the surrounding cell towers identification information and will use this information to compute the location in the future, the next time the device is connected to internet.\\
-
-An unofficial API to the Google GSM cell tower database has been discovered and is used to retrieve the location of each cell tower.
-This database has been selected as it is one of the most complete compared to the other free alternatives.\\
-
-%\emph{schema du méchanisme utilisé}
-
-This triangulation mechanism is however known as imprecise as explained in Section \ref{sec:dw-difficult-cell} about technical difficulties.
-
-\section{Technical difficulties}
-
-To develop this application, several constrains were met that limited the effect of the application.
+To develop this application, several constrains were experienced that limited the effect of the application.
 
 \subsection{Automatic idle}
 
@@ -190,44 +249,3 @@ As efficient computation of the signal strength would have required long monitor
 The computation and weighting of the variables has been done based on personal observations.
 This is known as imprecise but achieves the purpose to be able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 
-
-\section{FAQ}
-\label{sec:faq}
-
-\subsection{What data is collected by the application ?}
-
-\begin{itemize}
-\item Estimated location and time of the recording
-\item Google username
-\item IMSI (International Mobile Subscriber Identity)
-\item Phone number (if written in the SIM card, usually not)
-\end{itemize}
-
-The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
-Note that the IMSI and phone number do not require any permission and that any application can collect it.
-
-\subsection{What is collected by the application ?}
-
-\begin{itemize}
-\item Estimated location and time of the recording
-\item Google username
-\item IMSI (International Mobile Subscriber Identity)
-\item Phone number\footnote{Only if written in the SIM card, depends on the phone provider.}
-\end{itemize}
-
-The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
-Note that the IMSI and phone number do not require any permission and that any application can collect it.
-
-\subsection{When run the application ?}
-
-The application start at the phone boots and when the user unlock its phone.
-Except if using Android 4.0 or above, killing the process will only stop it until the next time the phone is unlocked.
-Uninstalling the application \texttt{DroidWatcher} will fully remove it.
-
-\subsection{What is stored on the phone ?}
-
-The last collected cell towers and last locations are collected in the file \texttt{.log.obj} at the root of the SD card. You can remove this file safely.
-
-\subsection{Who is able to see the recorded location ?}
-
-To ensure privacy, only the owner of the server is able to see the collected location.
