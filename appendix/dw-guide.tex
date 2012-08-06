@@ -1,0 +1,136 @@
+\chapter{DroidWatcher guides}
+
+\label{dw-guide}
+
+\section{Mobile application}
+\label{sec:dw-user-manual}
+
+\subsection{Installation}
+
+The installation of the mobile application is similar to the installation of most Android application.
+
+\begin{enumerate}
+\item Retrieve the file DroiDWatcher.apk from the CDROM\footnote{The file can also be downloaded at \url{https://gitorious.org/martin-trigaux-thesis/droidwatcher/blobs/raw/HEAD/mobile/DroidWatcher.apk}} to the Android device
+\item Open the file with the Android installer
+\item Accpet the requested permissions
+\item Open the interface DroidWatcher in the menu pannel to launch the background application
+\end{enumerate}
+
+\subsection{Interface}
+\label{sec:dw-gui}
+
+For configuration ease and to solve the restriction appearing on Android 4.0 as explained in Section \ref{sec:dw-ics}, a configuration interface has been created.
+This interface allows to see the last location computed and the date of the last synchronisation to the remote server.
+The option are also given to specify a specific data collection URL and choose if the phone will or not reply to SMS commands.
+
+\subsection{SMS commands}
+\label{sec:dw-smscom}
+
+The application can be controlled through SMS commands sent to the phones running the application.
+The messages are intercepted before arriving to the message application.
+If the message contains a pre-defined code, the phone will execute an action in consequence.
+
+\begin{itemize}
+\item The messages are not case sensitive.
+\item The match should be exact (no extra character).
+\item The application does not record the content of messages, the messages not containing the code will not be affected.
+\end{itemize}
+
+\vspace{0.5cm}
+\texttt{BIGBRO} : starting code for a command.
+\begin{itemize}
+\item \texttt{LOCME} : reply with the last recorded location
+\item \texttt{GPSON} : turn the GPS on
+\item \texttt{WIFION} : turn the wireless on
+\item \texttt{SETSERVER[new\_server\_url]} : set
+  the url of the server, default
+  \url{http://watcher.dotzero.me/collect}
+%\item SETTHRESHOLD[new\_threshold] : set the collect threshold, in millisecond, below 60,000 is not adviced
+\end{itemize}
+
+\vspace{0.5cm}
+Examples of correct messages:
+\begin{itemize}
+\item BIGBROGPSON
+\item bigbroSetServerhttp://watcher.dotzer.me/collect
+\item Ping
+\end{itemize}
+
+\vspace{0.5cm}
+Examples of incorrect messages
+\begin{itemize}
+\item BIGBRO GPSON
+\item Ping!
+\end{itemize}
+\vspace{0.5cm}
+To easily test if the application is running, the message \texttt{PING} can be send, the targeted cell phone replies with message containing \texttt{PONG}.\\
+
+Turning on the GPS is done by exploiting a bug in some Android roms.
+It was reported as working on v2 Android ROM and CyonengMod 7.
+
+\section{FAQ}
+\label{sec:faq}
+
+\subsection{What data is collected by the application ?}
+
+\begin{itemize}
+\item Estimated location and time of the recording
+\item Google username
+\item IMSI (International Mobile Subscriber Identity)
+\item Phone number (if written in the SIM card, usually not)
+\end{itemize}
+
+The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
+Note that the IMSI and phone number do not require any permission and that any application can collect it.
+
+\subsection{When run the application ?}
+
+The application start at the phone boots and when the user unlock its phone.
+Except if using Android 4.0 or above, killing the process will only stop it until the next time the phone is unlocked.
+Uninstalling the application \texttt{DroidWatcher} will fully remove it.
+
+\subsection{What is stored on the phone ?}
+
+The last collected cell towers and last locations are collected in the file \texttt{.log.obj} at the root of the SD card. You can remove this file safely.
+
+\subsection{Who is able to see the recorded location ?}
+
+To ensure privacy, only the owner of the server is able to see the collected location.
+
+
+\section{Installation of the web application}
+\label{sec:dw-django}
+
+To watch the collected information, the DroidWatcher collecting website can be installed on your own web server.
+The server use the python framework Django 1.3\footnote{Available at \url{https://www.djangoproject.com/}}.
+The following steps explain the deployment of the application on a Debian Lenny server running Apache and mod-wsgi. The full configuration and security of the apache server is considered as out of the scoop of these explanations.
+
+\begin{enumerate}
+\item Download the latest version of Django\\
+  \texttt{\$ wget http://www.djangoproject.com/download/1.3.1/tarball/ -O django.tar.gz}
+\item Extract and install\\
+  \texttt{\$ tar -xzvf django.tar.gz\\\$ cd Django-1.3.1\\\$ sudo python setup.py install}
+\item Extract and deploy the DroidWatcher Django application from the DroidWatcher package\\
+  \texttt{\$ tar -xzvf watcher.tar.gz\\\$ sudo mv watcher /var/www/watcher}
+\item Change the ownership to the apache user\\
+  \texttt{\$ sudo chown -R www-data:www-data /var/www/watcher}
+\item Update the apache configuration file (probably \texttt{/etc/apache2/sites-enabled/000-default}) and add
+\begin{verbatim}
+<VirtualHost *:80>
+             ServerName SERVERURL
+             Alias /static/ /var/www/watcher/static/
+             <Directory /var/www/watcher/static>
+             Order deny,allow
+             Allow from all
+             </Directory>
+             WSGIScriptAlias / /var/www/watcher/apache/django.wsgi
+</VirtualHost>
+\end{verbatim}
+\item Update eventually the django setting in \texttt{watcher/settings.py} files if you want to configure your email or have changed the location of the application folder.
+\item Generate the database. In the application folder, execute\\
+  \texttt{\$ python manage.py syncdb}\\
+  and choose an admin password.
+\item Restart the apache module\\
+  \texttt{\$ sudo service apache2 restart}
+\item Access the received location by going to \url{http://SERVERURL/admin} to log in and them access to the recorded location at \url{http://SERVERURL/}
+\end{enumerate}
