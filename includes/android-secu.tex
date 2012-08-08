@@ -156,9 +156,14 @@ In comparison to the Apple iOS system, Google has adopted an open policy of appl
 This strategy choice makes the Android system an easier target in term of malware propagation on the official applications distribution platform.\\
 
 To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
-There is no control before the publication of an application.
+There is no human control before the publication of an application.
 The upload of a malicious application would be detected only after its publication which can lead to infected users.
 In comparison, when submitting an iOS application, Apple will review the application which can takes several days.\\
+
+In February 2012, Google announced the creation of Bouncer, an automated scanning of the Android Play Store for potential malicious software.
+This scan is applied on every new and already published application to detect known malwares, spywares and torjans or detected suspicious behaviour based on previous detection.
+This prevents detected malicious applications to be republished on different developer accounts or under different names~\cite{secu-bouncer}.
+However, in the 2012 DefCon conference, Bob Pan, from TrendMicro Inc. presented a way to bypass this security by dividing a known virus in several parts and recreate the infected apk afterwards~\cite{secu-defcon}.\\
 
 To become a registered developer, the owner of a Google account has only to pay a 25\$ fee and no other information than a name and a phone number.
 In comparison, to become a registered Apple developer, a minimum of 99\$/year fee\footnote{According to Apple Developer Programs \url{https://developer.apple.com/programs/}} to subscribe to the developer program is required and more personal information such as credit card information for identity verification.\\
@@ -167,7 +172,7 @@ This difference in the verification process and ease to create a developer profi
 The presence of an application on the Android Play Store is then, by no means, a guarantee of safety and a user should check carefully before installing any application.\\
 
 As for the Play Store, alternative market places are as secured as the control of their owners over the applications acceptance process.
-The \emph{Amazon AppStore}\footnote{Available in the US only at \url{http://www.amazon.com/appstore}} developed by Amazon.com Inc. has an approval process to publish applications similar to Apple regarding iOS applications\footnote{Approval Process and Content Guidelines \url{https://developer.amazon.com/help/faq.html#Approval}}.
+The \emph{Amazon AppStore}\footnote{Available in the US only at \url{http://www.amazon.com/appstore}} developed by Amazon.com Inc. has an approval process to publish applications similar to Apple regarding iOS applications\footnote{Approval Process and Content Guidelines \url{https://developer.amazon.com/help/faq.html\#Approval}}.
 
 \subsection{Play Store website}
 
