@@ -1,0 +1,370 @@
+
+\chapter{Security analysis: case study of D-Link DCS-2130}
+\label{chap:cam-dcs}
+
+\section*{Introduction}
+\label{sec:dcs-intro}
+
+As presented at Section \ref{sec:trendnet-hack} on the TRENDnet vulnerability, even protected video cameras could be vulnerable to attacks.
+We consider personal video cameras as devices with a high risk in term of privacy.
+The usage of these cameras goes from garden surveillance to supervision of the babysitter\footnote{Miniature wireless cameras called \emph{nanny cam} are sold on specialised websites with the purpose to ensure the child safety.}.
+The possibility for unauthorised people to access the video could have an adverse effect (helping the work of potential burglars for example).\\
+
+To evaluate the security of such devices, we decided to concentrate the analysis on one device.
+The selected device is a D-Link DCS-2130.
+The camera as been selected as being recent (2011), having good reviews, a large choice of features\footnote{Technical details about the device can be found on D-Link website at \url{http://www.dlink.com/}} and being at reasonable prices (around 100€).
+No previous security researches were found to be made on this model of camera.
+The aim was to select a common camera and take it as representative example of the personal wireless camera market.\\
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6cm]{images/dcs2130.png}
+  \caption{D-Link DCS-2130 camera}
+  \label{fig:dcs2130}
+\end{figure}
+
+Some of the vulnerabilities and security aspects analysed in this chapter are specific to this model of camera.
+However as weaknesses have been discovered on other models of cameras (as showed the TRENDnet hack) it is believed similar issues can be discovered in other models.\\
+
+\section{DCS-2130 features}
+\label{sec:dcs-pres}
+
+The selected camera model is a D-Link DCS-2130 and is represented in Figure \ref{fig:dcs2130}. The camera support the following protocols:\\
+
+\begin{itemize}
+\item Wifi: Open, WEP, WPA, WPA2
+\item Admin interface: HTTP, HTTPS
+\item Access: UPnP, DDNS
+\item Transfer: FTP, SMTP, Samba, RTSP
+\item Video: H.264, MPEG-4, MJPEG
+\item Audio: G.726
+\end{itemize}
+
+The DCS-2130 has also features such as motion detection allowing to program conditional chain of events (eg: if a motion is detected, upload current pictures to a FTP server).
+The camera is provided with an installation utility to configure it to connect to the wireless network and a software to watch several video streams of different personal cameras without requiring the usage of the admin interface.
+
+\section{Firmware source code}
+\label{sec:dcs-gpl}
+
+As many embedded devices, D-Link uses a Linux kernel and open source software such as Busybox which are released under a GPL licence.
+A clause in this licence requires to make available the source code of the software using code under GPL if binaries are proposed (which is the case of D-Link).
+In 2006, the Court of Frankfurt issued that D-Link was violating the GPL licence on a network attached storage device~\cite{dlink-gpl-viol}.
+Following that ruling, D-Link published the source code of several of its devices on his website\footnote{D-Link GPL Source Code Support \url{http://tsd.dlink.com.tw/GPL.asp}} including the DCS-2130.\\
+
+Even if D-Link technically provides the source code of the software on his website, many difficulties have been faced to get the archive file.
+The difficulties were:
+
+\begin{itemize}
+\item No direct link to the file download (impossible to restart an interrupted download)
+\item Download speed highly throttle (from 1 to 60Kb/s max.)
+\item Regular connection timed out
+\item The contact email address provided for this section of the website is invalid
+\item No answer while using the general contact form
+\end{itemize}
+
+Seen the nature of the difficulties, one can question if they are intentional to avoid the spreading of the source code too easily.
+The source code has finally been retrieved\footnote{The archive downloaded is available on a public FTP server at \url{ftp://ftp.dotzero.me/DLink/}} and the analysis permitted a better understanding of the firmware mechanism as well as the discovery of security issues.
+
+\section{Installation procedure}
+\label{sec:dcs-install}
+
+\subsection{Admin account}
+
+The installation and configuration of the software are realised using an ActiveX wizard utility provided with a CD-ROM included with the camera.
+This utility is used to configure the connectivity aspect of the camera and to secure the admin account.
+The administrator account is used to manage the configuration settings of the camera through a the web interface.\\
+
+This last point is positive as the procedure does not permit the configuration of the camera without setting an access control mechanism.
+%To access the main web interface, a username and password are required, preventing any unauthorised access to the interface.
+However, this control access mechanism is not strongly enough as detailed in Section \ref{sec:dcs-guest}.
+
+\subsection{Clear-text authentication}
+\label{sec:dcs-clearauth}
+
+At the launch of this wizard, messages broadcasted are exchanged to discover the presence of compatible cameras.
+These messages use a proprietary protocol but understandable by anybody listening the traffic.
+The problem of this protocol is the fact that, in the case of a camera already configured a first time, the authentication of the admin account is required and this communication is also broadcasted, communicating the administrator password in clear text over the network.\\
+
+Below are parts of an exchange between a laptop using the utility and a the camera.
+
+{\small
+\begin{verbatim}
+   Laptop
+0000  ff ff ff ff ff ff 08 00  27 07 34 7d 08 00 45 00   ........ '.4}..E.
+0010  00 32 00 33 00 00 80 11  78 d6 c0 a8 01 0a ff ff   .2.3.... x.......
+0020  ff ff 04 04 f6 00 00 1e  a2 fc fd fd 01 00 a1 00   ........ ........
+0030  ff ff ff ff ff ff 00 00  00 00 00 00 01 00 00 00   ........ ........
+
+   Camera
+...
+0080  44 4c 69 6e 6b 43 61 6d  00 00 00 00 00 00 00 00   DLinkCam ........
+...
+00c0  44 43 53 2d 32 31 33 30  00 00 00 00 00 00 00 00   DCS-2130 ........
+00d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00   ........ ........
+00e0  31 2e 32 36 00 00 00 00  00 00 00 00 00 00 00 00   1.26.... ........
+00f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00   ........ ........
+0100  01 00 27 00 00 00 f0 7d  68 09 52 52 44 4c 69 6e   ..'....} h.RRDLin
+0110  6b 43 61 6d 00 00 00 00  00 00 00 00 00 00 00 00   kCam.... ........
+...
+0140  00 00 00 00 00 00 00 00  00 00 00 00 c0 a8 01 07   ........ ........
+0150  50 00 02 00 ff ff ff 00  c0 a8 01 01 c0 a8 01 01   P....... ........
+0160  00 00 00 00 01 32 30 31  32 30 36 32 38 30 36 35   .....201 20628065
+0170  31 34 34 00 00 42 00 ff                            144..B..         
+
+
+   Laptop (after giving the credentials to the software)
+0000  ff ff ff ff ff ff 08 00  27 07 34 7d 08 00 45 00   ........ '.4}..E.
+0010  00 b2 00 34 00 00 80 11  78 55 c0 a8 01 0a ff ff   ...4.... xU......
+0020  ff ff 04 05 f6 00 00 9e  82 f7 fd fd 02 00 a3 00   ........ ........
+0030  f0 7d 68 09 52 52 c0 a8  01 07 77 77 01 00 80 00   .}h.RR.. ..ww....
+0040  59 57 52 74 61 57 34 3d  00 00 00 00 00 00 00 00   YWRtaW4= ........
+...
+0080  62 58 6c 77 59 58 4e 7a  00 00 00 00 00 00 00 00   bXlwYXNz ........
+...
+\end{verbatim}
+}
+
+Where \texttt{YWRtaW4=} is \texttt{admin} in base64 encoding and \texttt{bXlwYXNz} is \texttt{mypass}.
+These were the current username and password of the camera at the time of the experiment.
+While the meaning of each byte would require a larger study, it is however easy to guess the structure of the communication based on the observation:
+
+\begin{enumerate}
+\item Laptop: Broadcast detection message
+\item Camera: Broadcast presence, model and configuration state
+\item The software asks for the administration credentials
+\item Laptop: Broadcast the credentials
+\end{enumerate}
+
+%Updating the administrator password follows the same 
+The fact that all messages are broadcasted implies that, even on encrypted network using session keys such as WPA (which prevents monitoring the traffic of other users on a wireless network), the credentials are publicly broadcasted.
+An attacker only needs to monitor the network to be able to retrieve an administrator access to the camera.
+However, the usage of the utility to reconfigure the network is supposed to be very rare and minimise the risk of such attack.
+
+\section{Security against traffic monitoring}
+\label{sec:dcs-proto}
+
+As mentioned in Section \ref{sec:dcs-pres}, the camera supports with several protocols.
+These protocols are not all as secure and while only monitoring the network an attacker could retrieve sensible information.\\
+
+The monitoring of a network using free tools such as \emph{tcpdump} is possible while an attacker is connected on the same network as the camera and when the wireless network traffic is not encrypted or using WEP\footnote{Unlike WPA/WPA2, WEP does not use unique session keys for each user.}.
+On encrypted traffic, an attacker could apply an ARP spoofing attack to force the traffic to transit by its computer and read the content of packages.
+
+\subsection{HTTP authentication}
+
+The access to the web interface allows to watch the video stream but also configure the camera.
+This page is protected with a basic authentication mechanism over HTTP.
+This authentication is not secured as the credentials are send in clear text in the headers of the request.
+The code below is extracted from the headers of a request to the web interface which contain \texttt{admin:mypass} in base64 encoding.
+
+\begin{verbatim}
+GET / HTTP/1.1
+Authorization: Basic YWRtaW46bXlwYXNz
+\end{verbatim}
+
+\subsection{URL parameters}
+
+To configure the access to external services (email, FTP, DDNS...) the administrator uses the web interface.
+This interface is accessed by default using HTTP which means that the URL of the requested pages is in clear text on the network.\\
+
+For each configuration request, the URL in the headers contains the information for the selected service.
+For example, a request to update the password of the wireless access point credential would look like:
+\begin{verbatim}
+GET /cgi-bin/wifi_config.cgi?enable=1&ssid=MyWifiNetwork&Mode=0&\
+   auth=3&encrypt=2&wpa_key=MyWifiPassword HTTP/1.1
+\end{verbatim}
+
+This means that, even if other protocols are secured (eg: usage of SSL in SMTP), the configuration may be the source of information leakages.\\
+
+\subsection{Export configuration}
+\label{sec:dcs-config}
+
+To realise a backup of the configuration of the camera, it is possible to export the current configuration.
+In the administration panel, the functionality \emph{Backup configuration} generates a text file containing all the specified information.
+This file contains, in clear text, all the passwords and login information specified.
+Behind the fact, it is worrying that all these information are unnecessary stored in clear text instead of an encrypted version, this means also that monitoring the traffic will reveals the content of the file.
+
+\subsection{SSL certificate as a solution}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=10cm]{images/dcs-ssl.png}
+  \caption{SSL certificate issued by D-Link}
+  \label{fig:dcs-ssl}
+\end{figure}
+
+
+To prevent the monitoring issues while using the web interface, it is possible to use an SSL certificate to establish a secured HTTPS connection to access the web interface.
+However, the certificate used for the SSL connection is issued by the certification hierarchy \texttt{www.dlink.com.tw} which is not a known certification authority in browsers.\\
+
+In Figure \ref{fig:dcs-ssl}, the imported certificate for the case study camera is displayed in Firefox with a security warning.
+That means that an attacker could issue a forged certificate pretending to be the D-Lin authority without the possibility for the end user to check the validity.
+
+\section{Guest account}
+\label{sec:dcs-guest}
+
+During the analysis of the camera, the exported configuration file mentioned in Section \ref{sec:dcs-config} contains also the information about the different users allowed to access the camera with their access right level as shown below.
+
+\begin{verbatim}
+acounts0_name=admin
+acounts0_passwd=mypass
+acounts0_authority=0
+acounts1_name=guest
+acounts1_passwd=guest
+acounts1_authority=2
+\end{verbatim}
+
+In this part, an account \emph{guest} using the password \emph{guest} appears with an access level of 2.
+This account is automatically created at the installation of the camera.\\
+
+It is important to notice that neither during the installation process or in the user manual, the existence of guest account is mentioned.
+The only way to detects its presence is to analyse the exported configuration file or see it in the list of removable accounts in the configuration interface (but without knowing his password).
+While the obligation to set up a password the administrator account is positive in term of security, the creation of the guest account pushes the end user in an incorrect sens of security.
+
+\subsection{Guest account access}
+\label{sec:dcs-guest-rights}
+
+With an access right of two, the guest user can not modify the configuration of the firmware but is able to watch the video stream.
+The access to the web interface is possible as retrieve snapshots of the video.\\
+
+In the firmware source code, the web interface is powered by the open source web server Boa\footnote{Boa Webserver \url{http://www.boa.org/}}.
+To resolve the different URLs, this webserver lists all the possible URI with the associated function to execute and the access rights required to access the URI\footnote{In the firmware source code, see \texttt{/apps/public/boa-0.94.13/src/request.c} line 6700}.
+Using this list, it is possible to identify what the guest account is capable of.
+Fortunately, the guest account appears to be able only to access the stream of the camera and some moderately important information such as the firmware version.
+
+\subsection{Account suppression}
+\label{sec:dcs-guest-suppression}
+
+The presence of the guest account is very problematic if a user wants to configure his camera as visible from outside (see Section \ref{sec:dcs-web-access}).
+In the administration web interface, it is possible to manage the users and delete it.
+However, the removal of the guest account has been specifically prevented.
+In the webserver source code, the case of removing the guest user is refused as shown in the code below\footnote{In the firmware source code, see \texttt{/apps/public/boa-0.94.13/src/request.c} line 3280}
+
+\begin{verbatim}
+...
+#ifdef CONFIG_BRAND_DLINK
+    else if(i == 1){
+       DBG("You can not delete the guest accunt!\n");
+       break;
+    }
+#endif
+...
+\end{verbatim}
+
+\emph{TODO Discussion: est-ce une volonté de laisser une backdoor ?}\\
+This piece of code is highly surprising as a clear addition from D-Link as an effort to prevent the removal of the guest account.
+The reason of this effort is unknown and left to the reader interpretation but it leads to an important security breach as facilitate the unauthorised viewing of the video stream.\\
+
+The only known solution to prevent unauthorised access using the guest account is by applying the following procedure:
+\begin{enumerate}
+\item Export the configuration file
+\item Modify it to change the password of the guest account
+\item Import the modified file as the new configuration
+\end{enumerate}
+
+% TODO: tester la suppression depuis l'import
+
+\section{RTSP}
+\label{sec:dcs-rtsp}
+
+The RTSP protocol is enabled by default.
+As mentioned earlier, this protocol is used to stream the video into another software.
+If it is possible to disable the protocol or rename the access path, this protocol does not use any access control mechanism.
+If an attacker has access to the associated port (554), it can stream the video, even without having access to the guest account.\\
+
+If not used, it is recommended to disable this protocol.
+
+\section{Log file}
+\label{sec:dcs-log}
+
+As mentioned in Section \ref{sec:dcs-guest-rights}, the allowed queries are hard-coded in a list in the file \texttt{request.c} of the webserver.
+For some of the requests, there is no execution function associated, only access rights.
+This is often the case of requests to the folder \texttt{/cgi-bin/} which contains binary files to execute instead of applying a defined function.\\
+
+During the analysis of the source code firmware, it was noticed that the binary file \texttt{/cgi-bin/exportlog.cgi} was present in the folder of the server but not in the in listed URI list.
+This lack of definition in the request file implies that it will be executed according to the file execution rights, not the one defined in the server list.
+This means that, even for an anonymous visitor (not guest or admin), it is possible to execute this file.\\
+
+As its name implies, the file exports the log of the camera in a text file.
+This log file does not reveal highly sensitive information (no password) but gives the state of camera through time.
+
+\begin{verbatim}
+2012-05-24 21:01:29 NETWORK LOST
+2012-05-24 21:01:29 SD CARD SIZE 7620040 KB
+2012-05-24 21:01:34 NETWORK RECONNECT
+2012-05-24 21:03:15 admin LOGIN OK FROM 193.44.55.11
+2012-05-25 15:40:38 IP CAMERA Received MOTION Trigger
+2012-05-25 15:40:41 MOTION STOPPED
+\end{verbatim}
+
+A more sensitive information displayed in the log file is the login account name, the IP addresses and events such as motion detection activation.
+Analysing these information could allow an attacker to retrieve information such as the user habits and presence time.\\
+
+Like the TRENDnet vulnerability showed in Section \ref{sec:trendnet-hack}, the possibility to access the log file is due to a bug and it is not possible for the end user to prevent this security leak.
+The only possible mitigation is a regular cleanup of the log file in the administration interface.
+
+\section{Web camera discovery}
+\label{sec:dcs-web-access}
+
+If an end user configures his router to be able to access his camera from outside of the network (using a port forwarding in the case of a NAT), it opens the possibility for attacker to access the camera.
+Using the previously mentioned vulnerabilities, intrusions are possible to login as guest account or to access the log file.\\
+
+It is possible to scan a network for the discovery of IP cameras such as the one analysed in this chapter.
+While making a request to an IP address, the headers of the reply are specific to the IP device and make it possible to easily identify the presence of cameras.
+The reply headers of a request shown below contains the identifier \texttt{Basic realm="DCS-2130"} which can be used.
+
+\begin{verbatim}
+HTTP/1.0 401 Unauthorized
+Date: Sat, 12 Feb 2011 17:59:32 GMT
+Server: Boa/0.94.13
+Connection: close
+WWW-Authenticate: Basic realm="DCS-2130"
+Content-Type: text/html; charset=ISO-8859-1
+\end{verbatim}
+
+As a proof of contest, we developed the program \texttt{dcs\_detection.py}.
+This script scans a range of IP addresses until it detects a basic realm containing \texttt{DCS-2130}.
+In a few minutes, this script can discover the presence of a camera on a home network or on a public IP range.\\
+
+Using the ShodanHQ search engine with the keyword \texttt{DCS-2130} is another efficient way to retrieve quickly a list of IPs leading to this model of camera.\\
+
+Through personal experiences, only one camera accessible from the web had the guest account not available but had the RTSP port open.
+This means there was no DCS-2130 camera available on the web (discovered using ShodanHQ) that were found where the video stream was inaccessible.
+
+\section{PRNG testing}
+\label{sec:dcs-random}
+
+As a way to evaluate the security of the camera, the quality of the PNRG (Pseudo-Random Number Generator) has been evaluated.
+To evaluate the quality of the generated numbers, the tests from the NIST were used\footnote{Software available at \url{http://csrc.nist.gov/groups/ST/toolkit/rng/index.html}.}.
+These tests are a recognised standards and allow to give a neutral evaluation of the security of the PRNG in the camera.\\
+
+To retrieve as many bits of entropy as possible, the program \texttt{gen\_https.py} has been developed.
+This script generates a specified number of connections to the web interface of the camera after having been configured to use SSL.
+While this script was running, the network was monitored using the tool \emph{tcpdump} recording the communication in the PCAP format.
+In each HTTPS connection, a 28 bytes payload of random bytes are consumed from the server.
+These bytes were extracted from the PCAP file using another developed script \texttt{pcap\_to\_random.py}.\\
+
+Successive runs of 5000 requests to the camera were made with the purpose to empty the pool of entropy.
+For each set of requests, the random bytes from the camera and from the laptop used in the experience were collected and evaluated using the NIST tests set.\\
+
+The conclusion of these tests were that, in every tested run, the entropy of both the laptop and the camera were sufficient to pass the NIST tests.
+If the tests realised on the laptop were better than the ones using the camera, both were still enough to be considered as random enough.
+The difference between the two devices can be explained by the fact that the camera has no hard drive and more external sources of entropy, allowing it to refill the pool of entropy faster than the camera.
+
+\section{Burglar scenario}
+\label{sec:dcs-burglar}
+
+As an example of issues related to lack of security from a wireless camera, lets take the scenario of a burglar planning to visit a building equipped with a DCS-2130 camera.
+Several usages cases are 
+
+\section{Security advises and best practices}
+\label{sec:dcs-security}
+
+\section{D-Link reactions}
+\label{sec:dcs-dlink}
+
+\section{Future researches}
+\label{sec:dcs-future}
+
+- évaluer si s'applique à d'autres
+- compile firmware
+- port 1010
