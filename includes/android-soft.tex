@@ -116,7 +116,7 @@ The complete list of SMS commands is available at Appendix \ref{sec:dw-smscom}.
 \subsection{GPS activation}
 \label{sec:dw-gps-bug}
 
-The GPS of a device can be remotely activated using an SMS command.
+The GPS of a device can be remotely activated using a SMS command.
 This feature is possible due to a bug discovered in the power control widget\footnote{Issue 7890 \url{https://code.google.com/p/android/issues/detail?id=7890}}.
 Even if the security flaw has been revealed in April 2010 and a patch released in April 2011, the flaw has been observed as still exploitable on devices running Android 2.3.\\
 
@@ -182,11 +182,11 @@ In the three considered cases, the confidence range is determined as
 \item The half of the distance between the two intersections
 \end{enumerate}
 
-\emph{Comment justifier l'utilisation de la distance ?}
+%TODO \emph{Comment justifier l'utilisation de la distance ?}
 
 \subsection{Signal strength conversion}
 
-If a device receive a GSM signal at a determined strength, it is possible to estimate its distance from the cell tower.
+If a device receives a GSM signal at a determined strength, it is possible to estimate its distance from the cell tower.
 A circle is drawn around the GSM tower representing every position the device could be.
 The strongest the signal is, the closest is the device to the tower.\\
 
@@ -207,7 +207,7 @@ To develop this application, several constrains were experienced that limited th
 \subsection{Automatic idle}
 
 Once going in idle state (once the device is not used by the user for a certain amount of time), the operating system will limit the possibility of the system to save battery.
-Some applications will be paused in there running process.
+Some applications will be paused during their running process.
 The effectiveness of the localisation process done by DroidWatcher is affected by this idle purpose.\\
 
 This is the case, for example, of the GPS that needs to constantly update of the position.
@@ -247,5 +247,5 @@ The main imprecision comes from the fact that all cell tower do not emit signal 
 
 As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas.
 The computation and weighting of the variables has been done based on personal observations.
-This is known as imprecise but achieves the purpose to be able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
+This is known as imprecise but achieves the purpose of being able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 
