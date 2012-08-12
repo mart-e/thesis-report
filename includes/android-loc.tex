@@ -3,8 +3,8 @@
 
 \section*{Introduction}
 The localisation of the mobile device is a key system service of Android.
-Many applications use this service, as a feature of the application.% or as a service for the developer.
-It allows, for example, to directly show the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to give statistical information regarding the using of an application in a particular region.\\
+Many applications use this service, as a feature of the application.
+It allows, for example, to show directly the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to give statistical information regarding the using of an application in a particular region.\\
 
 The details of the localisation methods used by the Android system are often unknown or unclear.
 There exists several techniques to locate a device: using the GPS chip usually present in smartphones or using connection information (cell phone tower or wireless access points).
@@ -23,9 +23,9 @@ These experiments allow us to have a better understanding of the localisation sy
 
 \subsection{GPS signal}
 
-The GPS, for Global Positioning System, is a technology based on satellite trilateration~\cite{pocketgpsworld}.
+The GPS, for Global Positioning System, is a technology based on satellite trilateration.
 GPS satellites are navigating around the Earth in a way to maximise the number of visible satellites anywhere at any time.
-There is currently 31 working satellites in orbit.
+There is currently 31 working satellites in orbit~\cite{pocketgpsworld}.
 The location-aware device is equipped with a GPS receiver chip.
 This receiver retrieves broadcasted messages from the reachable satellites.
 The messages contain :
@@ -39,6 +39,7 @@ The messages contain :
 Trilateration is used based on the received messages as shown in Figure \ref{fig:gps-earth}.
 If, theoretically, three satellites are enough, at least four are required to avoid clock synchronisation errors (at the speed of light, even a small clock error can lead to huge distance gap).\\
 
+% TODO changer image pour noir & blanc
 \begin{figure}[h]
   \centering
   \includegraphics[width=6cm]{images/gps.jpg}
@@ -145,6 +146,7 @@ It is the combination of these two factors that allows a device to identify a un
 A cellphone can then be located using trilateration based on the surrounding cell towers.\\
 
 The data collection method and cache management system are very similar to the ones analysed in Section \ref{sec:andro-wifi} and will not be discussed here.
+The location system in Android use usually both wireless access points and cell towers location methods simultaneously and indifferently for the user and developer.
 The advantage of using cell tower location over the wireless is the fact it allows to locate a device with an approximate accuracy of 1km almost everywhere.
 
 %In the DroidWatcher application (see Chapter \ref{chap:droidwatcher}), the application implements its own trilateration algorithm for offline computation.
@@ -196,11 +198,13 @@ He affirms there is no proof the location is anonymised due to the presence of t
 \label{sec:andro-perso-research}
 
 Several facts about the storage of information and privacy have been announced.
+% TODO ajouter source
 To verify these facts, further investigations have been carried in this thesis.
-The applications used to realise the analyses are present in the appendix.\\
+The applications used to realise the analyses are presented in the appendix.\\
+% TODO mettre numero de appendix
 
 To realise the experiments a rooted smartphone using Android 2.3 was used.
-As most of the location information, including the cache databases files are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
+As most of the location information, including the cache databases files, are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
 The root process and implications are discussed in the introduction.
 
 \subsection{Experiment 1: Database suppression}
@@ -208,7 +212,7 @@ The root process and implications are discussed in the introduction.
 \subsubsection{Goal}
 
 When the option \emph{Use wireless networks} in the system settings is disabled, Google ensured the cache files are deleted.
-The cache files have been located long ago but the asked question was to know if it was the only place that stored this location information.\\
+The cache files have been located long ago but the question is to know if it was the only place that stored this location information.\\
 
 During this experiment, the content of the device is inspected before and after opting out the option \emph{Use wireless networks} and the two versions are compared to detect the modified or deleted files.
 
@@ -221,7 +225,7 @@ During this experiment, the content of the device is inspected before and after 
 \item Compare the two dumps
 \end{enumerate}
 
-To facilitate the experiment realisation the two scripts \texttt{androdump.py} and \texttt{compare\_dump.py} have been developed and are available on the CD-ROM.
+To facilitate the experiment realisation the two scripts \texttt{androdump.py} and \texttt{compare\_dump.py} have been developed and are available on the appendix %TODO the CD-ROM or url
 The dump is done using the script \texttt{androdump.py} which uses the Android Debug Bridge (adb) program connecting the device to a computer.
 The comparison is done using the script \texttt{compare\_dump.py} which uses a hash function on each file present in the dump to detect a modification.
 
@@ -236,8 +240,8 @@ This confirms the assumption concerning the deletion of location data.\\
 
 \subsubsection{Goal}
 
-When a location is requested on an Android device, the system sends an encrypted request to the Google's location servers.
-The Google's servers reply to the request with the location of surrounding GSM cell towers and access points.\\
+When a location is requested on an Android device, the system sends an encrypted request to Google's location servers.
+Google's servers reply to the request with the location of surrounding GSM cell towers and access points.\\
 
 The goal of the experiment was to detect the impact of a location request.
 It is known that the surrounding wireless access points and cell towers information is stored in the cache file but other location related information could be stored somewhere else.
@@ -257,6 +261,7 @@ This experiment inspects the content of the system before and after a localisati
 \end{enumerate}
 
 The Android application \texttt{LocateMe} has been developed to create a simple location request using the network provider (including GSM cell towers and wifi access points).
+% TODO preparer réponse si poste des questions sur les irrelevant system files
 
 \subsubsection{Result}
 
@@ -266,7 +271,7 @@ The analysis reveals that, with the exception of irrelevant system files, only t
 
 \subsubsection{Goal}
 
-As the request is encrypted, its content is unknown.
+As the request used to locate the device using wifi and cell towers is encrypted, its content is unknown.
 What is known and confirmed in the previous experiments is the fact that the cache files are updated and some wifi and cell towers information are added to these files when a request is made.
 To guess the content of a location request, it has been tried to determine patterns in the requests form to correlate a request with the content of the cache files.
 
@@ -280,6 +285,8 @@ To guess the content of a location request, it has been tried to determine patte
 \item Stop monitoring the traffic once a location received
 \end{enumerate}
 
+The network monitoring has been made with the tool \emph{tcpdump}\footnote{TCPDUMP 4.3 \url{http://www.tcpdump.org/}} installed on the Android device.
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{images/trace2.png}
@@ -287,14 +294,12 @@ To guess the content of a location request, it has been tried to determine patte
   \label{fig:loc-req-tcpdump}
 \end{figure}
 
-The network monitoring has been made with the tool \emph{tcpdump} installed on the Android device.
-
 \subsubsection{Result}
 
 From the collected trace, the size of the transmitted data was compared with the number of cells and access points added to the cache files.
-After observation and repeating the experiment, the following observations were made.
+After observation and repeating the experiment (results displayed in Table \ref{tab:expe-req-pattern}), the following observations were made.
 Each location requests is composed of two communications with Google's servers.
-In each communication, a first packet of 270 bytes is sends followed by another of variable size.\\
+In each communication, a first packet of 271 bytes is sends followed by another of variable size.\\
 
 % \begin{itemize}
 % \item Two requests are made, one for the cells, one for the wifi.
@@ -315,7 +320,9 @@ In each communication, a first packet of 270 bytes is sends followed by another 
     \hline
     1       &   3  & 271+428/619 & 271+576/713 & 1 & 3 \\
     \hline
-    ? & ? & 269+916/598 & 269+646/695 & 1 & 2 \\
+    4 (1) & 9 & 271+463/632 & 271+898/861 & 2 (1) & 9 \\
+    \hline
+    6 (1) & 10 & 271+434/619 & 271+916/873 & 1 & 10 \\
     \hline
   \end{tabular}
   \caption{Example of location requests and effect on the cache files}
@@ -340,13 +347,13 @@ These observations do not allow to validate the suppositions concerning the cont
 
 \subsubsection{Goal}
 
-In Section \ref{sec:andro-samy}, Samy Kamkar observed a unique identifier was used in the requests made to Google servers.
+As mentioned in Section \ref{sec:andro-samy}, Samy Kamkar observed that an unique identifier was used in the requests made to Google servers.
 The presence of this identifier could compromise the privacy of the user as it would allow Google to trace a location requests to a certain user.
 The purpose of this experiment was to verify this fact.
 
 \subsubsection{Methodology}
 
-Personal researches showed that this string is contained inside a file \texttt{gls.platform.key} next to the cache database.
+Personal examinations of the cache folder in the system file showed that this string is contained inside a file \texttt{gls.platform.key} next to the cache database.
 When the option \emph{Use wireless networks} in the Android settings is disabled, the content of the cache location folder (containing the wifi and cell cache files as well as this identifier) is emptied.
 When the option is enabled, new cache files and unique identifier are create.
 The content of the identifier file \texttt{gls.platform.key} is different to the previous value every time the option is toggled.

@@ -2,7 +2,7 @@
 \label{chap:and-secu}
 
 \section*{Introduction}
-As the number of smartphones is in constant raise, the level of concerns about the security of the system increases.
+As the number of smartphones is raising constantly, the level of concerns about the security of the system increases.
 Paradoxically, the users tend to store more and more personal data on their smartphones and are not aware of the security issues of such devices.
 Malwares have been discovered on the official applications store and antivirus softwares for Android are now available.
 Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
@@ -10,17 +10,17 @@ Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
 The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
 Using the presented information, a user should be able to reduce his infection risk by adopting simple security principles.
 The focus of this chapter is the application capabilities and propagation.
-Different security threads are examined and the risks associated are evaluated.
+Different security threads are examined and the associated risks are evaluated.
 The different procedures from the publication to the installation of an application on a device are particularly examined.
 
 The forensic aspect to retrieve information from a device without the owner consent have not been analysed here.\\
 
-These clarifications are essentials to understand the limits and possibilities for the developed \emph{DroidWatcher} (see Chapter \ref{chap:droidwatcher}) application to be effective.
+These clarifications are essentials to understand the limits and possibilities for the developed \emph{DroidWatcher} application (see Chapter \ref{chap:droidwatcher}) to be effective.
 
 \section{Permissions}
 \label{sec:permissions}
 
-For an application to run on the Android operating system and access to critical resources, it should have explicitly been allowed to do so.
+For an application to run on the Android operating system and access to critical resources, it should have explicitly been allowed to do so by the system. %TODO pas très clair
 For a set of defined tasks, a permission should be enabled.
 These tasks are, for example, accessing the current location of the user, update the address book, use the Internet, write to the SD card...
 At the installation of an application, the permissions necessary are mentioned.\\
@@ -30,7 +30,7 @@ Without a permission, an application can not access to certain resources or meth
 
 \subsection{Technical details}
 %In Appendix \ref{perm-list}, the list of available permissions are mentioned.
-The full list of permissions with a brief description is available on the Android documentation\footnote{Available at \url{https://developer.android.com/reference/android/Manifest.permission.html}}
+The full list of permissions with a brief description is available on the Android documentation\footnote{Available at \url{https://developer.android.com/reference/android/Manifest.permission.html}}.
 These permissions are defined in the configuration file \texttt{AndroidManifest.xml} present in every application.
 Without the correct permission, an application throws an exception when the method accessing the forbidden resource is launched.
 
@@ -45,7 +45,7 @@ E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps re
 In Listing \ref{lst:gpsexception}, is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
 If the error is not caught properly, the execution of the application is interrupted and the users receives a notification of the crash of the application.\\
 
-The permission processed is conceived to control the access to an information and not a phone characteristic.
+The permission processed is conceived to control the access to an information and to not a phone characteristic.
 For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
 \subsection{Weaknesses}
@@ -123,7 +123,7 @@ This is the same screen while using either the Google Play Store or installing a
 An apk file is produced after the compilation of a program and is often proposed on small projects or for beta versions.
 Once an application is installed on the system, the apk file is stored on the system.
 
-\subsubsection{Alternative marketplace}
+\subsubsection{Alternative marketplaces}
 In the same way as the Android Play Store, it exists several alternative market places.
 Alternative market places are a way to download apk files from a centralised interface.
 It is seen as an alternative to the Google Play Store with the advantages of a centralised distribution medium (paid system, users reviews, moderation...).
