@@ -13,7 +13,7 @@ bib:
 clean:
 	rm *.log; \
 	rm *.aux; \
-	rm includes/*.aux; \
-	rm includes/*.log;
+	rm *.bbl; \
+	rm includes/*.aux;
 
 .PHONY: all clean
