@@ -55,6 +55,7 @@ Some digital cameras are available on the Internet .
 This section explains how a camera can be accessed from outside the local network and what are the risks of discovery and abuses.
 
 \subsection{Connectivity}
+\label{sec:cam-connect}
 
 The default deployment of a digital camera is to be restricted to a home network using wifi.
 %This is the default behaviour when a camera such the one studied in Chapter \ref{chap:cam-dcs} is connected on a wireless network. 
@@ -93,7 +94,7 @@ By refining the search with other keywords such as \emph{airport} or the name of
 \label{sec:cam-detection-hidden}
 
 To end up in Google results, all the cameras have been published on a web page that was indexed by Google.
-However, it is possible to find camera stream of more private areas such as bars, factories or even homes.
+However, it is possible to find camera streams of more private areas such as bars, factories or even homes.
 Most likely, these cameras have not been published by their owner on a website that was indexed by a search engine bot.
 %If these digital cameras are not protected with an access control mechanism, anybody with the correct address can watch it.
 Often, the owners of personal cameras rely on the fact that the IP address or URL to access these cameras are not known and published.
@@ -105,7 +106,7 @@ This is the case for example with AXIS\footnote{AXIS \url{http://www.axis.com/}}
 By iterating or using a dictionary on common keywords, it is possible to find cameras that were not intended to be published.\\
 
 Another method to detect cameras are to scan ranges of IPs addresses.
-By iterating on a range of IP addresses, it is possible, with a sufficient amount of time, to list any type of IP device, including digital cameras, accessible via a public IP address. % TOCHECK any type of IP deviceS ?
+By iterating on a range of IP addresses, it is possible, with a sufficient amount of time, to list any type of IP device, including digital cameras, accessible via a public IP address.
 Some cameras have unique patterns in the URL or in the header of the requests, searching for these patterns allow to detect these hidden cameras.
 A script detecting the model of D-Link cameras studied in Chapter \ref{chap:cam-dcs} is described in Section \ref{sec:dcs-web-access}.\\
 
@@ -149,9 +150,10 @@ The exploitation of this vulnerability is made easier by the existence of the Sh
 Using the query \texttt{netcam} which is used in the headers of TRENDnet cameras, the Shodan search engine lists IP addresses of TRENDnet cameras.
 Using this list, the vulnerability can be tested on a large number of devices.\\
 
-TRENDnet replied to this publication by proposing an update of the firmware that fixes the vulnerability.
-%However, until new devices with a fixed firmware outnumber the old versions, the proportion of vulnerable cameras may stay large as cameras are very unlikely to be updated by their owners.
-\\
+TRENDnet replied to this publication by proposing an update of the firmware that fixes the vulnerability and contacting registered owners to warm them about the potential threat.
+However it is very likely that most of the vulnerable devices will not be updated by their owners and still be exploitable in the future.\\
+
+%TODO idee conclusion appliance vs securite, on ne fait pas de mise à jour
 
 This vulnerability is an example of the danger of setting up such devices on the web.
 Even by protecting correctly and not publishing the URL to access the camera, owners of these devices are exposed to any curious eyes as for the moment their camera is made accessible from the Internet.
