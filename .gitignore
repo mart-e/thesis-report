@@ -2,7 +2,6 @@
 *.log
 *.bbl
 *.blg
-*.bib
 *.xml
 *.toc
 *.out
