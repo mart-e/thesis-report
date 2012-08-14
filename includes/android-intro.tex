@@ -22,11 +22,11 @@ This chapter intends to clarify the risks by explaining the known possible abuse
 %TODO a reformuler
 %It also intends and best how to avoid it by developing secure behaviours.\\
 
-The combination of the two first chapter aims at developing a good understanding of the mechanisms of localisation and related security on an Android application.
+The combination of the two first chapters aims at developing a good understanding of the mechanisms of localisation and related security on an Android application.
 As an example of practical implementation of these concepts, the \textbf{DroidWatcher} mobile application has been developed.
 This application aims at demonstrating what an application is capable of and how any location-aware application could trace a user.
 
-\section*{Why Android ?}
+\section*{Why Android?}
 \label{sec:why-android}
 
 Android is the operating system delivered by Google for smartphones and tablets.
@@ -34,7 +34,7 @@ The choice of the Android operating system is justified by several factors.\\
 
 \subsection*{Market share}
 
-Android is the main operating system powering smartphones with a market share of 56.1\% in the first quarter of 2012\footnote{According Mobile Statistics \url{http://www.mobilestatistics.com/mobile-statistics/}}.
+Android is the main operating system powering smartphones with a market share of 56.1\% in the first quarter of 2012\footnote{According to Mobile Statistics \url{http://www.mobilestatistics.com/mobile-statistics/}}.
 As the smartphone presence increases, it is today most likely that a mobile device is powered by this operating system now and in a close future.
 The iOS system from Apple is the second most popular system with a market share of 22.9\% at the same period of time.\\
 
@@ -47,23 +47,23 @@ The open model of Android allows more abusive usages and may lead to an increase
 The combination of high market share and security concerns makes it an interesting case study.\\
 
 \subsection*{Not specific to Android}
-Although this thesis looks at the Android case, we believe our findings are relevant to other system as well.
+Although this thesis looks at the Android case, we believe our findings are relevant to other systems as well.
 % The technical information used in the following chapters are directly depending to the Android system but 
-Today, every smartphone system has location capabilities similar to the one used in Android and these capabilities could be used in a malicious behaviour without the user realising it.
+Today, every smartphone system has localisation capabilities similar to the ones used in Android and these capabilities could be used in a malicious behaviour without the user realising it.
 The malicious application propagation is directly depending on the platform\footnote{The difference of an application publication on the official distribution medium between Android and iOS is studied in Section \ref{sec:playstore-publication-policy}}, but the risks exist and malicious applications are present on any systems that allows such abusive behaviour.
 
-\section*{Why the localisation ?}
+\section*{Why the localisation?}
 \label{sec:why-localisation}
 
 Nowadays, the localisation privacy is often an aspect being neglected.
-The success of applications such as Foursquare, which intends to actively and consciously publish his current position on social networks for instance, is a clear sign of this tendency.\\
+The success of applications such as Foursquare, which intends to actively and consciously publish one's current position on social networks for instance, is a clear sign of this tendency.\\
 %TODO ajouter footnote nombre telechargement foursquare
 
 However, this lack of focus on privacy respect has been understood and exploited by advertisers and developers.
 Mobile technology brings a new dimension in the constant search for knowing more about people: the \emph{Where am I?}.
-The targeted advertisements and user profiling is now common and the location is directly related to the efficiency of these techniques.
+The targeted advertisements and user profiling is now common and the localisation is directly related to the efficiency of these techniques.
 If a country-based advertisement in a game application may not bother a user, the traceability possibilities are a lot more accurate and worrying.
-Knowing the same game application is able to accurately trace the movements of a user through time, even when he does not use the application, should be a more important concern.
+Knowing that the same game application is able to accurately trace the movements of a user through time, even when he does not use the application, should be a more important concern.
 Demonstrating these possibilities in a transparent way is the aim behind the DroidWatcher application.\\
 
 The location aspect is only studied in the capabilities of requesting the location of a device.
@@ -75,7 +75,7 @@ With the exception of the cache file described in Section \ref{sec:andro-cell-db
 To help the understanding of the following chapters, some specific terms are explained below:\\
 
 \textbf{ROM}: Android is an operating system targeting mobile devices using a Linux kernel.
-Literally, ROM stands for \emph{Read Only Memory}, the part of the system where the firmware and system applications are stored but the term ROM is often used to designate a new firmware that will replace the existing one.
+Literally, ROM stands for \emph{Read-Only Memory}, the part of the system where the firmware and system applications are stored but the term ROM is often used to designate a new firmware that will replace the existing one.
 The ROM installed by the manufacturer is usually called the \emph{stock ROM}.
 CyanogenMod\footnote{CyanogenMod \url{http://www.cyanogenmod.com/}} is a well-known alternative Android ROM.
 Its development is driven by the community\footnote{Unlike Android which is open source but developed by Google only} and ported to a large number of devices.
@@ -85,7 +85,7 @@ The installation of a ROM such as CyanogenMod does not modify deeply the system 
 It can install new applications but not see or alter the content of the device system file where the application is stored.
 %Features such as USB tethering (the possibility to use the phone internet connection on an external device using the USB connection) is usually not permitted using the stock ROM of the devices and can not be activated without modifying the system behaviour.
 Gaining a root access on a device is a procedure to access all the capabilities of the system and be able to modify it.
-The procedure for root access varies from device to device since root access protection is left to manufacturers choice and can require complex procedure\footnote{The website ready2root gathers procedures to gain root access on a large list of devices \url{http://ready2root.com/}}.
+The procedure for root access varies from device to device since root access protection is left to manufacturers' choice and can require a complex procedure\footnote{The website ready2root gathers procedures to gain root access on a large list of devices \url{http://ready2root.com/}}.
 Gaining root access is considered sufficient to void the warranty of a device with many manufacturers.
 Having a root access is required to install an alternative ROM.
 To realise the experiments described in Section \ref{sec:andro-perso-research}, a root access was necessary to be able to monitor every aspect of the system.
