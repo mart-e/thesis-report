@@ -10,6 +10,9 @@ bib:
 	pdflatex Thesis; \
 	pdflatex Thesis;
 
+html:
+	latex2html Thesis;
+
 clean:
 	rm *.log; \
 	rm *.aux; \
