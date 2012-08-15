@@ -4,10 +4,10 @@
 \section*{Introduction}
 The localisation of the mobile device is a key system service of Android.
 Many applications use this service, as a feature of the application.
-It allows, for example, to show directly the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to give statistical information regarding the using of an application in a particular region.\\
+It enables, for example, to show directly the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to give statistical information regarding the use of an application in a particular region.\\
 
 The details of the localisation methods used by the Android system are often unknown or unclear.
-There exists several techniques to locate a device: using the GPS chip usually present in smartphones or using connection information (cell phone tower or wireless access points).
+Several techniques exist to locate a device: using the GPS chip usually present in smartphones or using connection information (cell phone tower or wireless access points).
 This chapter explains how these techniques work and why they are subject to privacy concerns.\\
 
 Several facts about the management of the localisation have been used in the official declarations or documentations.
@@ -72,7 +72,7 @@ Each wireless access point has a unique identifier\footnote{BSSID for Basic Serv
 When the wireless option of the phone is turned on, the device can retrieve the surrounding access points.
 Assuming the geographical coordinates of all the access points are known, it is possible to estimate the location of the user by trilateration.\\
 
-The advantage of this method is that for an accuracy of about 100 metres, the localisation is faster than using GPS, it works indoors, consumes less battery power than a GPS receiver chip and only one access point is enough to locate a device.\\
+The advantage of this method is that for an accuracy of about 100 metres, the localisation is faster than using GPS, it works indoors, consumes less battery power than a GPS receiver chip and one access point is enough to locate a device.\\
 
 \subsection{Cache database}
 \label{sec:andro-cell-db}
@@ -83,12 +83,12 @@ SkyHook, Apple and Google are three companies well known for using such database
 SkyHook was one of the first to create a database to locate wireless access points and develop a SDK to query the location of a user.
 The information is collected by war-driving\footnote{Car equipped with a GPS, wireless and cell tower receiver collecting data in the streets} in North America, Western Europe and some Asian countries~\cite{skyhook-coverage}.\\
 
-Companies have quickly understood the value of this information and the economic interest of having their own database as a betterment for location aware applications.
+Companies have quickly understood the value of this information and the economical interest of having their own database as a betterment for location aware applications.
 While Apple was, at first, using SkyHook, it has now developed its own database system.
 Google is also independent and has created its own database.\\
 
 As they collect data to improve the accuracy of their location services, these companies recently have been subject to criticism.
-Users wondered about the usage of this database and how it could pose a threat to the privacy of users.
+Users wondered about the use of this database and how it could pose a threat to the privacy of users.
 The privacy aspect of the localisation section is analysed in Section \ref{sec:andro-priv}.
 
 \subsection{Methods of data collection}
@@ -101,8 +101,8 @@ The location server is constructed based on two factors:
 \end{itemize}
 
 The Google Cars are mainly used to take pictures to illustrate the service Google Street View.
-In addition to that, the cars are also war-driving.
-Having a GPS module on the car and driving almost all over the world, it was a good opportunity to constitute a very accurate database.\\
+In addition to that, the cars are also wardriving\footnote{Wardriving is the activity of driving through the streets of a city to collect information such as wireless access points location.}.
+Having a GPS module on the car and mapping almost every main cities in the world, it was a good opportunity to constitute a very accurate database.\\
 
 As most Android devices are equipped with a GPS receiver, collecting via crowd-sourcing is also possible.
 When an Android device uses the Google database to request a location, data are also transmitted to Google servers.
@@ -112,7 +112,7 @@ This way, the database of wireless access points and cell towers is always up-to
 \subsection{Location cache files}
 
 Previous cell tower and access point locations are stored in an unencrypted system file.
-This allows to locate the user quickly and the device is still able to use the network resource, even when not connected to the Internet.
+This enables to locate the user quickly and the device is still able to use the network resource, even when not connected to the Internet.
 %This local cache file is stored in the folder \texttt{/data/data/com.google.android.location/files} in the files \texttt{cache.wifi} and \texttt{cache.cell}.
 Each entry in the cache file is linked with a timestamp representing the date of the retrieval as seen in Figure \ref{fig:locmap}.\\
 
@@ -127,8 +127,8 @@ Each entry in the cache file is linked with a timestamp representing the date of
 The recent criticism about privacy concerns is mainly based on the existence of these cache files.
 If the iOS devices used to have unlimited cache size (fixed in iOS 4.3.3), on an Android device, only the 50 last cells and 200 access points have been observed as stored in the cache files.
 % TODO add reference prev sentence
-However, in the course of this research, the observations made based on the analysis of the data collected from several devices have shown that this size is enough to contain locations older than one month.
-A forensic analysis would allow to retrieve the device location at a given time if a location request was made.
+However, in the course of this research, the analysis of the data collected from several devices have shown that this size is enough to contain locations older than one month.
+A forensic analysis would enable them to retrieve the device location at a given time if a location request was made.
 Such requests can be run in background by any application having the correct permissions.
 The DroidWatcher application relies on this fact to monitor the location of the user in background.\\
 
