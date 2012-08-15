@@ -28,7 +28,10 @@
 \include{includes/camera-gen}
 \include{includes/camera-dcs}
 
-
+\makeatletter
+\def\toclevel@chapter{-1}
+\makeatother
+\addtocontents{toc}{\protect\vspace*{\baselineskip}\protect}
 \include{includes/conclusion}
 
 
