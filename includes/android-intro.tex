@@ -8,7 +8,7 @@ This part is composed of three chapters.
 Consecutive order of chapters should be observed when reading this part.
 However, technical details can be skipped without losing the general understanding.\\
 
-The \textbf{localisation using Android} chapter presents the different methods available to retrieve the location of smartphones.
+The \textbf{localisation using Android} chapter presents the different methods available to retrieve the localisation of smartphones.
 The aim is to define the capabilities of an application in term of location.
 These methods are often unknown and considered as a black-box but when studied they may lead to privacy concerns.
 The anonymity and the traces left by the location requests are particularly examined in this chapter.\\
@@ -22,7 +22,7 @@ This chapter intends to clarify the risks by explaining the known possible abuse
 %TODO a reformuler
 %It also intends and best how to avoid it by developing secure behaviours.\\
 
-The combination of the two first chapters aims at developing a good understanding of the mechanisms of localisation and related security on an Android application.
+The combination of the first two chapters aims at developing a good understanding of the mechanisms of localisation and related security on an Android application.
 As an example of practical implementation of these concepts, the \textbf{DroidWatcher} mobile application has been developed.
 This application aims at demonstrating what an application is capable of and how any location-aware application could trace a user.
 
@@ -35,7 +35,7 @@ The choice of the Android operating system is justified by several factors.\\
 \subsection*{Market share}
 
 Android is the main operating system powering smartphones with a market share of 56.1\% in the first quarter of 2012\footnote{According to Mobile Statistics \url{http://www.mobilestatistics.com/mobile-statistics/}}.
-As the smartphone presence increases, it is today the most likely that a mobile device is powered by this operating system now and in a close future.
+As the smartphone presence increases, it is today the most likely that a mobile device is powered by this operating system now and in a reasonable future.
 The iOS system from Apple is the second most popular system with a market share of 22.9\% at the same period of time.\\
 
 \subsection*{Openness implications}
@@ -61,11 +61,13 @@ The malicious application propagation is directly depending on the platform\foot
 Nowadays, the localisation privacy is often an aspect being neglected.
 The success\footnote{Foursquare had over 20 million of users in April 2012 according to \url{https://foursquare.com/about/}} of applications such as Foursquare, which intends to actively and consciously publish one's current position on social networks for instance, is a clear sign of this tendency.\\
 
-However, this lack of focus on privacy respect has been understood and exploited by advertisers and developers.
+This lack of focus on privacy respect has been understood and exploited by advertisers and developers.
 Mobile technology brings a new dimension in the constant search for knowing more about people: the \emph{Where am I?}.
-The targeted advertisements and user profiling is now common and the localisation is directly related to the efficiency of these techniques.
-If a country-based advertisement in a game application may not bother a user, the traceability possibilities are a lot more accurate and worrying.
-Knowing that the same game application is able to accurately trace the movements of a user through time, even when he does not use the application, should be a more important concern.
+The user profiling is critical for an efficient targeted advertisement and suggestions (eg: Amazon suggesting books that might interest the visitor).
+The localisation possibilities are an important criteria for this profiling and very valuable for marketing purposes.\\
+
+However, localisation process can be used in a more precise and worrying way than for targeted advertisements (cf the Wall Street Journal article).
+A location-aware application is capable of a background and continuous monitoring of an Android phone.
 Demonstrating these possibilities in a transparent way is the aim behind the DroidWatcher application.\\
 
 The location aspect is only studied in the capabilities of requesting the location of a device.
