@@ -43,7 +43,10 @@
 \include{appendix/dw-guide}
 \include{appendix/software}
 
-
+\makeatletter
+\def\toclevel@chapter{-1}
+\makeatother
+\addtocontents{toc}{\protect\vspace*{\baselineskip}\protect}
 \bibliography{includes/biblio}{}
 \bibliographystyle{plain}
 
