@@ -25,10 +25,10 @@ These experiments allow us to have a better understanding of the localisation sy
 
 The GPS, for Global Positioning System, is a technology based on satellite trilateration.
 GPS satellites are navigating around the Earth in a way to maximise the number of visible satellites anywhere at any time.
-There is currently 31 working satellites in orbit~\cite{pocketgpsworld}.
+There are currently 31 working satellites in orbit~\cite{pocketgpsworld}.
 The location-aware device is equipped with a GPS receiver chip.
 This receiver retrieves broadcasted messages from the reachable satellites.
-The messages contain :
+The messages contain:
 
 \begin{itemize}
 \item the time the message was transmitted
@@ -72,7 +72,7 @@ Each wireless access point has a unique identifier\footnote{BSSID for Basic Serv
 When the wireless option of the phone is turned on, the device can retrieve the surrounding access points.
 Assuming the geographical coordinates of all the access points are known, it is possible to estimate the location of the user by trilateration.\\
 
-The advantage of this method is that for an accuracy of about 100 meters, the localisation is faster than using GPS, it works indoors, consumes less battery power than a GPS receiver chip and only one access point is enough to locate a device.\\
+The advantage of this method is that for an accuracy of about 100 metres, the localisation is faster than using GPS, it works indoors, consumes less battery power than a GPS receiver chip and only one access point is enough to locate a device.\\
 
 \subsection{Cache database}
 \label{sec:andro-cell-db}
@@ -83,7 +83,7 @@ SkyHook, Apple and Google are three companies well known for using such database
 SkyHook was one of the first to create a database to locate wireless access points and develop a SDK to query the location of a user.
 The information is collected by war-driving\footnote{Car equipped with a GPS, wireless and cell tower receiver collecting data in the streets} in North America, Western Europe and some Asian countries~\cite{skyhook-coverage}.\\
 
-Companies have quickly understood the value of this information and the economical interest of having its own database as a betterment for location aware applications.
+Companies have quickly understood the value of this information and the economic interest of having their own database as a betterment for location aware applications.
 While Apple was, at first, using SkyHook, it has now developed its own database system.
 Google is also independent and has created its own database.\\
 
@@ -106,12 +106,12 @@ Having a GPS module on the car and driving almost all over the world, it was a g
 
 As most Android devices are equipped with a GPS receiver, collecting via crowd-sourcing is also possible.
 When an Android device uses the Google database to request a location, data are also transmitted to Google servers.
-This way, the database of wireless access points and cell towers is always up to date\footnote{Francisco Kattan, Feb 2010, \url{http://franciscokattan.com/2010/02/06/dynamic-cell-id-clever-way-to-block-google-but-will-it-backfire/}}.
+This way, the database of wireless access points and cell towers is always up-to-date\footnote{Francisco Kattan, Feb 2010, \url{http://franciscokattan.com/2010/02/06/dynamic-cell-id-clever-way-to-block-google-but-will-it-backfire/}}.
 
 
 \subsection{Location cache files}
 
-Previous cell tower and access point locations are stored in an unencrypted system files.
+Previous cell tower and access point locations are stored in an unencrypted system file.
 This allows to locate the user quickly and the device is still able to use the network resource, even when not connected to the Internet.
 %This local cache file is stored in the folder \texttt{/data/data/com.google.android.location/files} in the files \texttt{cache.wifi} and \texttt{cache.cell}.
 Each entry in the cache file is linked with a timestamp representing the date of the retrieval as seen in Figure \ref{fig:locmap}.\\
@@ -130,7 +130,7 @@ If the iOS devices used to have unlimited cache size (fixed in iOS 4.3.3), on an
 However, in the course of this research, the observations made based on the analysis of the data collected from several devices have shown that this size is enough to contain locations older than one month.
 A forensic analysis would allow to retrieve the device location at a given time if a location request was made.
 Such requests can be run in background by any application having the correct permissions.
-The DroidWatcher application relays on this fact to monitor the location of the user in background.\\
+The DroidWatcher application relies on this fact to monitor the location of the user in background.\\
 
 To show the ease of retrieving such information, a python script has been developed~\cite{soft-locdump} to parse the content of these two files and produce a GPS trace file in GPX format\footnote{GPX is a XML file format listing geographical coordinates with timestamp and allowing to reproduce the movement of a device} representing the approximate movement of the device.
 However, a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the manufacturer warranty.}.
