@@ -1,6 +1,6 @@
-\chapter{Thesis introduction}
+\chapter{Introduction}
 
-\section{The context}
+\section{Background}
 
 Extract from article ``The Really Smart Phone'' in the Wall Street journal (April 22, 2011)~\cite{really-smart-phone}.
 
@@ -32,114 +32,110 @@ Extract from article ``The Really Smart Phone'' in the Wall Street journal (Apri
   [\dots]\\
 \end{quotationalt}
 
-We introduce the context of the current thesis with this extract of an article published in 2011 in the Wall Street Journal.
-This gives a rather frightening view on the potential from the exploitation of the massive amount of data made available from our smartphones.
-One year after this article has been published, one can only confirm this structural trend.\\
+We introduce the background of the current thesis with this extract of an article published in 2011 in the Wall Street Journal.
+This gives a rather frightening view on the potential exploitation of the massive amount of data made available from smartphones.
+One year after the publication of this article, one can only confirm this structural trend.\\
 
-The usage of technology is more and more embedded in our everyday life.
-It keeps us organised and it enables our ubiquitous interactions with others in a way that is less and less conscious.
-Even more we get so used to the convenience of those technologies that we might get less and less reluctant at unveiling a part of our private life.
+The usage of technology has become an integral part of human life.
+It keeps us organised and it enables our ubiquitous interactions with others in a way that is becoming less and less conscious.
+Even more we get so used to the convenience of these technologies that we might get not very reluctant to unveil a part of our private life.
 This is clearly a new way of life.\\
 
-This thesis does not focus on computers or websites on the Internet but on the devices implementing this technology that contributes to our new way of life.
+This thesis does not focus on computers or websites on the Internet but on the devices implementing technologies that contributes to our new way of living.
 %These devices work as a black-box, if they \emph{just work} is usually enough for the usage we have of it.
-Those devices are designed and marketed more as easy-to-use appliances than as computers with their complexity and known vulnerabilities.
-Actually a modern smartphone is definitely not an appliance but a general purpose computer fitting in a very small and convenient case.
+These devices are designed and marketed more as easy-to-use appliances than as computers with their complexity and known vulnerabilities.
+Actually a modern smartphone is not an appliance but a general purpose computer fitting in a very small and convenient case.
 From the end-user perspective the privacy aspect of such a device is usually ignored or considered as good enough.
-Also the end-user confidence in the manufacturer’s concern to deal with privacy is a recurrent problem in the privacy scandals\footnote{In April 2011, a cache file containing 8 months of previous user locations has been discovered on iPhones, Section \ref{sec:loc-cache-files} explains the purpose of such file and its presence on Android.}.
+Also the end-user confidence in the manufacturer’s concern to deal with privacy is a recurrent problem as indicated by various privacy scandals\footnote{In April 2011, a cache file containing 8 months of previous user locations has been discovered on iPhones, Section \ref{sec:loc-cache-files} explains the purpose of such file and its presence on Android.}.
 
 \section{Case study choices}
 
-Although there are many very important and interesting aspects\footnote{Marketing, social and legal aspects to name some.} related to this new ``world'', this thesis will look at technical capabilities and related weaknesses.
-As part of this thesis, it has been decided to focus on two types of devices.
-\begin{itemize}
-\item Smartphone is an obvious candidate for reasons mentioned above.
-\item Wireless camera is an interesting candidate because much less mentioned in literature while privacy concerns are real.
-\end{itemize}
+Although there are many very important and interesting aspects (marketing, social and legal aspects to name some) related to this new ``world'', this thesis will look only at technical capabilities and related weaknesses of selected case studies.
+As part of this thesis, it has been decided to focus on two types of devices: the Android smartphone operating system and wireless cameras.
 
-The smartphones penetration rate is in constant rise and, in a few years, it is expected that the large majority of persons own such device in our countries.
+
+Smartphone is an obvious candidate for reasons mentioned above.
+The smartphone penetration rate is in constant rise and, in a few years, it is expected that the  majority of people will own such a device in developed countries.
 Similarly to our personal computers, these devices contain more and more personal data.
-The consequences of compromising these data can be very high for an end-user.
-The cause of compromising can be both related to potential security weaknesses or to abuses for marketing or data steal purposes.\\
+The consequences of compromising such data can be very high for an end-user.
+The cause of data breach can be both related to potential security weaknesses or to abuses for marketing or criminal purposes (eg: identity theft).\\
 
-The wireless camera market is not as developed as for the smartphones but the privacy risks are acknowledged.
-The consequences of camera compromising and unauthorised access to the video stream is potentially very high and can have the opposite effect than the one expected (to ease abuses instead of protecting).\\
-
-For each device type, a concrete case has been selected for the sake of demonstrating
-vulnerabilities and privacy consequences.
-\begin{itemize}
-\item The Android operating system has been selected for smartphones.
-\item The D-Link DSC 2130 camera has been selected for wireless cameras.
-\end{itemize}
-These two choices are justified in the related parts.
+Wireless camera is an interesting candidate because much less mentioned in literature while privacy concerns related to it are real.
+The consequences of camera compromising and unauthorised access to the video stream is potentially very dangerous and can have the opposite effect than the one expected (to ease abuses instead of protecting).
+In order of demonstrating vulnerabilities and privacy consequences, a specific case has been selected: the D-Link DSC 2130 camera.
 
 \section{Potential abuses}
 
 Beyond the two study cases, several technologies face potential abuses related to the privacy of the users.
-This section does not intend to cover every technology but to give a brief presentation for reflection on the risks once we adopt these technologies for our everyday tasks.\\
+This section does not intend to cover every technology but to give a brief presentation for reflection on the risks once these technologies are adopted for our everyday use.\\
 
 \subsection{Mobile phones}
 
 As the Wall Street Journal extract introduced, the amount of data collected using mobile phones reveals patterns in the behaviour of human beings.
-While this research focused on voluntary tracked family using smartphones, there exists many other unconscious ways of tracking a mobile phone.\\
+While this research focused on voluntary tracked family using smartphones, there exists many other ways of tracking a mobile phone.\\
 
-For instance, a phone operator is capable of locating any users in a range of a few hundreds of meters.
-This is localisation is possible using the GSM cell towers information on which a user is connected.
-This is a requirement imposed by US and European directives (E911 and E112) to be able to locate a mobile phone owner in case of emergency~\cite{e112-recom}.\\
+For instance, a phone operator is capable of locating any user in a range of a few hundreds of meters.
+This localisation is possible using the information from the GSM cell towers on which a user is connected.
+This is a requirement imposed by the US and European directives E911 and E112 in order to be able to locate a mobile phone owner in a case of emergency~\cite{e112-recom}.\\
 
-In March 2011, the German politician Malte Spitz sued Deutsche Telekom mobile phone company to hand over his phone data collected.
+In March 2011, the German politician Malte Spitz took legal proceedings against Deutsche Telekom mobile phone company to hand over the data collected from his phone.
 By combining the received data (35,831 spreadsheet rows), he was able to create a map representing his movements during the six months of collected data, including the time of each phone call and text message sent or received~\cite{german-phone-tracking}.
 
 \subsection{RFID}
 
-RFID tags are present in more and more products, from clothes to credit card or passports, their uses goes from inventory tracking to identification or payment transactions.
-As long as the distance from the reader is sufficient (from a few centimetres to meters depending on the tag), an RFID tag enables the transmission of information without any interaction needed from the person who carry the tag.
-The communication can even happen without the user realising it.
+RFID tags are present in more and more products, from clothes to credit cards or passports, their uses ranges from inventory tracking to identification or payment transactions.
+As long as the distance from the reader is sufficient (from a few centimetres to meters depending on the tag), an RFID tag enables the transmission of information without any interaction needed from the person who carries the tag.
+The data transaction can even happen without the user realising it.
 Due to this last point, RFID technology is often involved in privacy issue scandals.\\
 
-RFID criticisms are based on the possible traceability issues as well as the privacy concerns.
-Privacy advocates ask for the destruction of RFID tags when not use (for instance after buying an item where the tag was used for inventory) or cover it with a aluminium foil.\\
+The criticism of RFID is based on the possible traceability issues as well as the privacy concerns.
+Privacy advocates ask for the destruction of RFID tags when not in use (for instance after buying an item where the tag has been used for inventory purpose) or advise covering it with a aluminium foil.\\
 
 RFID tags are now used in credit cards for contactless payments.
-In January 2012, Kristin Paget demonstrated\footnote{Presentation of the hack was done during the Shmoocon 2012 conference, slides available at \url{http://www.tombom.co.uk/Paget-shmoocon-credit-cards.pdf}} that, with compatible RFID reader, it is possible to retrieve sensible bank information from the card such as credit card's number and expiration date, along with the one-time CVV number used by contactless cards to authenticate payments.
+In January 2012, Kristin Paget demonstrated\footnote{Presentation of the hack was done during the Shmoocon 2012 conference, slides available at \url{http://www.tombom.co.uk/Paget-shmoocon-credit-cards.pdf}} that, with compatible RFID reader, it is possible to retrieve sensible bank information from the card such as credit card number and expiration date, along with the one-time CVV number used by contactless cards to authenticate payments.
 
 \subsection{Wifi hotspot}
 
-More and more companies or internet providers offer an wifi sharing capabilities.
-It is the case for instance with the international FON\footnote{FON network \url{http://corp.fon.com/}} system and, at a local level, the wireless system deployed in the centre of Louvain-La-Neuve for the students and members of the UCL\footnote{Université Catholique de Louvain, Belgium \url{https://www.uclouvain.be/en-wifi.html}}.
-These technologies are very convenient as to allow access the Internet from outside the home network.\\
+More and more companies or internet providers offer wifi sharing features.
+For instance, it is the case with the international FON\footnote{FON network \url{http://corp.fon.com/}} system and, at a local level, the wireless system deployed in the centre of Louvain-La-Neuve for the students and members of the UCL\footnote{Université Catholique de Louvain, Belgium \url{https://www.uclouvain.be/en-wifi.html}}.
+These technologies are very convenient as they allow to access the Internet from outside the home network.\\
 
-However these technologies introduce a security risk.
-For instance, it is possible to create a fake access point on which victims may connect and reveals, in the best case, their credentials for the access point or more sensible information during the surf\footnote{During the master in computer sciences at the UCL, the pattern of such an attack has been demonstrated at the occasion of a security. A fake FON access point was created to retrieve FON credentials as well as passwords during the surf using inexpensive material.}.
+However these technologies incorporate a security risk.
+For instance, it is possible to create a fake access point on which victims may connect and reveal, in the best case, their credentials for the access point or more sensitive information during the navigation on the Internet\footnote{During the master in computer sciences at the UCL, the pattern of such an attack has been demonstrated at the occasion of a security. A fake FON access point was created to retrieve FON credentials as well as passwords during the surf using inexpensive material.}.
 
-\section{Thesis document organisation}
+\section{Document organisation}
 
 The thesis is divided into two distinct parts.\\
 
-\textbf{Part \ref{part:android}} is about the Android system and is composed of four chapters.\\
+\textbf{Part \ref{part:android}} deals with the Android system and is composed of four chapters.\\
 
-\textbf{Chapter \ref{chap:andro-intro}} presents and justifies the choice of studying the Android system as well as the focus on the localisation.
-\textbf{Chapter \ref{chap:and-loc}} explains the localisation techniques used in Android as well as the privacy aspect related to it.
-\textbf{Chapter \ref{chap:and-secu}} presents the current security mechanisms used in the Android system to avoid abuses from the applications and how the current security weaknesses are exploited by malicious developers.
-\textbf{Chapter \ref{chap:droidwatcher}} is a presentation of the developed software \emph{DroidWatcher} as an implementation of the concepts introduced in the previous two chapters.\\
+In \textbf{Chapter \ref{chap:andro-intro}}, focuses on Android system as a research subject, also the problem of localisation is discussed. 
+%presents and justifies the choice of studying the Android system as well as the focus on the localisation.
+In \textbf{Chapter \ref{chap:and-loc}}, the localisation techniques used in Android and the related privacy concerns are reviewed.
+% explains the localisation techniques used in Android as well as the privacy aspect related to it.
+In \textbf{Chapter \ref{chap:and-secu}}, an overview of the security mechanisms currently used in the Android system to avoid abuses from the applications is presented.
+Also it is discussed how the current security weaknesses are exploited by malicious developers.
+% presents the current security mechanisms used in the Android system to avoid abuses from the applications and how the current security weaknesses are exploited by malicious developers.
+\textbf{Chapter \ref{chap:droidwatcher}} is a presentation of \emph{DroidWatcher}, the software developed during this thesis as an implementation of the concepts introduced in the previous two chapters.\\
 
-\textbf{Part \ref{part:camera}} is about wireless cameras and is composed of two chapters.\\
+\textbf{Part \ref{part:camera}} concerns wireless cameras and is composed of two chapters.\\
 
 \textbf{Chapter \ref{chap:wifi-cam}} is an introduction to wireless cameras.
-It presents the different types of cameras and the risks of discovery and compromising of a web digital camera.
-\textbf{Chapter \ref{chap:cam-dcs}} is a full security analysis of the chosen camera model D-Link DCS-2130.\\
+It presents the different types of cameras and the risks of discovery and compromising of a digital web camera.
+In \textbf{Chapter \ref{chap:cam-dcs}}, a full security analysis of the chosen camera model D-Link DCS-2130 is presented.\\
 
-%The appendix contains documents related to mentioned as well as every software developed in the context of this thesis.
-The appendix provides some reference documents used during the thesis work.
-Also the appendix provides the documentation related to software developed in the scope of this thesis.
+\textbf{Chapter \ref{chap:thesis-ccl}} is the conclusion of the work, summarising the observations made from the analysis and the issues detected.
+
+%The appendix provides some reference documents employed in the course of the research.
+The appendix provides the documentation related to softwares developed in the scope of this thesis.
 
 \section{Licence}
 
 The author of this work believes in the importance of free licences for the development of technology and sharing of knowledge.
-Accordingly, the content of this thesis is released under different open licences.\\
+Accordingly, the content of this thesis is released under various open licences.\\
 
 The text of the current report is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
-This license allows you to copy, distribute, transmit, adapt the work and to make commercial use of the work under the following conditions:
+This license allows you to copying, distribution, transmission, adaptation the work and making commercial use of the work under the following conditions:
 
 \begin{itemize}
 \item You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
@@ -150,38 +146,3 @@ Details and the full licence text are available at \url{https://creativecommons.
 
 The code developed and published in the context of this thesis is, with exception of explicit mention of otherwise, licensed under the GNU GENERAL PUBLIC LICENSE 3.0 licence. The full licence text is available at \url{https://www.gnu.org/licenses/gpl-3.0.txt}
 
-%\section{Acknowledgements}
-
-
-
-% \section{idées}
-
-% \begin{itemize}
-% \item Aujourd'hui technologie partout
-% \item L'impact sur la vie privée est souvent négligé
-% \item A décidé de se concentrer sur deux technologies
-% \item Le smartphone
-%   \begin{itemize}
-%   \item Android, très à la mode auj
-%   \item Nombre d'appareils en pleine croissance
-%   \item Nombre de virus en croissance également
-%   \item Contient de plus en plus de données personnelles
-%   \item Qu'en est-il de la localisation d'un appareil ?
-%   \end{itemize}
-% \item La caméra de surveillance
-%   \begin{itemize}
-%   \item Prévue pour nous protéger (argument souvent mis en avant)
-%   \item Apparition de petites caméras personnelles wifi abordables
-%   \item Est-ce que ces caméras sont vraiment sécurisées ?
-%   \item Analyse en détail d'un modèle en particulier
-%   \item Si les faiblesses trouvées sont parfois propres à ce modèle en particulier, représentatif de l'effort mis en avant pour sécuriser ces appareils
-%   \end{itemize}
-% \item Document structure
-%   \begin{itemize}
-%   \item State of the art
-%   \item android
-%   \item camera
-%   \item for the future
-%   \end{itemize}
-% %\item Thème de réflexion sur la problématique de la vie privée
-% \end{itemize}
