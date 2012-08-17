@@ -148,7 +148,7 @@ A cellphone can then be located using trilateration based on the surrounding cel
 
 The data collection method and cache management system are very similar to the ones analysed in Section \ref{sec:andro-wifi} and will not be discussed here.
 The location system in Android usually uses both wireless access points and cell towers location methods simultaneously and indifferently for the user and developer.
-The advantage of using cell tower location over the wireless is the fact that it allows to locate a device with an approximate accuracy of 1km almost everywhere.
+The advantage of using cell tower location over the wireless is the fact that it allows to locate a device with an approximate accuracy of 1~km almost everywhere.
 
 %In the DroidWatcher application (see Chapter \ref{chap:droidwatcher}), the application implements its own trilateration algorithm for offline computation.
 
@@ -171,7 +171,7 @@ Google hopes than over time, the \texttt{\_nomap} string will be adopted by othe
 
 This proposition was received with much of scepticism and did not satisfy the pro-privacy groups.
 The main complain was the need of an action from the user to explicitly opt out his access point while people want a way to explicitly opt in instead.
-Many people that are concerned by privacy issues do not have enough technical knowledge to modify the wireless network name.
+Many people that are concerned with privacy issues do not have enough technical knowledge to modify the wireless network name.
 Furthermore, if this string is not universally adopted by other companies such as Apple or SkyHook, conflicting systems can be imagined, preventing a concerned user to fully opt out his access points from commercial databases.
 
 \subsection{Research of Samy Kamkar}
@@ -332,7 +332,7 @@ In each communication, a first packet of 271 bytes is sent followed by another o
 
 Table \ref{tab:expe-req-pattern} shows data collected during the experiments realised.
 \textbf{S. cell} represents the number of surrounding valid GSM cell towers at the collect time.
-$6 (1)$ means there are six surround GSM cell towers detected but only one is valid\footnote{Some cell towers are detected but displayed as using a Cell ID and LAC of -1, these are considered as invalid and ignored. These invalid cells often have a very weak signal strength.}.
+$6 (1)$ means there are six surrounding GSM cell towers detected but only one is valid\footnote{Some cell towers are detected but displayed as using a Cell ID and LAC of -1, these are considered as invalid and ignored. These invalid cells often have a very weak signal strength.}.
 \textbf{S. wifi} represents the number of surrounding wireless access points at the collect time.
 \textbf{Req 1} represents the first communication and \textbf{Req 2} the second one ($271+644/654$ means two packets of 271 and 644 bytes are uploaded and 654 bytes are downloaded from Google's servers).
 \textbf{C. cell} represents the number of cell towers and \textbf{C. wifi} the number of wireless access points in the cache files after the location request (numbers between brackets represents the number of valid entries in the cache file, as the experiment starts in blank state, the cache files are empty at start).\\
@@ -342,7 +342,7 @@ Figure \ref{fig:loc-req-tcpdump} shows an example of collected trace confirming 
 The packets number 46 and 64 contain 269 bytes and are the initiating packets of a request for cell towers and wireless access points.
 The packets number 47 and 65 are the surrounding cell towers and access points uploaded to Google's servers.
 The packets number 49 and 67 are the reply from Google's servers containing the coordinates of the known cell towers and access points.
-These observations do not allow to validate the suppositions concerning the content of the packet but the patterns are coherent to the model explained before.
+These observations do not enable us to validate the suppositions concerning the content of the packet but the patterns are coherent to the model explained before.
 
 \subsection{Experiment 4: Unique identifier}
 
@@ -403,7 +403,7 @@ If it is relatively easy to change this value, we can however imagine that very 
 
 % The provider \texttt{GPS\_PROVIDER}  or \texttt{NETWORK\_PROVIDER} allows to choose the source of the location. The GPS is used in the first case and an hybrid method using both wireless and cell tower location in the second.\\
 
-% A \texttt{Location} is characterized by the following parameters that can be used to determine if a location is or not relevant by an application:
+% A \texttt{Location} is characterized by the following parameters that can be used to determine whether a location is or not relevant by an application:
 % \begin{itemize}
 % \item Longitude
 % \item Latitude
