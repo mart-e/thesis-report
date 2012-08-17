@@ -147,8 +147,8 @@ It is the combination of these two factors that enables a device to identify a u
 A cellphone can then be located using trilateration based on the surrounding cell towers.\\
 
 The data collection method and cache management system are very similar to the ones analysed in Section \ref{sec:andro-wifi} and will not be discussed here.
-The location system in Android use usually both wireless access points and cell towers location methods simultaneously and indifferently for the user and developer.
-The advantage of using cell tower location over the wireless is the fact it allows to locate a device with an approximate accuracy of 1km almost everywhere.
+The location system in Android usually uses both wireless access points and cell towers location methods simultaneously and indifferently for the user and developer.
+The advantage of using cell tower location over the wireless is the fact that it allows to locate a device with an approximate accuracy of 1km almost everywhere.
 
 %In the DroidWatcher application (see Chapter \ref{chap:droidwatcher}), the application implements its own trilateration algorithm for offline computation.
 
@@ -157,7 +157,7 @@ The advantage of using cell tower location over the wireless is the fact it allo
 
 \subsection{Google Cars}
 In May 2010, Google admitted to German authorities having collected more than what it was supposed to.
-In addition to access point's unique identifier, it had ``been mistakenly collecting samples of payload data from open networks''.
+In addition to access points unique identifier, it had ``been mistakenly collecting samples of payload data from open networks''.
 These data chunks could include parts of web surf, email, text...\footnote{TechEYE, May 2012, \url{http://news.techeye.net/security/google-admits-it-sniffed-out-peoples-data}}.
 In reaction, the data collected was asked to be deleted and the CNIL (independent French administrative authority) fined Google with €100.000\footnote{BBC UK, Mar 2011, http://www.bbc.co.uk/news/technology-12809076}.\\
 
@@ -166,13 +166,13 @@ In reaction, the data collected was asked to be deleted and the CNIL (independen
 Some users considered the collected data by the Google Cars and Android devices as private.
 In November 2011, in reaction to criticism, Google created a way to opt out recording of its access point.
 The proposition of Google is to end the ESSID of the wireless access point with \texttt{\_nomap}.
-The next time it is scanned by a Google Cars or an Android device, the access point is removed from the database.
+The next time it is scanned by a Google Car or an Android device, the access point is removed from the database.
 Google hopes than over time, the \texttt{\_nomap} string will be adopted by other location providers~\cite{nomap}.\\
 
 This proposition was received with much of scepticism and did not satisfy the pro-privacy groups.
-The main complain was the need of an action from the user to explicitly opt out its access point while people wants a way to explicitly opt in instead.
+The main complain was the need of an action from the user to explicitly opt out his access point while people want a way to explicitly opt in instead.
 Many people that are concerned by privacy issues do not have enough technical knowledge to modify the wireless network name.
-Furthermore, if this string is not universally adopted by other companies such as Apple or SkyHook, conflicting systems can be imagined, preventing a concerned user to fully opt out its access points from commercial databases.
+Furthermore, if this string is not universally adopted by other companies such as Apple or SkyHook, conflicting systems can be imagined, preventing a concerned user to fully opt out his access points from commercial databases.
 
 \subsection{Research of Samy Kamkar}
 \label{sec:andro-samy}
@@ -188,11 +188,11 @@ The security researcher Samy Kamkar has also looked at the location requested.\\
 %   \label{fig:reqdecode}
 % \end{figure}
 
-He succeeded to decrypt the request made to Google servers and realised that it contains a unique identifier~\cite{cnet-andr-samy}.
+He succeeded in decrypting the request made to Google servers and realised that it contains a unique identifier~\cite{cnet-andr-samy}.
 %Figure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
 % TODO rewrite the graph ?
 The identifier is unique to the cell phone and present in every request.
-If this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then trace him.
+If this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then to trace him.
 He affirms there is no proof the location is anonymised due to the presence of this identifier.\\
 
 \section{Personal researches}
@@ -200,11 +200,11 @@ He affirms there is no proof the location is anonymised due to the presence of t
 
 Several facts about the storage of information and privacy have been announced.
 % TODO ajouter source
-To verify these facts, further investigations have been carried in this thesis.
+To verify these facts, further investigations have been carried out in this thesis.
 The applications used to realise the analyses are presented in the appendix.\\
 % TODO mettre numero de appendix
 
-To realise the experiments a rooted smartphone using Android 2.3 was used.
+To realise the experiments, a rooted smartphone using Android 2.3 was used.
 As most of the location information, including the cache databases files, are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
 The root process and implications are discussed in the introduction.
 
