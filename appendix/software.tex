@@ -3,9 +3,53 @@
 \label{chap:app-soft}
 
 For the realisation of this thesis, several softwares have been developed and used for the researches.
-This appendix gives a short summuray of the usage and purpose of the software.\\
+This appendix gives a short summary of the usage and purpose of the software.\\
 
 The code of every software mentioned here can be found on \url{https://gitorious.org/martin-trigaux-thesis/code/}.
+
+
+\section{androdump.py}
+
+Download the content of the file system on the Android device.
+The ADB utility should be installed and the device connected to the computer making the dump.
+A root access is required to be able to retrieve the full content of the system.
+This program is used in experiments in Section \ref{sec:andro-perso-research} to monitor impact of actions on the file system.
+
+\begin{verbatim}
+Python 3
+Usage: androdump.py [options]
+
+Options:
+  -v, --verbose         Enable verbose mode, lots of text
+  -p PATH, --path=PATH  Starting path, default '/'
+  -o OUT, --out=OUT     Outgoing path, default current path
+\end{verbatim}
+
+\section{compare\_dump.py}
+
+Compare the content of two folders.
+The hash function \texttt{sha256} is used to compare two files and detect the changes.
+The script list the files that have changed were added or deleted between the two folders.
+This program is used in experiments in Section \ref{sec:andro-perso-research} to compare two dumps of the system made with \texttt{androdump.py}.
+
+\begin{verbatim}
+Python 3
+Usage: compare_dump.py [options]
+
+Options:
+  -v, --verbose  Enable verbose mode, lots of text
+  --path1=PATH1  Starting path for folder n°1
+  --path2=PATH2  Starting path for folder n°2
+\end{verbatim}
+
+\section{LocateMe.apk}
+
+LocateMe is an Android application.
+At the launch of the application, it will display current wireless information such as the number of surround wireless access points and GSM cell towers.
+It will also make a single localisation request using the wireless network.
+This application was used for experiments in Section \ref{sec:andro-perso-research}.
+It was a simple way to create a localisation request and observe the according changes.
+
 
 \section{gen\_https.py}
 
@@ -42,4 +86,40 @@ optional arguments:
   -s SOURCE, --source SOURCE
                         The packet author address in the form
                         00:11:22:33:44:55
+\end{verbatim}
+
+\section{dcs-detection.py}
+
+This program scans a range of IP to detect DLink DCS-2130 cameras available on that range.
+The use of this script is explained in Section \ref{sec:dcs-web-access}.
+
+\begin{verbatim}
+Python 3
+usage: dcs-detection.py [-h] [-v] range
+
+Scan a range of IP address to detect DCS-2130 cameras
+
+positional arguments:
+  range          The range to scan in the form 1.2.3.x
+
+optional arguments:
+  -v, --verbose  Verbose mode
+\end{verbatim}
+
+\section{shodan-dcs.py}
+
+This program uses the Shodan search engine presented in Section \ref{sec:shodanhq} to retrieve DLink DCS-2130 cameras indexed.
+The use of this script is explained in Section \ref{sec:dcs-web-access}.
+
+\begin{verbatim}
+Python 3
+usage: dcs-detection.py [-h] [-v] range
+
+Scan a range of IP address to detect DCS-2130 cameras
+
+positional arguments:
+  range          The range to scan in the form 1.2.3.x
+
+optional arguments:
+  -v, --verbose  Verbose mode
 \end{verbatim}
