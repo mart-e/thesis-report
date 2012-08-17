@@ -134,10 +134,9 @@ Such requests can be run in background by any application having the correct per
 The DroidWatcher application relies on this fact to monitor the location of the user in background.\\
 
 To show the ease of retrieving such information, a python script has been developed~\cite{soft-locdump} to parse the content of these two files and produce a GPS trace file in GPX format\footnote{GPX is a XML file format listing geographical coordinates with timestamp and allowing to reproduce the movement of a device} representing the approximate movement of the device.
-However, a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the manufacturer warranty.}.
-This could prevent malicious applications retrieving these data.
+However, a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the manufacturer warranty.}, this could prevent malicious applications retrieving these data.
 This cache folder is only created when the \emph{Use wireless networks} option is enabled in the Android settings.
-However, this option is often required by common applications such as Google Maps which may lead to a large percentage of devices having this option enabled.\\
+However, this option is often required by common applications such as Google Maps which may lead to a large percentage of devices having this option enabled.
 
 \section{Cell tower}
 \label{sec:loc-cell-tower}
@@ -207,6 +206,21 @@ The applications used to realise the analyses are presented in the appendix.\\
 To realise the experiments, a rooted smartphone using Android 2.3 was used.
 As most of the location information, including the cache databases files, are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
 The root process and implications are discussed in the introduction.
+
+\subsubsection*{About root access}
+
+On most devices, the owner of an Android device has only a limited access to the system.
+It can install new applications but not see or alter the content of the device system file where the application is stored.
+%Features such as USB tethering (the possibility to use the phone internet connection on an external device using the USB connection) is usually not permitted using the stock ROM of the devices and can not be activated without modifying the system behaviour.
+Gaining a root access on a device is a procedure to access all the capabilities of the system and be able to modify it.
+The procedure for root access varies from device to another since root access protection is left to manufacturers' choice and can require a complex procedure\footnote{The website ready2root gathers procedures to gain root access on a large list of devices \url{http://ready2root.com/}}.
+Gaining root access is considered sufficient to void the warranty of a device with many manufacturers.\\
+% Having a root access is required to install an alternative ROM.
+
+When enabled at the user level, it is possible for an application to ask as well to gain root access and access most of the device capabilities.
+However these applications still need the user authorisation to do so, gaining root access does not decrease fundamentally the security regarding applications security.\\
+
+To realise the experiments described in this section, a root access was necessary to be able to monitor every aspect of the system.
 
 \subsection{Experiment 1: Database suppression}
 
