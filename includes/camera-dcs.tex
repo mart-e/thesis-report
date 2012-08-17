@@ -29,14 +29,14 @@ However as weaknesses have been discovered on other models of cameras (as showed
 
 The selected camera model is a D-Link DCS-2130 and is represented in Figure \ref{fig:dcs2130}. The camera supports the following protocols:\\
 
-\begin{itemize}
+\begin{itemizealt}
 \item Wifi: Open, WEP, WPA, WPA2
 \item Admin interface: HTTP, HTTPS
 \item Access: UPnP, DDNS
 \item Transfer: FTP, SMTP, Samba, RTSP
 \item Video: H.264, MPEG-4, MJPEG
 \item Audio: G.726
-\end{itemize}
+\end{itemizealt}
 
 The DCS-2130 has also features such as motion detection allowing to program conditional chain of events (eg: if a motion is detected, upload current pictures to a FTP server).
 The camera is provided with an installation utility to configure it from a computer to be able to connect to the wireless network.
@@ -55,13 +55,13 @@ Following that ruling, D-Link published the source code of several of its device
 Even if D-Link technically provides the source code of the software on his website, many difficulties have been faced to get the archive file.
 The difficulties were:
 
-\begin{itemize}
+\begin{itemizealt}
 \item No direct link to the file download (impossible to restart an interrupted download)
 \item Download speed highly throttle (from 1 to 60Kb/s max.)
 \item Regular connection timed out
 \item The contact email address provided for this section of the website is invalid
 \item No answer while using the general contact form
-\end{itemize}
+\end{itemizealt}
 
 Given the nature of the difficulties, one can question if they are intentional to avoid the spreading of the source code too easily.
 The source code has finally been retrieved\footnote{The archive downloaded is available on a public FTP server at \url{ftp://ftp.dotzero.me/DLink/}} and the analysis permitted a better understanding of the firmware mechanism as well as the discovery of security issues.
@@ -475,14 +475,14 @@ However, during the experiments, some cameras where discovered as fully availabl
 To conclude all the camera analysis, the usage of the camera without taking security measures is not considered as safe and is not recommended.
 The owners of this model of camera should apply the following steps:
 
-\begin{itemize}
+\begin{itemizealt}
 \item Disable the guest account.
 \item If not used disable the RTSP stream.
 \item Secure efficiently the wifi network (WPA or WPA2 with a hard to guess password).
 \item Use the web interface in HTTPS after making sure to import the certificate while in a secured environment\footnote{Wired connection, no potential attacker on the network...}.
 \item Cleanup regularly the cache file.
 \item Avoid configuring the camera when not necessary, especially using the installation utility.
-\end{itemize}
+\end{itemizealt}
 
 \section{D-Link reactions}
 \label{sec:dcs-dlink}

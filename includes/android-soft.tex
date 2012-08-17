@@ -20,12 +20,12 @@ But of course more invasive actions could be taken by malicious developers.
 
 DroidWatcher is made of two major components as represented in Figure \ref{fig:dw-archi}: 
 
-\begin{itemize}
+\begin{itemizealt}
 \item A mobile application running on a smartphone:\\
   the application essentially collects location data on a regular basis.
 \item A server-based application:\\
   the application centralises the data collected by the smartphones as soon as those smartphones have an internet access.
-\end{itemize}
+\end{itemizealt}
 
 This chapter presents more specifically the mobile application.
 Installation guide and user manual on the complete DroidWatcher solution, on the mobile and server side, can be found in Appendix \ref{dw-guide}
@@ -59,11 +59,11 @@ Installation guide and user manual on the complete DroidWatcher solution, on the
 Figure \ref{fig:dw-schema} shows the execution of the mobile application.
 The application starts at phone boot, when unlocked or when the interface is used\footnote{Except with Android 4.0 or above where the interface should be launched at least once, see Section \ref{sec:dw-ics} for technical information}.
 When starting, the application has three main components:
-\begin{itemize}
+\begin{itemizealt}
 \item Periodic recording of the location and cell information
 \item SMS commands management
 \item Internet requests and synchronisation%Detection when the phone is connected to the Internet
-\end{itemize}
+\end{itemizealt}
 
 %\section{Location features}
 
@@ -88,10 +88,10 @@ The geographical coordinates of the collected GSM cell towers are retrieved once
 Periodically and when the wireless is enabled on the smartphone, the application verifies if the device is connected to the Internet.
 When it is the case, the application takes two actions:
 
-\begin{itemize}
+\begin{itemizealt}
 \item Retrieve the geographical coordinates of the collected GSM cell towers and compute the previous locations using triangulation
 \item Synchronise the collected locations to the remote server
-\end{itemize}
+\end{itemizealt}
 
 The coordinates of the GSM towers are collected using an unofficial Google database available at \url{http://www.google.com/glm/mmap}.
 This database has been selected as it is one of the most complete compared to the other free alternatives.

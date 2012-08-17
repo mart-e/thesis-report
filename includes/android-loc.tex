@@ -95,10 +95,10 @@ The privacy aspect of the localisation section is analysed in Section \ref{sec:a
 
 In the current study of the Android system, Google solution is taken as an illustration.
 The location server is constructed based on two factors:
-\begin{itemize}
+\begin{itemizealt}
 \item Google Cars
 \item Crowd-sourcing
-\end{itemize}
+\end{itemizealt}
 
 The Google Cars are mainly used to take pictures feeding the Google Street View database.
 In addition to that, the cars are also wardriving\footnote{Wardriving is the activity of driving through the streets of a city to collect information such as wireless access points location.}.
@@ -316,12 +316,12 @@ After observation and repeating the experiment (results displayed in Table \ref{
 Each location requests is composed of two communications with Google's servers.
 In each communication, a first packet of 271 bytes is sent followed by another one of variable size.\\
 
-% \begin{itemize}
+% \begin{itemizealt}
 % \item Two requests are made, one for the cells, one for the wifi.
 % \item The first packets contains every time 269 bytes.
 % \item The uploaded data size is larger than the downloaded.
 % \item The size of the downloaded data is directly linked to the number of entries in the cache files.
-% \end{itemize}
+% \end{itemizealt}
 
 \begin{table}[h]
   \centering
@@ -418,11 +418,11 @@ If it is relatively easy to change this value, we can however imagine that very 
 % The provider \texttt{GPS\_PROVIDER}  or \texttt{NETWORK\_PROVIDER} allows to choose the source of the location. The GPS is used in the first case and an hybrid method using both wireless and cell tower location in the second.\\
 
 % A \texttt{Location} is characterized by the following parameters that can be used to determine whether a location is or not relevant by an application:
-% \begin{itemize}
+% \begin{itemizealt}
 % \item Longitude
 % \item Latitude
 % \item Altitude
 % \item Provider (GPS, Network...)
 % \item Accuracy
 % \item Time of the fix
-% \end{itemize}
+% \end{itemizealt}
