@@ -137,6 +137,7 @@ Using the official Android Debug Bridge toolkit\footnote{Documentation \url{http
 %The device does not need to be unlocked to allow the installation.
 
 \section{Attack schemes}
+\label{sec:and-attack-scheme}
 
 As the multiple installation procedures make the propagation of application easier, it also allows abuses and permit the propagation of malwares.
 Figure \ref{fig:secu-graph} presents the different possibilities for a malicious applications to propagate and be installed on a device.
@@ -208,6 +209,7 @@ When a malicious application is installed using this method, no notification is 
 It is recommended to disable the debug mode when not required and use a screen lock to prevent modifying the phone settings.
 
 \section{Malwares}
+\label{sec:and-malware}
 
 \subsection{General malware types}
 \label{sec:malware-type}
@@ -268,3 +270,20 @@ However, as the PDroid application works as a intermediate layer between the ope
 These requirements are most of the time not possible on manufactured phones with closed sources ROM and are reserved to users with good computer knowledge.
 Although it is not applicable to most Android users, PDroid is a possibility of big improvement on the permission model and we can hope a similar model to be adopted in future versions of Android.
 Figure \ref{fig:pdroid} is an example of usage of the PDroid application capabilities on the Facebook application.
+
+
+\section{Android ecosystem and security}
+\label{sec:and-echosystem}
+
+Section \ref{sec:and-attack-scheme} and \ref{sec:and-malware} explained the different possibilities of attacks as illustrated in Figure \ref{fig:secu-graph}.
+These different types of attacks are partially due to the ecosystem of Android.
+The ecosystem of Android is very different from the one in iOS and this has an impact on the security of the platform.\\
+
+The Android market is very fragmented, any manufacturer is able to port and deploy the Android operating system to its smartphone models.
+When a manufacturer uses Android on a smartphone, Google loose the ability to control efficiently the system.
+The system update process or even the presence of the Android Play Store is dependent of the will of the manufacturer.\\
+
+This lack of efficient control requires  the manufacturer's action to publish fix of known vulnerabilities.
+These will unavoidably be slower than if pushed by Google or even nonexistent to many devices (manufacturers preferring launching new models than supporting old ones).
+The availability of the code for porting and the current open nature of Android would make it very hard to gain more control in the future.
+The large choice of devices and installation medium (Play Store, alternative marketplaces,...) is an marketing argument but also a security weakness.

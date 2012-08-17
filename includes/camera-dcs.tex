@@ -158,10 +158,12 @@ This page is protected with a basic authentication mechanism over HTTP.
 This authentication is not secured as the credentials are send in clear text in the headers of the request.
 The code below is extracted from the headers of a request to the web interface which contain \texttt{admin:mypass} in base64 encoding.
 
+{\scriptsize
 \begin{verbatim}
 GET / HTTP/1.1
 Authorization: Basic YWRtaW46bXlwYXNz
 \end{verbatim}
+}
 
 \subsection{URL parameters}
 
@@ -170,10 +172,12 @@ This interface is accessed by default using HTTP which means that the URL of the
 
 For each configuration request, the URL in the headers contains the information for the selected service.
 For example, a request to update the password of the wireless access point credential would look like:
+{\scriptsize
 \begin{verbatim}
 GET /cgi-bin/wifi_config.cgi?enable=1&ssid=MyWifiNetwork&Mode=0&\
    auth=3&encrypt=2&wpa_key=MyWifiPassword HTTP/1.1
 \end{verbatim}
+}
 
 This means that, even if other protocols are secured (eg: usage of SSL in SMTP), the configuration may be the source of information leakages.\\
 
@@ -210,6 +214,7 @@ This means that an attacker could issue a forged certificate pretending to be th
 
 During the analysis of the camera, the exported configuration file mentioned in Section \ref{sec:dcs-config} contains also the information about the different users allowed to access the camera with their access right level as shown below.
 
+{\scriptsize
 \begin{verbatim}
 acounts0_name=admin
 acounts0_passwd=mypass
@@ -218,6 +223,7 @@ acounts1_name=guest
 acounts1_passwd=guest
 acounts1_authority=2
 \end{verbatim}
+}
 
 In this part, an account \emph{guest} using the password \emph{guest} appears with an access level of 2.
 This account is automatically created at the installation of the camera.\\
@@ -244,6 +250,7 @@ In the administration web interface, it is possible to create and delete users.
 However, the removal of the guest account has been specifically prevented.
 In the webserver source code, the case of removing the guest user is refused as shown in the code below present in the function responsible for removing an account\footnote{In the firmware source code, see \texttt{/apps/public/boa-0.94.13/src/request.c} line 3280}
 
+{\scriptsize
 \begin{verbatim}
 ...
 #ifdef CONFIG_BRAND_DLINK
@@ -254,6 +261,7 @@ In the webserver source code, the case of removing the guest user is refused as 
 #endif
 ...
 \end{verbatim}
+}
 
 This piece of code (typographical error in the original code) is highly surprising as a clear addition from D-Link as an effort to prevent the removal of the guest account (identified by the variable \texttt{i == 1} here).
 The reason of this effort is unknown and left to the reader interpretation but it leads to an important security breach as it facilitates the unauthorised viewing of the video stream.\\
@@ -296,6 +304,7 @@ This means that, even for an anonymous visitor (not guest or admin), it is possi
 As its name implies, the file exports the log of the camera in a text file.
 This log file does not reveal highly sensitive information (no password) but gives the state of camera through time.
 
+{\scriptsize
 \begin{verbatim}
 2012-05-24 21:01:29 NETWORK LOST
 2012-05-24 21:01:29 SD CARD SIZE 7620040 KB
@@ -304,6 +313,7 @@ This log file does not reveal highly sensitive information (no password) but giv
 2012-05-25 15:40:38 IP CAMERA Received MOTION Trigger
 2012-05-25 15:40:41 MOTION STOPPED
 \end{verbatim}
+}
 
 A more sensitive information displayed in the log file is the login account name, the IP addresses and events such as motion detection activation.
 Analysing these information could allow an attacker to retrieve information such as the user habits and presence time.\\
@@ -322,6 +332,7 @@ As mentioned in Section \ref{sec:cam-detection-hidden}, it is possible to scan a
 While making a request to an IP address, the headers of the reply are specific to the IP device and make it possible to easily identify the presence of cameras.
 The reply headers of a request shown below contains the identifier \texttt{Basic realm="DCS-2130"} which can be used.
 
+{\scriptsize
 \begin{verbatim}
 HTTP/1.0 401 Unauthorized
 Date: Sat, 12 Feb 2011 17:59:32 GMT
@@ -330,12 +341,14 @@ Connection: close
 WWW-Authenticate: Basic realm="DCS-2130"
 Content-Type: text/html; charset=ISO-8859-1
 \end{verbatim}
+}
 
 As a proof of contest, the program \texttt{dcs\_detection.py} was developed.
 This script scans a given range of IP addresses until it detects a basic realm containing \texttt{DCS-2130}.
 In a few minutes, this script can discover the presence of a camera on a home network or on a public IP range.
 The example below shows the execution of the script detected two cameras in about 4 minutes on a /24 range of IPs.\\
 
+{\scriptsize
 \begin{verbatim}
 $ time python dcs-detection.py 78.37.191.x
 Iterating on 256 urls
@@ -347,6 +360,7 @@ real    3m57.994s
 user    0m2.007s
 sys     0m0.127s
 \end{verbatim}
+}
 
 Using Shodan search engine (presented in Section \ref{sec:shodanhq}) with the keyword \texttt{DCS-2130} is another efficient way to retrieve quickly a list of IPs connected to this model of camera.
 Using the developer API, the script \texttt{shodan-dcs.py} has been developed to list the indexed DCS-2130 cameras.\\

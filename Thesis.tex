@@ -9,6 +9,9 @@
 \include{includes/titlepage}
 %\maketitle
 
+\include{includes/acknowledgments}
+
+\clearpage\mbox{}\clearpage
 
 \tableofcontents
 
@@ -29,16 +32,21 @@
 \include{includes/camera-gen}
 \include{includes/camera-dcs}
 
-\makeatletter
-\def\toclevel@chapter{-1}
-\makeatother
-\addtocontents{toc}{\protect\vspace*{\baselineskip}\protect}
+\addcontentsline{toc}{part}{Conclusion}
+\part*{Conclusion}
+
+% \makeatletter
+% \def\toclevel@chapter{-1}
+% \makeatother
+% \addtocontents{toc}{\protect\vspace*{\baselineskip}\protect}
+
 \include{includes/conclusion}
 
 
 \appendix
 
-\part{Appendix}
+\addcontentsline{toc}{part}{Appendix}
+\part*{Appendix}
 
 %\include{appendix/perm}
 \include{appendix/dw-guide}
