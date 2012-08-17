@@ -1,0 +1,45 @@
+
+\chapter{Softwares}
+\label{chap:app-soft}
+
+For the realisation of this thesis, several softwares have been developed and used for the researches.
+This appendix gives a short summuray of the usage and purpose of the software.\\
+
+The code of every software mentioned here can be found on \url{https://gitorious.org/martin-trigaux-thesis/code/}.
+
+\section{gen\_https.py}
+
+Generate a specific number of HTTPS connections to a specified host.
+This program is used to generate a large number of bytes of entropy to test the quality of the PRNG as explained in Section \ref{sec:dcs-random}.
+
+\begin{verbatim}
+Python 3 
+usage: Generate HTTPS connexions [-h] [--host HOST] N
+
+positional arguments:
+  N            the number of connexions to generate
+
+optional arguments:
+  --host HOST  IP address of the host to contact
+\end{verbatim}
+
+\section{pcap\_to\_random.py}
+
+Retrieve the 28 random bytes from the \emph{server hello} packet during the initialisation of an HTTPS connection.
+It uses a PCAP trace file and outputs an ASCII sequence of bits.
+This program is used to extract a large quantity of random bits from a trace file to test the quality of the PRNG as explained in Section \ref{sec:dcs-random}.
+
+\begin{verbatim}
+Python 2
+usage: pcap_to_random.py [-h] [-s SOURCE] [-d] filename
+
+A pcap random number extractor
+
+positional arguments:
+  filename              The pcap file to parse
+
+optional arguments:
+  -s SOURCE, --source SOURCE
+                        The packet author address in the form
+                        00:11:22:33:44:55
+\end{verbatim}
