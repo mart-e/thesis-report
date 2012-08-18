@@ -1,12 +1,12 @@
 
-\chapter{Wireless cameras introduction}
+\chapter{Introduction to wireless cameras}
 \label{chap:wifi-cam}
 
 % \section*{Introduction}
 % \label{sec:cam-intro}
 
-Personal wireless surveillance cameras are widely available for a large public nowadays.
-From hotel receptions to home surveillance or supervision of the babysitter\footnote{Miniature wireless cameras called \emph{nanny cam} are sold on specialised websites for the sake of child safety.}, many reason can justify the usage of a video camera.
+Personal wireless surveillance cameras are widely available for general public nowadays.
+From hotel receptions to home surveillance or supervision of the babysitter\footnote{Miniature wireless cameras called \emph{nanny cam} are sold on specialised websites for child safety.}, many reasons can justify the usage of a video camera.
 While these cameras have valid usages, it is an open door to very important privacy threats.
 The possibility for unauthorised people to access the video could have the opposite effect of protecting something (helping the work of potential burglars for example).
 During the placing of this kind of wireless cameras, the question of security and privacy is often neglected or completely forgotten.\\
@@ -18,34 +18,34 @@ This chapter describes the different types of cameras and possible abuses on the
 \label{sec:cam-analogic}
 
 Analogue video cameras are often cheaper than the digital models and easier to install (no wifi network required).
-This explains the fact they are still in use nowadays and may still be used in the future for shops and personal usages.
-The video camera records analogue pictures and transmits it on a defined radio frequency.
+This explains the fact they are still in use nowadays and may still be used in the future for shops and in private sector.
+The video camera records analogue pictures and transmits them on a defined radio frequency.
 To visualise the video, a receptor is set on the same frequency.
-The frequency bands used are usually around 2,4GHz and have been selected as to avoid conflict with other emissions.\\
+The frequency bands used are usually around 2,4GHz and have been selected so to avoid conflict with other emissions.\\
 
 The important aspect about these cameras is the fact that, as the video is broadcasted on a defined frequency, any receptor set on this frequency can receive and watch the video stream.
-This implies that there is technically no protection on the video stream.
-Anybody using a portable receptor is able to watch the video stream (which could also contain an audio stream depending on the camera model) at a range of a few metres.\\
+This implies that technically there is no protection of the video stream.
+Anybody using a portable receptor is able to watch the video stream (which could also contain an audio stream depending on the camera model) at a range of few metres.\\
 
-The usage of this type of camera should only be reserved for non sensible content and be considered as watchable by anybody.
+The usage of this type of camera should only be reserved for non sensitive content and be considered as available to anybody.
 
 \section{Digital cameras}
 \label{sec:cam-digital}
 
-Unlike the analogue video cameras, the digital models record digital images and transmit it using numerical stream, in this case, using wifi networks.
-The protection of the video stream is then possible at several level:\\
+Unlike the analogue video cameras, the digital models record digital images and transmit them using numerical stream, in this case, using wifi networks.
+The protection of the video stream is then possible at several levels:\\
 
 \begin{itemizealt}
-\item Encryption of the wireless network (WEP, WPA, WPA2...)
+\item Encryption of the wireless network (WEP, WPA, WPA2, etc.)
 \item Encryption of the transmission protocol (usage of SSL to transmit the images)
-\item Access control mechanism to the stream itself (password to access the admin interface)
+\item Access control mechanism of the stream itself (password to access the admin interface)
 \end{itemizealt}
 
 The security of the video stream is then directly related to the choice of the security mechanism.
 Using a weak security mechanism (for example WEP) leads to a weak security of the camera.\\
 
 The digital video cameras can contain many features for the transmission of the video stream.
-As these features improve the access convenience using different methods (admin interface, mail sending...), they also put a challenge on the side of the end user who must understand the key differences in term of security.
+As these features improve the access convenience using different methods (admin interface, mail sending, etc.), they also put a challenge on the side of the end user who must understand the key differences in terms of security.
 For instance setting an admin password to the administration interface during the configuration process does not protect the RTSP\footnote{RTSP, for \emph{Real Time Streaming Protocol}, is a streaming protocol, often used to embed the video stream in third party softwares.} stream in the analysed D-Link camera.
 
 \section{Web digital cameras}
@@ -73,8 +73,8 @@ If the URL to a web camera interface is published on a website (legitimate or no
 If indexed, these cameras can be listed with the correct search keywords.\\
 
 Using the Google search engine, the keyword \texttt{inurl:} is used to search in the site's URL itself.
-On certain models of digital cameras, the URL to access the web interface contains some patterns typical of these cameras.
-It is the case for example of \texttt{axis-cgi/mjpg} or \texttt{ViewerFrame?Mode=} that are present mostly in webcam server softwares.
+On certain models of digital cameras, the URL to access the web interface contains some patterns typical for these cameras.
+This is the case for example with \texttt{axis-cgi/mjpg} or \texttt{ViewerFrame?Mode=} that are present mostly in webcam server softwares.
 Using the following search queries can list links to the web interface of digital cameras:
 
 \begin{itemizealt}
@@ -87,15 +87,15 @@ Using the following search queries can list links to the web interface of digita
 \item \texttt{inurl:view/view.shtml}
 \end{itemizealt}
 
-While these cameras are, most of the time, filming public areas were already available on websites without restrictions, these search queries allow quickly to list a large quantity of cameras.
-By refining the search with other keywords such as \emph{airport} or the name of cities, it may make easier the collect and cross-checking information and facilitate abuses.\\
+While these cameras are, most of the time, filming public areas were already available on websites without restrictions, these search queries allow quickly to list a large number of cameras.
+By refining the search with other keywords such as \emph{airport} or the names of cities, it may make easier the collection and cross-checking information and facilitate abuses.\\
 
 \subsection{Detection of non-public cameras}
 \label{sec:cam-detection-hidden}
 
-To end up in Google results, all the cameras have been published on a web page that was indexed by Google.
+To end up in Google results, all the cameras have been published on a web page that has been indexed by Google.
 However, it is possible to find camera streams of more private areas such as bars, factories or even homes.
-Most likely, these cameras have not been published by their owner on a website that was indexed by a search engine bot.
+Most likely, the video stream from these cameras has not been published by their owner on a website that was indexed by a search engine bot.
 %If these digital cameras are not protected with an access control mechanism, anybody with the correct address can watch it.
 Often, the owners of personal cameras rely on the fact that the IP address or URL to access these cameras are not known and published.
 However it is possible to find and access the video stream of such cameras in some cases.
@@ -105,9 +105,9 @@ If a dynamic DNS system is used (some cameras integrate DDNS clients in their co
 This is the case for example with AXIS\footnote{AXIS \url{http://www.axis.com/}} surveillance cameras system which provides a dynamic DNS system URL with the form http://\emph{\textless client-id\textgreater}.axiscam.net.
 By iterating or using a dictionary on common keywords, it is possible to find cameras that were not intended to be published.\\
 
-Another method to detect cameras are to scan ranges of IPs addresses.
+Another method to detect cameras is to scan ranges of IPs addresses.
 By iterating on a range of IP addresses, it is possible, with a sufficient amount of time, to list any type of IP device, including digital cameras, accessible via a public IP address.
-Some cameras have unique patterns in the URL or in the header of the requests, searching for these patterns allow to detect these hidden cameras.
+Some cameras have unique patterns in the URL or in the header of the requests, searching for these patterns allows to detect these hidden cameras.
 A script detecting the model of D-Link cameras studied in Chapter \ref{chap:cam-dcs} is described in Section \ref{sec:dcs-web-access}.\\
 
 \subsection{Shodan}
@@ -117,7 +117,7 @@ Shodan\footnote{SHODAN - Computer Search Engine \url{http://www.shodanhq.com/}} 
 Instead of crawling the content of web pages, it scans IP ranges using headers, IP and ports to detect devices connected to the Internet.\\
 
 In the case of camera, this search engine can be used to detect web cameras available on the Internet.
-The case where a camera interface is not protected using an access control mechanism, people using Shodan may find it and be able to watch the video stream.
+In case the camera interface is not protected by an access control mechanism, it is possible to find watch the video stream with the help of Shodan.
 The usage of an access control mechanism does not prevent the indexing of a camera by Shodan but helps to avoid unauthorised accesses.
 Figure \ref{fig:shodan-dcs} shows an example of a search done to find D-Link DCS-2130 camera, finding 195 devices.
 
@@ -131,10 +131,10 @@ Figure \ref{fig:shodan-dcs} shows an example of a search done to find D-Link DCS
 \subsection{TRENDnet vulnerability}
 \label{sec:trendnet-hack}
 
-While the methods mentioned previously abuse from a lack of protection, some cameras, even protected, suffer from vulnerabilities and the video stream can be accessed if they are published on the web.
+While the methods mentioned previously abuse from a lack of protection, some cameras, even protected, suffer from vulnerabilities and the video stream can be accessed if the camera is available on the web.
 This is the case of a set of TRENDnet IP cameras on which a bug has been discovered.\\
 
-In January 2012, the author of the webblog Console Cowboys, has published some researches he made about a TRENDnet digital camera~\cite{trendnet-hack}.
+In January 2012, the author of the webblog Console Cowboys, has published several researches on a TRENDnet digital camera~\cite{trendnet-hack}.
 Through his researches, he discovered on the server, the presence of an executable binary file \texttt{mjpg.cgi} in a public cgi directory.
 When executed, this file generates a video stream with regular snapshots of the camera.
 By accessing the file through the URI \texttt{/anony/mjpg.cgi}, any user, even unauthenticated, would receive the video stream from any TRENDnet camera using this firmware as the example in Figure \ref{fig:trendnet-hack} shows.\\
@@ -146,7 +146,7 @@ By accessing the file through the URI \texttt{/anony/mjpg.cgi}, any user, even u
   \label{fig:trendnet-hack}
 \end{figure}
 
-The exploitation of this vulnerability is made easier by the existence of the Shodan search engine presented in Section \ref{sec:shodanhq}.
+The exploitation of this vulnerability is facilitated by the existence of the Shodan search engine presented in Section \ref{sec:shodanhq}.
 Using the query \texttt{netcam} which is used in the headers of TRENDnet cameras, the Shodan search engine lists IP addresses of TRENDnet cameras.
 Using this list, the vulnerability can be tested on a large number of devices.\\
 
@@ -154,6 +154,6 @@ TRENDnet replied to this publication by proposing an update of the firmware that
 However it is very likely that most of the vulnerable devices will not be updated by their owners and still be exploitable in the future.\\
 
 This vulnerability is an example of the danger of setting up such devices on the web.
-Even by protecting correctly and not publishing the URL to access the camera, owners of these devices are exposed to any curious eyes as for the moment their camera is made accessible from the Internet.
+Even by protecting correctly and not publishing the URL to access the camera, owners of these devices are exposed to curious eyes as for the moment their camera is made accessible from the Internet.
 Unlike the results from the Google Search in Section \ref{sec:cam-google}, these cameras are often personal cameras and are often used in private areas.
 A similar bug permitting the access to the log file on the studied camera has been discovered and is explained in Section \ref{sec:dcs-log}.
