@@ -4,7 +4,7 @@
 %\section*{Introduction}
 As the number of smartphones is constantly rising, the level of concerns about the security of the system increases.
 Paradoxically, users tend to store more and more personal data on their smartphones and are not aware of the security issues of such devices.
-Malwares have been discovered in the official applications store and antivirus softwares for Android are now available.
+Malware have been discovered in the official applications store and antivirus softwares for Android are now available.
 Android runs on top of a Linux kernel which is yet reputed to be virus-free.\\
 
 The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
@@ -13,20 +13,20 @@ The focus of this chapter is the application capabilities and propagation.
 Different security threads are examined and the associated risks are evaluated.
 The different procedures from the publication to the installation of an application on a device are particularly examined.
 
-The forensic aspect to retrieve information from a device without the owner consent has not been analysed here.\\
+The forensic aspect of information retrieval from a device without the owner's consent has not been analysed here.\\
 
 These clarifications are essential to understand the limits and possibilities for the developed \emph{DroidWatcher} application (see Chapter \ref{chap:droidwatcher}) to be effective.
 
 \section{Permissions}
 \label{sec:permissions}
 
-For an application to run on the Android operating system and access to critical resources, it should have been explicitly allowed to do so by the system. %TODO pas très clair
+For an application to run on the Android operating system and to access critical resources, it should be explicitly allowed to do so by the system. %TODO pas très clair
 For a set of defined tasks, a permission should be enabled.
-These tasks are, for example, to access the current location of the user, update the address book, use the Internet, write to the SD card...
-At the installation of an application, the permissions necessary are mentioned.\\
+These tasks are, for example, to access the current location of the user, to update the address book, to use the Internet, to write to the SD card and alike.
+At the installation of an application, the necessary permissions are mentioned.\\
 
 The permission system is designed to control the use of internal methods and resources of Android.
-Without a permission, an application can not access to certain resources or methods in the Android system.
+Without a permission, an application can not access certain resources or methods in the Android system.
 
 \subsection{Technical details}
 %In Appendix \ref{perm-list}, the list of available permissions are mentioned.
@@ -45,37 +45,38 @@ E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps re
 In Listing \ref{lst:gpsexception} is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
 If the error is not caught properly, the execution of the application is interrupted and the user receives a notification of the crash of the application.\\
 
-The permission processed is conceived to control the access to an information and to not a phone characteristic.
-For instance, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the use of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
+The permission processed is conceived to control the access to information and to not a phone characteristic.
+For instance, there is no permission to use the GPS but one to access a precise location whatever the source of the information.
+The \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the use of the high level \texttt{LocationManager} methods but it is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
 \subsection{Weaknesses}
 
 The way the permission system is implemented does not fully prevent malicious behaviour.
-The permission description is unclear and can include different purposes.
+The permission description is unclear and can have different purposes.
 For example, the permission \texttt{READ\_PHONE\_STATE} is required for many actions.
-It enables an application to be notified when a phone call is processed or when the device is locked, it also gives information about the phone unique identifier and SIM id.
+It enables an application to be notified when a phone call is processed or when the device is locked, it also gives information about the unique identifier of the phone and SIM id.
 This permission is often used to suspend services or simply track a device using the unique identifier.
 The problem is that, in case of a phone call, it also provides the access to methods allowing to retrieve the caller phone number.
-This is an information leakage that could have been avoided.\\
+This is a type of information leakage that could have been avoided.\\
 
 Also, it is unclear when and why an application requires a permission at the installation process.
 Many free applications display advertisements to fund their development.
-This kind of applications requires the permission to access the Internet to download the advertisement content.
+This kind of applications requires the permission to access the Internet in order to download the advertisement content.
 A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the micro-SD card of the device) for advertising and score storing.
 By using these permissions, it could upload the full content of the SD card (which may contain personal information from the other applications) to a server.
-Only a deep analysis such as network monitoring can detect malicious behaviours of an application.\\
+Only an in-depth analysis such as network monitoring can detect malicious behaviours of an application.\\
 
 Finally, if a user disagrees with the need of a suspicious permission, he has no other choice than not to install the application.
 There is no possibility to partially accept the permissions.
-Due to this restriction, if they want to use the application, we can assume than most users will accept, whatever the permissions asked are.
+Considering this restriction, it is clear than in most cases, the user will accept any permissions without regards of their type, in order to use the particular application.
 
 \section{Installation of applications}
 
-Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jail-breaking which is not allowed by Apple}, the Android operating system proposes several ways to install an application.
+Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jail-breaking which is not allowed by Apple}, the Android operating system permits several ways to install an application.
 
 \subsection{Play Store}
 By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources and compatible with only the official Android devices.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
-Once a Google account is associated to the user's phone, the user can use the Google Play Store application which lists the available applications and installs them quickly.
+Once a Google account is linked to the user's phone, the user can use the Google Play Store application which lists the available applications and allows quick installation.
 Figure \ref{fig:market} shows an example of the interface of the application.\\
 
 \begin{figure}[h]
@@ -90,7 +91,7 @@ The Android Play Store has several features that can be handy for the average us
 \begin{itemizealt}
 \item Warning when an update is available
 \item Control by Google against malicious applications
-\item User's comments and reviews
+\item Users' comments and reviews
 \item Payment system with Google Checkout
 \end{itemizealt}
 
@@ -108,10 +109,10 @@ Changing this setting is proposed when a user is trying to install a software fr
 \subsubsection{.apk file}
 The \emph{.apk} extension is the convention for installable applications on the Android operating system in the same way as \emph{.deb} or \emph{.rpm} are on Debian and Fedora operating systems.\\
 
-A user trying to open such files on his device launches the installation process in the same way as if he was using the Android Play Store.
-The required permissions are displayed and ask for the approval of the user.
+A user trying to open such files on a device launches the installation process in the same way as if the Android Play Store would be used.
+The required permissions are displayed and require the confirmation of the user.
 Figure \ref{fig:perm-dw} shows the permission screen when a user tries to install the application DroidWatcher.
-This is the same screen while either using the Google Play Store or installing an \emph{.apk} file.\\
+The same screen will appear while either using the Google Play Store or installing an \emph{.apk} file.\\
 
 \begin{figure}[h]
   \centering
@@ -124,22 +125,21 @@ An apk file is produced after the compilation of a program and is often proposed
 Once an application is installed on the system, the apk file is stored on the system.
 
 \subsubsection{Alternative marketplaces}
-In the same way as the Android Play Store, it exists several alternative market places.
-Alternative market places are a way to download apk files from a centralised interface.
-It is seen as an alternative to the Google Play Store with the advantages of a centralised distribution medium (paid system, users reviews, moderation...).
-Manufacturers or service providers sometimes sell smartphones with their own marketplace instead of the Google Play Store.\\
 
-% TODO \emph{jesaispluslenom} on the other hand as a fewer control which leads to finding more malicious applications or pirated versions of non-free applications available on the Play Store.
+In the same way as the Android Play Store, several alternative market places exist.
+Alternative market places enables downloading apk files from a centralised interface.
+It is considered to be an alternative to the Google Play Store with the advantages of a centralised distribution medium (payment system, users' reviews, moderation, etc.).
+Manufacturers or service providers sometimes sell smartphones with their own marketplace instead of the Google Play Store.\\
 
 \subsubsection{Debug mode}
 If the debug mode of an android device is turned on (done in the configuration settings of the device), interaction between a computer and the device is possible.
-Using the official Android Debug Bridge toolkit\footnote{Documentation \url{https://developer.android.com/tools/help/adb.html}}, an application can be installed in a few seconds from a computer without any notifications or user interactions on the device connected to a computer (connection done typically using a USB cable).
+Using the official Android Debug Bridge toolkit\footnote{Documentation \url{https://developer.android.com/tools/help/adb.html}}, an application can be installed in a few seconds from a computer without any notifications or user interactions on the device connected to a computer (connection typically made using a USB cable).
 %The device does not need to be unlocked to allow the installation.
 
 \section{Attack schemes}
 \label{sec:and-attack-scheme}
 
-As the multiple installation procedures make the propagation of application easier, it also enables abuses and accelerate the propagation of malwares.
+Even though the multiple installation procedures make the propagation of an application easier, they also enable abuses and accelerate the propagation of malware.
 Figure \ref{fig:secu-graph} presents the different possibilities for a malicious applications to propagate and be installed on a device.
 The attack types are described in Section \ref{sec:malware-type}.
 
@@ -154,31 +154,31 @@ The attack types are described in Section \ref{sec:malware-type}.
 \label{sec:playstore-publication-policy}
 
 In comparison to the Apple iOS system, Google has adopted an open policy of application publication.
-This strategy choice makes the Android system an easier target in term of malware propagation on the official applications distribution platform.\\
+This strategy makes the Android system an easier target in terms of malware propagation on the official applications distribution platform.\\
 
-To distribute an application on the Android Play Store, the registered developer can upload his application on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
+To distribute an application on the Android Play Store, the registered developer can upload their applications on Google Play servers and make it available in a few hours\footnote{Official Distribution Control guidelines \url{https://developer.android.com/distribute/googleplay/about/distribution.html}}.
 There is no human control before the publication of an application.
 The upload of a malicious application would be detected only after its publication which can lead to infected users.
-In comparison, when submitting an iOS application, Apple will review the application which can takes several days.\\
+In comparison, when submitting an iOS application, Apple will review the application which can take several days.\\
 
 In February 2012, Google announced the creation of Bouncer, an automated scanning of the Android Play Store for potential malicious software.
-This scan is applied on every new and already published application to detect known malwares, spywares and torjans or detected suspicious behaviour based on previous detection.
+This scan is applied on every new and already published application to detect known malware, spyware and torjans or detected suspicious behaviour based on previous detection.
 This prevents detected malicious applications to be republished on different developer accounts or under different names~\cite{secu-bouncer}.
-However, in the 2012 DefCon conference, Bob Pan, from TrendMicro Inc., presented a way to bypass this security by dividing a known virus in several parts and recreate the infected apk afterwards~\cite{secu-defcon}.\\
+However, in the 2012 DefCon conference, Bob Pan, from TrendMicro Inc., presented a way to bypass this security by dividing a known virus in several parts and recreating the infected apk afterwards~\cite{secu-defcon}.\\
 
-To become a registered developer, the owner of a Google account has only to pay a 25\$ fee and no other information than a name and a phone number.
+To become a registered developer, the owner of a Google account has to pay a 25\$ fee and no other information than a name and a phone number must be provided.
 In comparison, to become a registered Apple developer, a minimum of 99\$/year fee\footnote{According to Apple Developer Programs \url{https://developer.apple.com/programs/}} to subscribe to the developer program and more personal information such as credit card information for identity verification are required.\\
 
-This difference in the verification process and ease to create a developer profile between Google and Apple may lead to the presence of more malicious applications on the Android platform than on iOS.
+This difference between Google and Apple regarding the verification process and ease to create a developer profile  may lead to the presence of more malicious applications on the Android platform than on iOS.
 The presence of an application on the Android Play Store is then, by no means, a guarantee of safety and a user should check carefully before installing any application.\\
 
 As for the Play Store, alternative market places are as secured as the control of their owners over the applications acceptance process.
-The \emph{Amazon AppStore}\footnote{Available in the US only at \url{http://www.amazon.com/appstore}} developed by Amazon.com Inc. has an approval process to publish applications similar to Apple regarding iOS applications\footnote{Approval Process and Content Guidelines \url{https://developer.amazon.com/help/faq.html\#Approval}}.
+Approval process to application publishing of the \emph{Amazon AppStore}\footnote{Available in the US only at \url{http://www.amazon.com/appstore}} developed by Amazon.com Inc. is  similar to Apple's regulation regarding iOS applications\footnote{Approval Process and Content Guidelines \url{https://developer.amazon.com/help/faq.html\#Approval}}.
 
 \subsection{Play Store website}
 
 In the case of an attacker gaining access to the Google account of an Android user, it could remotely install any application.
-This would allow the attacker to do almost any kind of actions the device is capable of.
+This would allow the attacker to perform almost any kind of actions the device is capable of.
 It would be possible to monitor the activity of the user or remotely command the phone.
 %The developed application \emph{DroidWatcher} is an example of what would be possible with a focus on the geolocalization.
 A simple notification is displayed at the application installation that can be unnoticed or not understood as an infection sign by inexperienced users.
@@ -187,20 +187,20 @@ A simple notification is displayed at the application installation that can be u
 
 As the developer policy of Google is open by nature, the description of an application published on the Play Store may not describe the real behaviour of an application.
 Free games or widgets are often attractive and are an ideal target for a malicious application writer that can use social engineering.
-Pretending another purpose than the actual behaviour of an application leads to its installation willingly from the user.\\
+Declaring another purpose than the actual behaviour of an application leads to its installation willingly from the user.\\
 
 This attack scheme is relevant for applications on the Play Store or installed using any other sources.
-However, there is frequently a confusion from the users supposing the Play Store is more secure than it actually is.
-This may lead to reduce the suspicion of the users and makes the attack more effective.\\
+However, there is frequently a confusion from the users assuming the Play Store is more secure than it actually is.
+This may lead to reduce the suspicion of the users and make the attack more effective.\\
 
-Also, websites have appear on the web proposing applications that are non-free on the Play Store.
+Also, websites have appeared on the web providing applications that are non-free on the Play Store.
 These applications can be instead a malware or have been manipulated to inject malicious code in the original application.
-Therefore, applications downloaded on such websites should be considered as are the warez websites on the Windows operating system: highly risky in term of malware propagation.
+Therefore, applications downloaded on such websites should be considered similar to the warez websites on the Windows operating system: highly risky in term of malware propagation.
 
 \subsection{Physical access}
 
 If a malicious user has a physical access to a device, it can install an application from a computer using the \emph{adb} utility in debug mode.
-The micro-USB connectivity is an European standard recommendation for smartphone connectivity.
+The micro-USB connectivity is a European standard recommendation for smartphone connectivity.
 It is then easy to connect any smartphone to a computer with this connectivity.
 If the debug mode is enabled\footnote{The debug mode is required for any interaction between a computer and a smartphone}, there is no need to activate the phone which makes the presence of screen lock ineffective.\\
 
@@ -208,38 +208,38 @@ When a malicious application is installed using this method, no notification is 
 
 It is recommended to disable the debug mode when not required and use a screen lock to prevent modifying the phone settings.
 
-\section{Malwares}
+\section{Malware}
 \label{sec:and-malware}
 
 \subsection{General malware types}
 \label{sec:malware-type}
 
-There are two main types of Android malwares: abuse of permission or use of security flaws.\\
+There are two main types of Android malware: abuse of permission or use of security flaws.\\
 
-The first kind of malware takes advantage of the lack of suspicions from the users and simply ask for permissions allowing a malicious behaviour.
-This is usually the case for applications sending text messages to overtaxed number or stealing contact information from the address book.
-This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen whatever the operating system version he is running.
+The first kind of malware takes advantage of the lack of suspicions from the users and simply ask for permission allowing a malicious behaviour.
+This is usually the case with applications sending text messages to overtaxed number or stealing contact information from the address book.
+This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen without regard to the version of the operating system version that is being run.
 As some ``honest'' applications have a large range of features (that the user may never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered through personal researches by decompiling the downloaded application from the Android Play Store in July 2012}).
-The reasons of the asked permissions is usually not mentioned by the application makers\footnote{Counterexample: Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.\\
+The grounds of the required permissions usually are not mentioned by the application makers\footnote{Counterexample: Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.\\
 
 The use of security flaws is possible due to the slow update process.
-The manufacturers tends to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
+The manufacturers tend to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
 A device older than a year is usually not maintained anymore.
-The only solution for users owning such devices is to install alternative ROMs such as CyanogenMod that provides a longer support for a large range of devices.
-When a security flaw is discovered and a patch published, only a very small percentage of users benefits from the patch through an update in the months following the discovery.
-Malware writers can then create programs taking advantage of that flaw.\\
+The only solution for the users owning such devices is to install alternative ROMs such as CyanogenMod that provide an extended support for a large range of devices.
+When a security flaw is discovered and a patch published, only a very small percentage of users will benefit from the patch through an update in the months following the discovery.
+Malware writers can subsequently create programs taking advantage of that deficiency.\\
 
 \subsection{The DroidDream malware}
 
 In spring 2011, a malware named \emph{DroidDream} has widely spread across the Android devices.
-The particularity of this malware was that he used the official Android Play Store (called Android Market at that time).
+The particularity of this malware was that he used the official Android Play Store (called Android Market at that time) was used.
 Referring to Figure \ref{fig:secu-graph}, it is classified as using social engineering to exploit a system vulnerability.\\
 
-The attackers created several developers accounts and malicious applications (above 50 different applications were detected) on the Play Store.
+The attackers created several developer accounts and malicious applications (above 50 different applications were detected) on the Play Store.
 The applications used social engineering by taking the name of popular applications and using modified versions of the application to trick the users into downloading them.
-The malware used exploits effective until the version 2.2 (99\% of the devices at that time\footnote{Data collected based on the connections to the Android Play Store, source \url{https://developer.android.com/about/dashboards/index.html}}) to break the sandboxing mechanism, root the device and install other applications preventing the removal.
+The malware used exploits effective up to the version 2.2 (99\% of the devices at that time\footnote{Data collected based on the connections to the Android Play Store, source \url{https://developer.android.com/about/dashboards/index.html}}) to break the sandboxing mechanism, root the device and install other applications preventing the removal.
 The malware has been called DroidDream as it was set up to run between 11pm and 8am to contact the master server.
-Due to its ability to install other applications, the Kaspersky Lab's analysts suppose it could have been monetised in the future to be used as a botnet (spam sending, distributed denial of services...).\\
+Due to its ability to install other applications, the Kaspersky Lab's analysts speculated it could be monetised in the future to be used as a botnet (spam sending, distributed denial of services, etc.).\\
 
 In reaction to the discovery of this malware, Google activated the \emph{kill switch} which deleted the malware from the user devices remotely.
 It was the first known example of widely spread command-and-control malware on mobile devices.
@@ -248,10 +248,9 @@ Variants of this malware called DroidDream Lite have been detected a few months 
 
 \subsection{Protection}
 Observing the large increase of malware applications on the Android platform\footnote{Between 2011 and 2012, the number of Android malware families has increased from 10 to 37 according to F-Secure \url{http://www.zdnet.com/blog/security/android-malware-families-nearly-quadruple-from-2011-to-2012/12171}}, users and developers wonder about the need of antivirus software.
-As the antivirus for desktop computers works, these antivirus usually work using a malware database basis.
-Such softwares would be efficient on antivirus using flaws and derived in several applications such as the DroidDream malware did.
-However, on the second kind of malicious applications, the efficiency of the antivirus is mitigated as it is very easy and quick to develop applications abusing from the granted privileges.\\
-%The open politic on the Google Play Store help the propagation of malwares as the users wrongly suppose a higher control (which is done instead by the users a posteriori).\\
+Similarly to the principles employed by antivirus for desktop computers, this antivirus software usually works using malware database basis.
+Such software would be efficient on antivirus using flaws and deriving in several applications similarly to the DroidDream malware.
+However, in case of the second kind of malicious applications, the efficiency of the antivirus is mitigated as it is very easy and quick to develop applications abusing the granted privileges.\\
 
 \begin{figure}[h]
   \centering
@@ -261,14 +260,14 @@ However, on the second kind of malicious applications, the efficiency of the ant
 \end{figure}
 
 
-The PDroid application\footnote{Available on the xda-developers forum at \url{http://forum.xda-developers.com/showthread.php?t=1357056}} takes another approach than the antivirus softwares.
-Instead of detecting the known malicious applications, it allows the users to redefine the granted permissions and revoking them at wish.
-Another possibility instead of disallowing the access to certain information is to define a fixed or random value (eg: in the case of geographical coordinates).
+The PDroid application\footnote{Available on the xda-developers forum at \url{http://forum.xda-developers.com/showthread.php?t=1357056}} takes a different approach than the antivirus software.
+Instead of detecting the known malicious applications, it allows the users to redefine the granted permissions and revoking them when desired.
+Another possibility instead of denying the access to certain information is to define a fixed or random value (eg: in the case of geographical coordinates).
 For each application, a notification can be launched at the time the resource granted by a permission is used.
 This feature can be useful to detect abuse of permissions.
-However, as the PDroid application works as a intermediate layer between the operating system and the other applications, the application need the root privileges and the user has to apply a patch on the ROM files.
-These requirements are most of the time not possible on manufactured phones with closed sources ROM and are reserved to users with good computer knowledge.
-Although it is not applicable to most Android users, PDroid is a possibility of big improvement on the permission model and we can hope a similar model to be adopted in future versions of Android.
+However, as the PDroid application works as an intermediate layer between the operating system and the other applications, the application need the root privileges and the user has to apply a patch on the ROM files.
+These requirements most of the time are not possible on manufactured phones with closed sources ROM and are reserved to users with good computer knowledge.
+Although it is not applicable to most Android users, PDroid is a possibility of substantial improvement of the permission model and we can hope a similar model to be adopted in future versions of Android.
 Figure \ref{fig:pdroid} is an example of usage of the PDroid application capabilities on the Facebook application.
 
 
@@ -276,14 +275,14 @@ Figure \ref{fig:pdroid} is an example of usage of the PDroid application capabil
 \label{sec:and-echosystem}
 
 Section \ref{sec:and-attack-scheme} and \ref{sec:and-malware} explained the different possibilities of attacks as illustrated in Figure \ref{fig:secu-graph}.
-These different types of attacks are partially due to the ecosystem of Android.
+These different types of attacks are partially related to the ecosystem of Android.
 The ecosystem of Android is very different from the one in iOS and this has an impact on the security of the platform.\\
 
-The Android market is very fragmented, any manufacturer being able to port and deploy the Android operating system to its smartphone models with its specificity.
-When a manufacturer uses Android on a smartphone, Google loose the ability to fully control efficiently the system.
+The Android market is very fragmented, any manufacturer being able to port and deploy the Android operating system to its own smartphone models.
+When a manufacturer uses Android on a smartphone, Google loses the full and efficient control of the system.
 The system update process or even the presence of the Android Play Store is dependent of the commitment from the manufacturer.\\
 
-This lack of a strong control requires  the manufacturer's action to publish fix of known vulnerabilities and to manage third-party applications.
-These will unavoidably be slower than if pushed by Google or even nonexistent to many devices (manufacturers preferring launching new models than supporting old ones).
+This lack of a strict control requires  the manufacturer's action to publish fix of known vulnerabilities and to manage third-party applications.
+The reaction delay will unavoidably be longer than if pushed by Google or even nonexistent to many devices (manufacturers preferring launching new models than supporting old ones).
 The availability of the code for porting and the current open nature of Android would make it very hard to gain more control in the future.
-The large choice of devices and installation medium (Play Store, alternative marketplaces,...) is an marketing argument but also a structural weakness.
+The large choice of devices and installation medium (Play Store, alternative marketplaces,...) is a marketing argument but also a structural weakness.
