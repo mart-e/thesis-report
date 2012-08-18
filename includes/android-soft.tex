@@ -69,10 +69,10 @@ When starting, the application has three main components:
 \subsection{Location recording}
 
 At the installation, the mobile application requests the localisation permissions\footnote{See Section \ref{sec:permissions} for details about the permission model}.
-Using these permissions, every specified time interval (15min by default), DroidWatcher records the location of the device.
-The application works in background and keeps recording locations when the user does not use his smartphone.
-Only the most accurate location is kept in an interval of 15min.
-Both GPS and network\footnote{The network resource is defined as the usage of wireless and cell tower access points as described in Section \ref{sec:andro-wifi} and \ref{sec:loc-cell-tower}} resources are monitored using the official provided methods in Android.
+Using these permissions, every specified time interval (15~min by default), DroidWatcher records the location of the device.
+The application works in background and keeps recording locations when the user does not use its smartphone.
+Only the most accurate location is kept in an interval of 15~min.
+Both GPS and network\footnote{The network resource is defined as the use of wireless and cell tower access points as described in Section \ref{sec:andro-wifi} and \ref{sec:loc-cell-tower}} resources are monitored using the official provided methods in Android.
 If a new location is not available (the system keeps in cache the last recorded location), it will be ignored.
 %Depending on what is available, it can use the GPS, wireless or GSM cell location capabilities, keeping the most accurate one.
 The locations received are stored in a file on the SD card.\\
@@ -203,7 +203,7 @@ To develop this application, several constrains were experienced that limited th
 \subsection{Automatic idle}
 
 Once going in idle state (once the device is not used by the user for a certain amount of time), the operating system will limit the possibility of the system to save battery.
-Some applications will be paused during their running process.
+Some applications will be paused during its running process.
 The effectiveness of the localisation process done by DroidWatcher is affected by this idle purpose.\\
 
 This is the case, for example, of the GPS that needs to constantly update of the position.
@@ -211,7 +211,7 @@ The GPS will sometime stop monitoring the position of the user if it can not get
 This effect is independent of the application but the direct consequence of the system behaviour for battery saving. 
 This issue is often a complain related to the tracking application (eg: sport monitoring application).
 A solution is avoid the phone to going to idle state by keeping it in awake state.
-However, this solution is not used in DroidWatcher as it would have greatly compromised the battery usage of the phone and consequently the effectiveness of the application in monitoring the location the longest and most discrete way as possible.
+However, this solution is not used in DroidWatcher as it would have greatly compromised the battery consumption  of the phone and consequently the effectiveness of the application in monitoring the location the longest and most discrete way as possible.
 
 \subsection{Android 4.0}
 \label{sec:dw-ics}
