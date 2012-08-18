@@ -39,7 +39,6 @@ The messages contain:
 Trilateration is used based on the received messages as shown in Figure \ref{fig:gps-earth}.
 If, theoretically, three satellites are enough, at least four are required to avoid clock synchronisation errors (at the speed of light, even a small clock error can lead to huge distance gap).\\
 
-% TODO changer image pour noir & blanc
 \begin{figure}[h]
   \centering
   \includegraphics[width=7cm]{images/gps2.jpg}
@@ -126,8 +125,7 @@ Each entry in the cache file is linked with a timestamp representing the date of
 \end{figure}
 
 The recent criticism regarding privacy concerns is mainly based on the existence of these cache files.
-If the iOS devices used to have unlimited cache size (fixed in iOS 4.3.3), on an Android device, only the 50 last cells and 200 access points have been observed as stored in the cache files.
-% TODO add reference prev sentence
+If the iOS devices used to have unlimited cache size (fixed in iOS 4.3.3\footnote{iOS 4.3.3 Software Update \url{https://support.apple.com/kb/dl1358}}), on an Android device, only the 50 last cells and 200 access points have been observed as stored in the cache files.
 However, in the course of this research, the analysis of the data collected from several devices have shown that this size is enough to contain locations older than one month.
 A forensic analysis would enable to retrieve the device location at a given time if a location request was made.
 Such requests can be run in background by any application that has the correct permissions.
@@ -198,7 +196,6 @@ He affirms there is no proof the location is anonymised due to the presence of t
 \label{sec:andro-perso-research}
 
 Several facts about the storage of information and privacy have been announced.
-% TODO ajouter source
 To verify these facts, further investigations have been carried out as part of this research.
 The applications used to implement the analyses are presented in the appendix \ref{chap:app-soft}.\\
 
