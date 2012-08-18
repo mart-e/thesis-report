@@ -1,4 +1,3 @@
-
 \chapter{DroidWatcher}
 \label{chap:droidwatcher}
 
@@ -24,7 +23,7 @@ DroidWatcher is made of two major components as represented in Figure \ref{fig:d
 \item A mobile application running on a smartphone:\\
   the application essentially collects location data on a regular basis.
 \item A server-based application:\\
-  the application centralises the data collected by the smartphones as soon as those smartphones have an internet access.
+  the application centralises the data collected by the smartphones as soon as those smartphones have an Internet access.
 \end{itemizealt}
 
 This chapter presents more specifically the mobile application.
@@ -71,7 +70,7 @@ When starting, the application has three main components:
 
 At the installation, the mobile application requests the localisation permissions\footnote{See Section \ref{sec:permissions} for details about the permission model}.
 Using these permissions, every specified time interval (15min by default), DroidWatcher records the location of the device.
-The application works in background and keeps recording locations when the user does not use its smartphone.
+The application works in background and keeps recording locations when the user does not use his smartphone.
 Only the most accurate location is kept in an interval of 15min.
 Both GPS and network\footnote{The network resource is defined as the usage of wireless and cell tower access points as described in Section \ref{sec:andro-wifi} and \ref{sec:loc-cell-tower}} resources are monitored using the official provided methods in Android.
 If a new location is not available (the system keeps in cache the last recorded location), it will be ignored.
