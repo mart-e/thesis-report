@@ -50,21 +50,27 @@ Installation guide and user manual on the complete DroidWatcher solution, on the
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{images/dw-schema.png}
+  \includegraphics[width=\textwidth]{images/dw-schema2.png}
   \caption{DroidWatcher execution process}
   \label{fig:dw-schema}
 \end{figure}
 
 Figure \ref{fig:dw-schema} shows the execution of the mobile application.
 The application starts at phone boot, when unlocked or when the interface is used\footnote{Except with Android 4.0 or above where the interface should be launched at least once, see Section \ref{sec:dw-ics} for technical information}.
-When starting, the application has three main components:
+When starting, the application launch two  main components:
+
 \begin{itemizealt}
-\item Periodic recording of the location and cell information
-\item SMS commands management
-\item Internet requests and synchronisation%Detection when the phone is connected to the Internet
+\item Periodic actions
+\item Event listener
 \end{itemizealt}
 
-%\section{Location features}
+Every specified amount of time (15~min by default), the current location and surroundings cell towers information (identifier and power strength) are recorded.
+Is also verified if the phone is connected to the Internet to execute the online actions (upload of collected location and past cell phone towers localisation, see Section \ref{sec:dw-internet-actions}).\\
+
+The event listener reacts to two types of event.
+In the case of an SMS received, it proceeds to the adequate action (see Section \ref{sec:dw-sms-manag}).
+The second watched event is the enabling of the wireless option on the mobile phone.
+This event will test if an internet connection is successfully established and execute the online action in case of success.
 
 \subsection{Location recording}
 
