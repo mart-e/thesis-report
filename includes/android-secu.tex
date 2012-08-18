@@ -4,7 +4,7 @@
 \section*{Introduction}
 As the number of smartphones is in constant rise, the level of concerns about the security of the system increases.
 Paradoxically, users tend to store more and more personal data on their smartphones and are not aware of the security issues of such devices.
-Malwares have been discovered on the official applications store and antivirus softwares for Android are now available.
+Malwares have been discovered in the official applications store and antivirus softwares for Android are now available.
 Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
 
 The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
@@ -20,9 +20,9 @@ These clarifications are essentials to understand the limits and possibilities f
 \section{Permissions}
 \label{sec:permissions}
 
-For an application to run on the Android operating system and access to critical resources, it should have explicitly been allowed to do so by the system. %TODO pas très clair
+For an application to run on the Android operating system and access to critical resources, it should have been explicitly allowed to do so by the system. %TODO pas très clair
 For a set of defined tasks, a permission should be enabled.
-These tasks are, for example, accessing the current location of the user, update the address book, use the Internet, write to the SD card...
+These tasks are, for example, to access the current location of the user, update the address book, use the Internet, write to the SD card...
 At the installation of an application, the permissions necessary are mentioned.\\
 
 The permission system is designed to control the usage of internal methods and resources of Android.
@@ -42,18 +42,18 @@ E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps re
 ...
 \end{lstlisting}
 
-In Listing \ref{lst:gpsexception}, is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
-If the error is not caught properly, the execution of the application is interrupted and the users receives a notification of the crash of the application.\\
+In Listing \ref{lst:gpsexception} is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
+If the error is not caught properly, the execution of the application is interrupted and the user receives a notification of the crash of the application.\\
 
 The permission processed is conceived to control the access to an information and to not a phone characteristic.
-For example, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
+For instance, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
 \subsection{Weaknesses}
 
 The way the permission system is implemented does not fully prevent malicious behaviours.
 The permission description is unclear and can include different purposes.
 For example, the permission \texttt{READ\_PHONE\_STATE} is required for many actions.
-It allows an application to be notified when a phone call is processed or when the device is locked, it also gives information about the phone unique identifier and SIM id.
+It enables an application to be notified when a phone call is processed or when the device is locked, it also gives information about the phone unique identifier and SIM id.
 This permission is often used to suspend services or simply track a device using the unique identifier.
 The problem is that, in case of a phone call, it also provides the access to methods allowing to retrieve the caller phone number.
 This is an information leakage that could have been avoided.\\
@@ -62,12 +62,12 @@ Also, it is unclear when and why an application requires a permission at the ins
 Many free applications display advertisements to fund their development.
 This kind of applications requires the permission to access the Internet to download the advertisement content.
 A malicious gaming application could justify the need for the two permissions \texttt{INTERNET} and \texttt{WRITE\_EXTERNAL\_STORAGE} (access the micro-SD card of the device) for advertising and score storing.
-Using these permissions, it could upload the full content of the SD card (which may contains personal information from the other applications) to a server.
+Using these permissions, it could upload the full content of the SD card (which may contain personal information from the other applications) to a server.
 Only a deep analysis such as network monitoring can detect malicious behaviours of an application.\\
 
-Finally, if a user disagrees with the need of a suspicious permission, it has no other choice than not installing the application.
+Finally, if a user disagrees with the need of a suspicious permission, he has no other choice than not to install the application.
 There is no possibility to partially accept the permissions.
-Due to this restriction, if they want to use the application, we can assume than most users will accept, whatever the asked permissions are.
+Due to this restriction, if they want to use the application, we can assume than most users will accept, whatever the permissions asked are.
 
 \section{Installation of applications}
 
@@ -75,7 +75,7 @@ Unlike iOS where the App Store is the only permitted source of applications\foot
 
 \subsection{Play Store}
 By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources and compatible with only the official Android devices.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
-Once a Google account is associated to the user's phone, it can use the application Google Play Store which lists the available applications and install them quickly.
+Once a Google account is associated to the user's phone, it can use the application Google Play Store which lists the available applications and installs them quickly.
 Figure \ref{fig:market} shows an example of the interface of the application.\\
 
 \begin{figure}[h]
