@@ -2,25 +2,26 @@
 \label{chap:andro-intro}
 %\addcontentsline{toc}{chapter}{Introduction}
 
-\section*{Structure}
-\label{sec:intro-andro-structure}
-This part is composed of three chapters.
+%\section*{Structure}
+%\label{sec:intro-andro-structure}
+
+This part is composed of three subchapters.
 Consecutive order of chapters should be observed when reading this part.
 However, technical details can be skipped without losing the general understanding.\\
 
-The \textbf{localisation using Android} chapter presents the different methods available to retrieve the localisation of smartphones.
-The aim is to define the capabilities of an application in term of localisation.
-These methods are often unknown and considered as a black-box but when studied they may lead to privacy concerns.
-The anonymity and the traces left by the localisation requests are particularly examined in this chapter.\\
+The subchapter on the \textbf{localisation using Android} presents the different methods available to retrieve information regarding the localisation of smartphones.
+The aim is to define the capabilities of an application in terms of localisation.
+These methods are often unknown and considered as a black-box but when studied they reveal to privacy concerns.
+The anonymity and the traces left by the localisation requests are examined in this subchapter.\\
 
-The \textbf{security of Android} chapter focuses on the capabilities of an application in term of security.
-The permission model implemented in Android is explained with its limitations and weaknesses.
+The \textbf{security of Android} subchapter focuses on the capabilities of an application in terms of security.
+The permission model implemented in Android is explained focusing on its limitations and weaknesses.
 The different methods of an application propagation are also studied.
-As the previous chapter explains the capabilities of an application, this chapter demonstrates how a malicious application could end up on a user device.
-The malware risk has greatly increased in the past months on Android and the security of the platform is a recurring concern.
-This chapter intends to clarify the risks by explaining the possible abuses known at this day.\\
+As the previous subchapter explains the capabilities of an application, this subchapter demonstrates how a malicious application could propagate to a user device.
+The malware risk on Android has greatly increased in the past months on Android and the security of the platform is a recurring concern.
+This subchapter intends to clarify the risks by explaining the possible abuses that are currently known at this day.\\
 
-The combination of the first two chapters aims at developing a good understanding of the mechanisms of localisation and related security on an Android application.
+The combination of the first two chapters aims at developing a good understanding of the mechanisms of localisation and related security issues on an Android application.
 As an example of practical implementation of these concepts, the \textbf{DroidWatcher} mobile application has been developed.
 This application aims at demonstrating what an application is capable of and how any location-aware application could trace a user.
 
@@ -32,9 +33,9 @@ The choice of the Android operating system is justified by several factors.\\
 
 \subsection*{Market share}
 
-Android is the main operating system powering smartphones with a market share of 56.1\% in the first quarter of 2012\footnote{According to Mobile Statistics \url{http://www.mobilestatistics.com/mobile-statistics/}}.
-As the smartphone presence increases, it is today the most likely that a mobile device is powered by this operating system now and in a reasonable future.
-The iOS system from Apple is the second most popular system with a market share of 22.9\% at the same period of time.\\
+Android is the main operating system powering smartphones with a market share of 56.1\% in the first quarter of 2012.
+This important market combined with the increasing smartphone presence, it is very likely that a mobile device is powered by this operating system now and in a reasonable future.
+The iOS system from Apple is the second most popular system with a market share of 22.9\% at the same period of time\footnote{Market share statistics according to Mobile Statistics \url{http://www.mobilestatistics.com/mobile-statistics/}}.\\
 
 \subsection*{Openness implications}
 The difference between these two systems is mainly in the openness policy.
@@ -43,32 +44,33 @@ This choice of openness is reflected toward the manufacturers concerning the usa
 The direct opposition between the two platforms has implication on the security of the system.\\
 
 The open model of Android enables more abusive usages and may lead to an increased risk of malicious application propagation.
-Kaspersky Lab published in August 2012 a report mentioning that ``the number of Trojans targeting the Android platform nearly tripled from the first quarter of the year''~\ref{ kaspersky-malware-android}.
+In August 2012, Kaspersky Lab published a report mentioning that the number of Trojans targeting the Android platform nearly tripled from the first quarter of the year~\cite{kasperskymalware}.
 %Juniper Security reported a cumulative growth of 3,325\% between June and end of 2011 in the number of mobile malware attacks detected\ref{juniper-malware}.
 The combination of high market share and security concerns makes it an interesting case study.\\
 
 \subsection*{Not specific to Android}
-Although this thesis looks at the Android case, we believe our findings are relevant to other systems as well.
+Although this thesis looks at the Android case, it is believed that the result of this research are relevant to other systems as well.
 % The technical information used in the following chapters are directly depending to the Android system but 
-Today, every smartphone system has localisation capabilities similar to the ones used in Android and these capabilities could be used in a malicious behaviour without the user realising it.
-The malicious application propagation is directly depending on the platform\footnote{The difference of an application publication on the official distribution medium between Android and iOS is studied in Section \ref{sec:playstore-publication-policy}}, but the risks exist and malicious applications are present on any systems that enables such abusive behaviour.
+Today, every smartphone system has localisation capabilities similar to the ones used in Android and malicious applications could abuse from these capabilities without the user realising it.
+The malicious application propagation is directly depending on the platform\footnote{The difference of an application publication on the official distribution medium between Android and iOS is studied in Section \ref{sec:playstore-publication-policy}}, but the risks exist and potentially harmful applications are present on all systems that enables such abusive behaviour.
 
 \section*{Why the localisation?}
 \label{sec:why-localisation}
 
-Nowadays, the localisation privacy is often an aspect being neglected.
-The success of applications such as Foursquare\footnote{Foursquare had over 20 million of users in April 2012 according to \url{https://foursquare.com/about/}}, which intends to actively and consciously publish one's current position on social networks for instance, is a clear sign of this tendency.\\
+Nowadays, the localisation privacy is often neglected.
+The success of applications as Foursquare\footnote{Foursquare had over 20 million of users in April 2012 according to \url{https://foursquare.com/about/}}, which are intend to actively and consciously publish one's current position on social networks, is a clear sign of this tendency.\\
 
-This lack of focus on privacy respect has been understood and exploited by advertisers and developers.
-Mobile technology brings a new dimension in the constant search for knowing more about people: the \emph{Where am I?}.
+This lack of focus on privacy has been understood and exploited by advertisers and developers.
+Mobile technology brings a new dimension to the constant search for knowing more about people: the \emph{Where am I?}.
+% TOFIX too informal?
 The user profiling is critical for an efficient targeted advertisement (eg: Amazon suggesting books that might interest the visitor).
 The localisation possibilities are an important criteria for this profiling and very valuable for marketing purposes.\\
 
 However, localisation process can be used in a more precise and worrying way than for targeted advertisements (cf the Wall Street Journal article).
-A location-aware application is capable of a background and continuous monitoring of an Android phone.
+A location-aware application is capable of a continuous background monitoring of an Android phone.
 Demonstrating these possibilities in a transparent way is the aim behind the DroidWatcher application.\\
 
-The location aspect is only studied in the capabilities of requesting the location of a device.
+The location aspect is only studied regarding the capabilities of requesting the location of a device.
 With the exception of the cache file described in Section \ref{sec:andro-cell-db}, the forensic inspection of an Android device has not been studied and could be included in future researches.
 
 % \section*{Android lexicon}
