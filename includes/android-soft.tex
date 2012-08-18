@@ -94,8 +94,8 @@ Periodically and when the wireless is enabled on the smartphone, the application
 When it is the case, the application takes two actions:
 
 \begin{itemizealt}
-\item Retrieve the geographical coordinates of the collected GSM cell towers and compute the previous locations using triangulation
-\item Synchronise the collected locations to the remote server
+\item Retrieving the geographical coordinates of the collected GSM cell towers and computing the previous locations using triangulation
+\item Synchronising the collected locations to the remote server
 \end{itemizealt}
 
 The coordinates of the GSM towers are collected using an unofficial Google database available at \url{http://www.google.com/glm/mmap}.
@@ -109,8 +109,8 @@ The method developed to triangulate a device is explained in Section \ref{sec:dw
 \label{sec:dw-sms-manag}
 
 The mobile application provides a SMS-based command interface.
-These commands allow to configure the application (frequency of retrieval, server url...) and take direct actions related to the location (enable GPS, returns current location...).
-The application intercepts the received SMS before the main SMS application\footnote{The application is set to use the maximal priority in the chain of events. However if another application has also set the maximal priority, it may retrieve the SMS before the DroidWatcher application.}.
+These commands allow to configure the application (frequency of retrieval, server url...) and take direct actions related to the location (enable GPS, return current location...).
+The application intercepts the received SMS before the main SMS application\footnote{The application is set to use the maximal priority in the chain of events. However, if another application has also set the maximal priority, it may retrieve the SMS before the DroidWatcher application.}.
 If a predefined code is detected, it will discard the text message and will take an action accordingly.
 Otherwise, the SMS is ignored and will be delivered to the main SMS application.\\
 
@@ -124,7 +124,7 @@ This feature is possible due to a bug discovered in the power control widget\foo
 Even if the security flaw has been revealed in April 2010 and a patch released in April 2011, the flaw has been observed as still exploitable on devices running Android 2.3.\\
 
 This is the only part of the software where a bug is exploited in this application instead of using the official systems capabilities.
-However it is important for an user to understand such flows exists and, even when corrected, can affect a large part of devices (in August 2012, Android 2.3 and below represented 81\% of the Android market share).
+However, it is important for a user to understand that such flows exist and, even when corrected, can affect a large part of devices (in August 2012, Android 2.3 and below represented 81\% of the Android market share).
 
 %\emph{TODO: tester sur un Android 4.0}
 
@@ -135,7 +135,7 @@ However it is important for an user to understand such flows exists and, even wh
 
 
 When a device needs to record the current location but is not capable to access the Internet, the program records the surrounding cell towers information.
-The described triangulation algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connect to the Internet.
+The described triangulation algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connected to the Internet.
 
 \subsection{Scenarios}
 
@@ -179,7 +179,7 @@ The point D is determined as the best centre point as it is the one closest to t
 
 In the three considered cases, the confidence range is determined as
 \begin{enumerate}
-\item The conversion of the signal strength to meters
+\item The conversion of the signal strength to metres
 \item The distance between the two intersections
 \item The half of the distance between the two intersections
 \end{enumerate}
@@ -192,7 +192,7 @@ If a device receives a GSM signal at a determined strength, it is possible to es
 A circle is drawn around the GSM tower representing every position the device could be.
 The strongest the signal is, the closest is the device to the tower.\\
 
-The signal strength collected by the Android device is expressed in \emph{ASU}, for Arbitrary Strength Unit, which is a value between 0 and 31 derived from the signal strength usually computed in decibel\footnote{For the GSM network, $dBm = 2 * ASU - 113$}.
+The signal strength collected by the Android device is expressed in \emph{ASU}, for Arbitrary Strength Unit, which is a value between 0 and 31 derived from the signal strength usually computed in decibels\footnote{For the GSM network, $dBm = 2 * ASU - 113$}.
 0 ASU representing the lowest signal and 31 the strongest.
 The way to express the conversion is made using the following formula :\\
 
@@ -204,7 +204,7 @@ The weighting of the factors has been decided based on personal observations usi
 
 \section{Technical challenges}
 
-To develop this application, several constrains were experienced that limited the effect of the application.
+To develop this application, several constraints were experienced that limited the effect of the application.
 
 \subsection{Automatic idle}
 
@@ -213,10 +213,10 @@ Some applications will be paused during its running process.
 The effectiveness of the localisation process done by DroidWatcher is affected by this idle purpose.\\
 
 This is the case, for example, of the GPS that needs to constantly update of the position.
-The GPS will sometime stop monitoring the position of the user if it can not get a fix\footnote{See Section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
+The GPS will sometimes stop monitoring the position of the user if it can not get a fix\footnote{See Section \ref{sec:loc-gps} for the information needed to get a GPS fix} on the location of the user.
 This effect is independent of the application but the direct consequence of the system behaviour for battery saving. 
 This issue is often a complain related to the tracking application (eg: sport monitoring application).
-A solution is avoid the phone to going to idle state by keeping it in awake state.
+A solution is to avoid the phone from going to idle state by keeping it in awake state.
 However, this solution is not used in DroidWatcher as it would have greatly compromised the battery consumption  of the phone and consequently the effectiveness of the application in monitoring the location the longest and most discrete way as possible.
 
 \subsection{Android 4.0}
