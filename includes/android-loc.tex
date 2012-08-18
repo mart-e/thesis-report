@@ -1,7 +1,7 @@
 \chapter{Localisation using Android}
 \label{chap:and-loc}
 
-\section*{Introduction}
+%\section*{Introduction}
 The localisation of the mobile device is a key system service of Android.
 Many applications use this service, as a feature of the application.
 It enables, for example, to show directly the part of the map where the user is on Google Maps, to display advertisements for nearby shops, to automatically select the relevant area for the weather forecast, to give statistical information regarding the use of an application in a particular region.\\
@@ -12,7 +12,7 @@ This chapter explains how these techniques work and why they are subject to priv
 
 Several facts about the management of the localisation have been used in the official declarations or documentations.
 To verify these assumptions, several experiments have been carried out using an Android 2.3 smartphone.
-These experiments allow us to have a better understanding of the localisation system that mostly works as a black box.
+These experiments allow to have a better understanding of the localisation system that mostly works as a black box.
 
 
 \section{GPS}
@@ -23,7 +23,7 @@ These experiments allow us to have a better understanding of the localisation sy
 
 \subsection{GPS signal}
 
-The GPS, for Global Positioning System, is a technology based on satellite trilateration.
+The GPS, or Global Positioning System, is a technology based on satellite trilateration.
 GPS satellites are navigating around the Earth in a way to maximise the number of visible satellites anywhere at any time.
 There are currently 31 working satellites in orbit~\cite{pocketgpsworld}.
 The location-aware device is equipped with a GPS receiver chip.
@@ -48,23 +48,23 @@ If, theoretically, three satellites are enough, at least four are required to av
 \end{figure}
 
 
-The accuracy of this method depends on the surrounding of the user.
-In clear sight, the GPS is accurate to a few meters but it will degrade if the receiver is surrounded by high buildings or inside a dense forest.\\
+The accuracy of this method depends on the surroundings of the user.
+In clear sight, the GPS is accurate to a few meters but the accuracy will degrade if the receiver is surrounded by high buildings or inside a dense forest.\\
 
 The time to first fix (TTFF) depends on the state of the GPS.
 In a cold start scenario\footnote{Device is in factory state or the GPS data are not relevant (several months old or inaccurate)}, the GPS needs to retrieve the full almanac.
 This is done in at least 12.5 minutes~\cite{gpsuser}.
-To improve the TTFF, embedded GPS often uses assisted-GPS technology (aGPS) by acquiring almanac and ephemeris data over a fast network connection when available.
+To improve the TTFF, GPS embedded into smartphones often use assisted-GPS technology (aGPS) by acquiring almanac and ephemeris data over a fast network connection when available.
 
 \subsection{Degradation}
 
 The GPS system was invented by the U.S. Department of Defence as a military project.
 As the technology became available to civilians, it was intentionally degraded.
 To do so, the satellites used a technology called Selective Availability intended to introduce errors on a GPS signal to decrease its accuracy.
-The authorised users (military) could compute the errors and correct them using special receivers and daily cryptographical keys.
+The authorised users (military) were able to compute the errors and correct them using special receivers and daily cryptographical keys.
 The Selective Availability was implemented for national security reasons.\\
 
-In 2000, Bill Clinton ordered to discontinue the usage of the Selective Availability feature on the GPS satellites, allowing each receiver to perceive the most accurate signal possible. In 2007, the new generation of GPS system called \emph{GPS III} was announced as not capable of producing Selective Availability~\cite{gps-sa}.\\
+In 2000, Bill Clinton ordered to discontinue the usage of the Selective Availability feature on the GPS satellites, allowing each receiver to perceive the most accurate signal possible. In 2007, the new generation of GPS system called \emph{GPS III} was announced as incapable of producing Selective Availability~\cite{gps-sa}.\\
 
 \section{Wireless access point}
 \label{sec:andro-wifi}
@@ -102,7 +102,7 @@ The location server is constructed based on two factors:
 
 The Google Cars are mainly used to take pictures feeding the Google Street View database.
 In addition to that, the cars are also wardriving\footnote{Wardriving is the activity of driving through the streets of a city to collect information such as wireless access points location.}.
-Having a GPS module on the car and mapping almost every main cities in the world, it was a good opportunity to constitute a very accurate database.\\
+Having a GPS module on the car and mapping almost every main city in the world, it was a good opportunity to constitute a very accurate database.\\
 
 As most Android devices are equipped with a GPS receiver, collecting via crowdsourcing is also possible.
 When an Android device has both GPS and wifi capabilities, while using application such as Google Maps, the location of the user and surround wifi and cell tower data are uploaded to Google's servers.
@@ -113,7 +113,7 @@ This way, the database of wireless access points and cell towers is always up-to
 \label{sec:loc-cache-files}
 
 Previous cell tower and access point locations are stored in an unencrypted system file.
-This enables to locate the user quickly and the device is still able to use the network resource, even when not connected to the Internet.
+This allows to locate the user quickly and the device is still able to use the network resource, even when not connected to the Internet.
 %This local cache file is stored in the folder \texttt{/data/data/com.google.android.location/files} in the files \texttt{cache.wifi} and \texttt{cache.cell}.
 Each entry in the cache file is linked with a timestamp representing the date of the retrieval as seen in Figure \ref{fig:locmap}.\\
 
@@ -125,12 +125,12 @@ Each entry in the cache file is linked with a timestamp representing the date of
   \label{fig:locmap}
 \end{figure}
 
-The recent criticism about privacy concerns is mainly based on the existence of these cache files.
+The recent criticism regarding privacy concerns is mainly based on the existence of these cache files.
 If the iOS devices used to have unlimited cache size (fixed in iOS 4.3.3), on an Android device, only the 50 last cells and 200 access points have been observed as stored in the cache files.
 % TODO add reference prev sentence
 However, in the course of this research, the analysis of the data collected from several devices have shown that this size is enough to contain locations older than one month.
-A forensic analysis would enable them to retrieve the device location at a given time if a location request was made.
-Such requests can be run in background by any application having the correct permissions.
+A forensic analysis would enable to retrieve the device location at a given time if a location request was made.
+Such requests can be run in background by any application that has the correct permissions.
 The DroidWatcher application relies on this fact to monitor the location of the user in background.\\
 
 To show the ease of retrieving such information, a python script has been developed~\cite{soft-locdump} to parse the content of these two files and produce a GPS trace file in GPX format\footnote{GPX is a XML file format listing geographical coordinates with timestamp and allowing to reproduce the movement of a device} representing the approximate movement of the device.
@@ -155,7 +155,7 @@ The advantage of using cell tower location over the wireless is the fact that it
 \label{sec:andro-priv}
 
 \subsection{Google Cars}
-In May 2010, Google admitted to German authorities having collected more than what it was supposed to.
+In May 2010, Google admitted to German authorities having collected more data than what it was supposed to.
 In addition to access points unique identifier, it had ``been mistakenly collecting samples of payload data from open networks''.
 These data chunks could include parts of web surf, email, text...\footnote{TechEYE, May 2012, \url{http://news.techeye.net/security/google-admits-it-sniffed-out-peoples-data}}.
 In reaction, the data collected was asked to be deleted and the CNIL (independent French administrative authority) fined Google with €100.000\footnote{BBC UK, Mar 2011, http://www.bbc.co.uk/news/technology-12809076}.\\
@@ -168,7 +168,7 @@ The proposition of Google is to end the ESSID of the wireless access point with 
 The next time it is scanned by a Google Car or an Android device, the access point is removed from the database.
 Google hopes than over time, the \texttt{\_nomap} string will be adopted by other location providers~\cite{nomap}.\\
 
-This proposition was received with much of scepticism and did not satisfy the pro-privacy groups.
+This proposition was received with much scepticism and did not satisfy the pro-privacy groups.
 The main complain was the need of an action from the user to explicitly opt out his access point while people want a way to explicitly opt in instead.
 Many people that are concerned with privacy issues do not have enough technical knowledge to modify the wireless network name.
 Furthermore, if this string is not universally adopted by other companies such as Apple or SkyHook, conflicting systems can be imagined, preventing a concerned user to fully opt out his access points from commercial databases.
@@ -177,7 +177,7 @@ Furthermore, if this string is not universally adopted by other companies such a
 \label{sec:andro-samy}
 
 To reply to privacy concerns, Google ensured ``The location information sent to Google servers when users opt in to location services on Android is anonymised and stored in the aggregate and is not tied or traceable to a specific user''~\cite{loc-not-traceable}.
-The security researcher Samy Kamkar has also looked at the location requested.\\
+The security researcher Samy Kamkar has also looked into the location requested.\\
 
 % \begin{figure}[h]
 %   \hspace*{-2cm}
@@ -187,11 +187,11 @@ The security researcher Samy Kamkar has also looked at the location requested.\\
 %   \label{fig:reqdecode}
 % \end{figure}
 
-He succeeded in decrypting the request made to Google servers and realised that it contains a unique identifier~\cite{cnet-andr-samy}.
+He succeeded in decrypting the request made to Google servers and found that it contains a unique identifier~\cite{cnet-andr-samy}.
 %Figure \ref{fig:reqdecode} is the content of a request decrypted by Samy Kamkar sent to CNet.
 % TODO rewrite the graph ?
 The identifier is unique to the cell phone and present in every request.
-If this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then to trace him.
+Even though this string does not directly reveal the identity of the phone owner, it is however possible to tied the string to a specific user and then to trace him.
 He affirms there is no proof the location is anonymised due to the presence of this identifier.\\
 
 \section{Personal researches}
@@ -199,12 +199,11 @@ He affirms there is no proof the location is anonymised due to the presence of t
 
 Several facts about the storage of information and privacy have been announced.
 % TODO ajouter source
-To verify these facts, further investigations have been carried out in this thesis.
-The applications used to realise the analyses are presented in the appendix.\\
-% TODO mettre numero de appendix
+To verify these facts, further investigations have been carried out as part of this research.
+The applications used to implement the analyses are presented in the appendix \ref{chap:app-soft}.\\
 
-To realise the experiments, a rooted smartphone using Android 2.3 was used.
-As most of the location information, including the cache databases files, are located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
+To carry out the experiments, a rooted smartphone using Android 2.3 was used.
+As most of the location information, including the cache databases files, is located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
 The root process and implications are discussed in the introduction.
 
 \subsubsection*{About root access}
@@ -240,14 +239,14 @@ During this experiment, the content of the device is inspected before and after 
 \item Compare the two dumps
 \end{enumerate}
 
-To facilitate the experiment realisation the two scripts \texttt{androdump.py} and \texttt{compare\_dump.py} have been developed and are available on the appendix %TODO the CD-ROM or url
+In order to carry out the experiment, the two scripts \texttt{androdump.py} and \texttt{compare\_dump.py} have been developed and are available on the appendix %TODO the CD-ROM or url
 The dump is done using the script \texttt{androdump.py} which uses the Android Debug Bridge (adb) program connecting the device to a computer.
 The comparison is done using the script \texttt{compare\_dump.py} which uses a hash function on each file present in the dump to detect a modification.
 
 \subsubsection{Result}
 
 The goal of the comparison was to ensure that only the folder containing the databases is altered and the information is not stored somewhere else.
-The analysis reveals that, with the exception of some irrelevant system files (battery state...) modified, the database files only are updated.
+The analysis reveals that, with the exception of some irrelevant system files (alike battery state or statistic files) modified, the database files only are updated.
 The cache data of Google Maps application has been also deleted.
 This confirms the assumption concerning the deletion of location data.\\
 
@@ -288,7 +287,7 @@ The analysis reveals that, with the exception of irrelevant system files, only t
 
 As the request used to locate the device using wifi and cell towers is encrypted, its content is unknown.
 What is known and confirmed in the previous experiments is the fact that the cache files are updated and some wifi and cell towers information are added to these files when a request is made.
-To guess the content of a location request, it has been tried to determine patterns in the requests form to correlate a request with the content of the cache files.
+To guess the content of a location request, it has been attempted to determine the patterns in the requests form to correlate a request with the content of the cache files.
 
 \subsubsection{Methodology}
 
@@ -312,8 +311,8 @@ The network monitoring has been made with the tool \emph{tcpdump}\footnote{TCPDU
 \subsubsection{Result}
 
 From the collected trace, the size of the transmitted data was compared with the number of cells and access points added to the cache files.
-After observation and repeating the experiment (results displayed in Table \ref{tab:expe-req-pattern}), the following observations were made.
-Each location requests is composed of two communications with Google's servers.
+After observation and repetition of the experiment (results displayed in Table \ref{tab:expe-req-pattern}), the following observations were made.
+Each location request is composed of two communications with Google's servers.
 In each communication, a first packet of 271 bytes is sent followed by another one of variable size.\\
 
 % \begin{itemizealt}
@@ -362,22 +361,23 @@ These observations do not enable us to validate the suppositions concerning the 
 
 \subsubsection{Goal}
 
-As mentioned in Section \ref{sec:andro-samy}, Samy Kamkar observed that an unique identifier was used in the requests made to Google's servers.
+As mentioned in Section \ref{sec:andro-samy}, Samy Kamkar observed that a unique identifier was used in the requests made to Google's servers.
 The presence of this identifier could compromise the privacy of the user as it would allow Google to trace a location requests to a certain user.
 The purpose of this experiment was to verify this fact.
 
 \subsubsection{Methodology}
 
-Personal examinations of the cache folder in the system file showed that this string is contained inside a file \texttt{gls.platform.key} next to the cache database.
-When the option \emph{Use wireless networks} in the Android settings is disabled, the content of the cache location folder (containing the wifi and cell cache files as well as this identifier) is emptied.
+The content of the locations cache folder in the system file was observed and this identifier was found inside the file \texttt{gls.platform.key} next to the cache databases.
+When the option \emph{Use wireless networks} in the Android settings is disabled, the content of the cache location folder (containing the wifi and cell cache files as well as this identifier) is emptied.\\
+
 When the option is enabled, new cache files and unique identifier are created.
 The content of the identifier file \texttt{gls.platform.key} is different to the previous value every time the option is toggled.
 %\texttt{/data/data/com.google.android.location/files/gls.platform.key} 
 
 \subsubsection{Conclusions}
 
-The traceability possibilities are limited due to this constraint.
-If it is relatively easy to change this value, we can however imagine that very few users are aware of the existence of this value and will apply this manipulation regularly.
+The traceability is limited due to this constraint.
+Although it is relatively easy to change this value, it is quite clear that very few users are aware of the existence of this value and will apply this manipulation regularly.
 
 
 % \subsection{Android API}
