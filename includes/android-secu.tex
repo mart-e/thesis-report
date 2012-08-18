@@ -2,10 +2,10 @@
 \label{chap:and-secu}
 
 \section*{Introduction}
-As the number of smartphones is in constant rise, the level of concerns about the security of the system increases.
+As the number of smartphones is constantly rising, the level of concerns about the security of the system increases.
 Paradoxically, users tend to store more and more personal data on their smartphones and are not aware of the security issues of such devices.
 Malwares have been discovered in the official applications store and antivirus softwares for Android are now available.
-Android runs on top of a Linux kernel which is yet reputed to be virus free.\\
+Android runs on top of a Linux kernel which is yet reputed to be virus-free.\\
 
 The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
 Using the presented information, a user should be able to reduce his infection risk by adopting simple security principles.
@@ -25,7 +25,7 @@ For a set of defined tasks, a permission should be enabled.
 These tasks are, for example, to access the current location of the user, update the address book, use the Internet, write to the SD card...
 At the installation of an application, the permissions necessary are mentioned.\\
 
-The permission system is designed to control the usage of internal methods and resources of Android.
+The permission system is designed to control the use of internal methods and resources of Android.
 Without a permission, an application can not access to certain resources or methods in the Android system.
 
 \subsection{Technical details}
@@ -46,11 +46,11 @@ In Listing \ref{lst:gpsexception} is shown the Android debugger trace of an appl
 If the error is not caught properly, the execution of the application is interrupted and the user receives a notification of the crash of the application.\\
 
 The permission processed is conceived to control the access to an information and to not a phone characteristic.
-For instance, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the usage of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
+For instance, the \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the use of the high level \texttt{LocationManager} methods but is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
 \subsection{Weaknesses}
 
-The way the permission system is implemented does not fully prevent malicious behaviours.
+The way the permission system is implemented does not fully prevent malicious behaviour.
 The permission description is unclear and can include different purposes.
 For example, the permission \texttt{READ\_PHONE\_STATE} is required for many actions.
 It enables an application to be notified when a phone call is processed or when the device is locked, it also gives information about the phone unique identifier and SIM id.
@@ -75,7 +75,7 @@ Unlike iOS where the App Store is the only permitted source of applications\foot
 
 \subsection{Play Store}
 By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources and compatible with only the official Android devices.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
-Once a Google account is associated to the user's phone, it can use the application Google Play Store which lists the available applications and installs them quickly.
+Once a Google account is associated to the user's phone, the user can use the Google Play Store application which lists the available applications and installs them quickly.
 Figure \ref{fig:market} shows an example of the interface of the application.\\
 
 \begin{figure}[h]
@@ -90,12 +90,12 @@ The Android Play Store has several features that can be handy for the average us
 \begin{itemizealt}
 \item Warning when an update is available
 \item Control by Google against malicious applications
-\item User comments and review
+\item User's comments and reviews
 \item Paid system with Google Checkout
 \end{itemizealt}
 
 On the website \url{https://play.google.com/store}, the content of the Android Play Store is available from a browser.
-An important feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
+An major feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
 The next time the Android device is connected to the Internet, it will automatically download and install the selected applications without any user interaction required.
 A simple notice is displayed on the phone once the application is installed.\\
 
@@ -111,7 +111,7 @@ The \emph{.apk} extension is the convention for installable applications on the 
 A user trying to open such files on his device launches the installation process in the same way as if he was using the Android Play Store.
 The required permissions are displayed and ask for the approval of the user.
 Figure \ref{fig:perm-dw} shows the permission screen when a user tries to install the application DroidWatcher.
-This is the same screen while using either the Google Play Store or installing an \emph{.apk} file.\\
+This is the same screen while either using the Google Play Store or installing an \emph{.apk} file.\\
 
 \begin{figure}[h]
   \centering
