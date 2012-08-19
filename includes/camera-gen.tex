@@ -36,12 +36,12 @@ The protection of the video stream is then possible at several levels:\\
 
 \begin{itemizealt}
 \item Encryption of the wireless network (WEP, WPA, WPA2, etc.)
-\item Encryption of the transmission protocol (usage of SSL to transmit the images)
+\item Encryption of the transmission protocol (utilisation of SSL to transmit the images)
 \item Access control mechanism of the stream itself (password to access the admin interface)
 \end{itemizealt}
 
 The security of the video stream is then directly related to the choice of the security mechanism.
-Using a weak security mechanism (for example WEP) leads to a weak security of the camera.\\
+Using a weak security mechanism (for example WEP) leads to a weak security level of the camera.\\
 
 The digital video cameras can contain many features for the transmission of the video stream.
 As these features improve the access convenience using different methods (admin interface, mail sending, etc.), they also put a challenge on the side of the end user who must understand the key differences in terms of security.
@@ -50,8 +50,8 @@ For instance setting an admin password to the administration interface during th
 \section{Web digital cameras}
 \label{sec:cam-google}
 
-Some digital cameras are available on the Internet .
-This section explains how a camera can be accessed from outside the local network and what are the risks of discovery and abuses.
+Some digital cameras are available on the Internet.
+This section explains how a camera can be accessed from outside the local network and what the risks of discovery and abuses are.
 
 \subsection{Connectivity}
 \label{sec:cam-connect}
@@ -61,7 +61,7 @@ The default deployment of a digital camera is to be restricted to a home network
 However, it is possible to make the video available on the Internet.
 This is done by configuring a port forwarding at router level.
 Then the public IP address of the network can be used to access the web interface of the camera.
-Some camera systems also allow streaming to external websites or implements dynamic DNS mechanisms to be able to access the video stream from an URL.\\
+Some camera systems also allow streaming to external websites or implements dynamic DNS mechanisms to be able to access the video stream from a URL.\\
 
 Another common usage of web digital cameras is for outdoor cameras streaming streets, parks, ski resorts and other public areas.
 Unlike previously mentioned personal cameras, these cameras may be published and advertised on city websites or neighbourhood associations.
@@ -71,7 +71,7 @@ Unlike previously mentioned personal cameras, these cameras may be published and
 If the URL to a web camera interface is published on a website (legitimate or not), it may be detected and indexed by a search bot software such as the ones Google uses to constitute its search engine database.
 If indexed, these cameras can be listed with the correct search keywords.\\
 
-Using the Google search engine, the keyword \texttt{inurl:} is used to search in the site's URL itself.
+Using the Google search engine, the keyword \texttt{inurl:} is used to search in the site URL itself.
 On certain models of digital cameras, the URL to access the web interface contains some patterns typical for these cameras.
 This is the case for example with \texttt{axis-cgi/mjpg} or \texttt{ViewerFrame?Mode=} that are present mostly in webcam server software.
 Using the following search queries can list links to the web interface of digital cameras:
