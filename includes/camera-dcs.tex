@@ -258,9 +258,9 @@ In the webserver source code, the case of removing the guest user is refused as 
 }
 
 This piece of code (typographical error in the original code) is highly surprising as a clear addition from D-Link as an effort to prevent the removal of the guest account (identified by the variable \texttt{i == 1} here).
-The reason of this effort is unknown and left to the reader interpretation but it leads to an important security breach as it facilitates the unauthorised viewing of the video stream.\\
+The reason of this effort is unknown and left to the reader's interpretation but it leads to an important security breach as it facilitates the unauthorised viewing of the video stream.\\
 
-As the modification or removal of the guest user is not possible using the web interface, another procedure as been discovered:
+As the modification or removal of the guest user is not possible using the web interface, another procedure has been discovered:
 
 \begin{enumerate}
 \item Export the configuration file
@@ -280,7 +280,7 @@ The video stream can be accessed using any compatible third party software using
 Through the admin interface, it is possible to disable, change the port number or rename the access path.\\
 
 Even if technically possible\footnote{The RTSP protocol can implement a basic access control such as it is done on HTTP to access the web interface. However it is not possible to enable this feature on this model of camera.}, the system does not implement any access control mechanism.
-If an attacker has access to the associated port (554 by default), it is possible to stream the video, even without necessity to use to the guest account.\\
+If an attacker has access to the associated port (554 by default), it is possible to stream the video, even without necessity to use the guest account.\\
 
 If not used, it is recommended to disable this protocol.
 
