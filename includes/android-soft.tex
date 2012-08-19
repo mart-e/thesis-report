@@ -230,7 +230,7 @@ Consequently the testing has been done mainly on devices running the second vers
 An unexpected change introduced in the 4.0 version\footnote{The change was already present since the version 3.1 for tablets but reflected to smartphones only since the version 4.0} of Android is the way a device manages the start of an application in background.
 DroidWatcher has been conceived to be started when a device is booting or waked from idle.
 This feature supported the aim to be fully discrete and ensured that the application was not noticeable without analysis.
-With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched first time~\cite{boot-restrictions}.\\
+With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched the first time~\cite{boot-restrictions}.\\
 
 To fix this problem, an interface screen has been developed.
 This screen allows the user to see location information and basic configuration.\\
@@ -243,14 +243,13 @@ However malicious applications often use a fake interface (weather forecast, gam
 
 To compute the location of the user, a triangulation algorithm has been developed.
 This algorithm uses a circle intersections~\cite{circle-inter} and a coordinates conversion~\cite{ibm-coordinates} algorithms to compute the triangulated coordinates.
-However the unknown factor is the relation between the received signal strength and the distance from the cell tower.\\
+However the unknown factor is the relation between the received signal strength and the distance from the cell tower and lead to imprecision in the algorithm.\\
 
 To compute the location, the algorithm uses the signal strength of captured GSM cell towers nearby.
 The signal strength is a very fluctuating variable.
-At a same distance to a cell tower, the signal varies if the device is inside or outside a building or if monitored by two different devices with different GSM receiver.
-The main imprecision comes from the fact that all cell tower do not emit signal at the same signal strength (rural areas are usually covered with less cell towers emitting using higher signal strengths.\\
+At the same distance to a cell tower, the signal varies if the device is inside or outside a building or if monitored by two different devices with different GSM receiver.
+The main imprecision ensues from the fact that all cell towers do not emit signal at the same signal strength (rural areas are usually covered with less cell towers emitting using higher signal strengths.\\
 
-As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas.
-The computation and weighting of the variables has been done based on personal observations.
+As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas, the computation and weighting of the variables has been done based on personal observations.
 This is known as imprecise but achieves the purpose of being able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 
