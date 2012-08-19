@@ -319,12 +319,12 @@ The only possible mitigation is a regular cleanup of the log file in the adminis
 \label{sec:dcs-web-access}
 
 As mentioned in Section \ref{sec:cam-connect}, it is possible to configure a network to access a camera from outside of the network.
-However, this access may create the possibility for attacker to access the camera.
+However, this access may create the possibility for attackers to access the camera.
 Using the previously mentioned vulnerabilities, intrusions are possible to login as guest account or to access the log file.\\
 
 As mentioned in Section \ref{sec:cam-detection-hidden}, it is possible to scan a network in order to discover hidden IP cameras.
 While making a request to an IP address, the headers of the reply are specific to the IP device and make it possible to easily identify the presence of cameras.
-The reply headers of a request shown below contains the identifier \texttt{Basic realm="DCS-2130"} which can be used.
+The reply headers of a request shown below contain the identifier \texttt{Basic realm="DCS-2130"} which can be used.
 
 {\scriptsize
 \begin{verbatim}
@@ -375,7 +375,7 @@ This is the consequence of combination of the unknown presence of the guest acco
 \label{sec:dcs-random}
 
 Random numbers are used in many security protocols.
-The unpredictability of these random numbers are essential to ensure the secrecy while generating keys or initialisation vectors.
+The unpredictability of these random numbers is essential to ensure the secrecy while generating keys or initialisation vectors.
 The generation of true random numbers is a common challenge in computer sciences as a computer is deterministic.
 Instead, devices use arbitrary inputs such as disk moves or network noise to generate pseudo-random numbers.
 However, on small embedded devices such as wireless cameras, there is not as many possible inputs as on a personal computer (no hard drive for instance).
