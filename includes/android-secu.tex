@@ -152,8 +152,7 @@ Using the official Android Debug Bridge toolkit\footnote{Documentation \url{http
 \label{sec:and-attack-scheme}
 
 Even though the multiple installation procedures make the propagation of an application easier, they also enable abuses and accelerate the propagation of malware.
-Figure \ref{fig:secu-graph} presents the different possibilities for a malicious applications to propagate and be installed on a device.
-The attack types are described in Section \ref{sec:malware-type}.
+Figure \ref{fig:secu-graph} presents the two different attack types (explained in Section \ref{sec:malware-type}) and the three different strategies to deploy the attack presented in this section.
 
 \begin{figure}[h]
   \centering
@@ -223,18 +222,18 @@ It is recommended to disable the debug mode when not required and use a screen l
 \section{Malware}
 \label{sec:and-malware}
 
-\subsection{General malware types}
+\subsection{Attack types}
 \label{sec:malware-type}
 
-There are two main types of Android malware: abuse of permission or use of security flaws.\\
+As displayed in Figure \ref{fig:secu-graph}, Android malware has two main type of attack: abuse of permission or use of security flaws.\\
 
-The first kind of malware takes advantage of the lack of suspicions from the users and simply ask for permission allowing a malicious behaviour.
+The first kind of attack takes advantage of the lack of suspicions from the users and simply ask for permission allowing a malicious behaviour.
 This is usually the case with applications sending text messages to overtaxed number or stealing contact information from the address book.
-This kind of malware tends to be timeless and works as long as the users do not inspect attentively the permission screen without regard to the version of the operating system version that is being run.
+This kind of attack tends to be timeless and works as long as the users do not inspect attentively the permission screen without regard to the version of the operating system version that is being run.
 As some ``honest'' applications have a large range of features (that the user may never use), it is common to see such applications asking for many permissions (for example, the official Facebook application requires 19 different permissions\footnote{Discovered through personal researches by decompiling the downloaded application from the Android Play Store in July 2012}).
 The grounds of the required permissions usually are not mentioned by the application makers\footnote{Counterexample: Firefox browser created a page to explain the reason each permission is used \url{http://mzl.la/FirefoxPermissions}}.\\
 
-The use of security flaws is possible due to the slow update process.
+The second type of attacks relies on the fact that security flaws remain unfixed due to the slow update process.
 The manufacturers tend to provide only a limited number of version updates if any\footnote{Computerworld has computed the percentage of Android phones upgraded to Froyo (released in May 2010) by each manufacturer within 2010 \url{http://blogs.computerworld.com/17649/android_upgrades}}.
 A device older than a year is usually not maintained anymore.
 The only solution for the users owning such devices is to install alternative ROMs such as CyanogenMod that provide an extended support for a large range of devices.
