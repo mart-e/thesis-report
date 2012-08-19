@@ -47,8 +47,7 @@ Options:
 LocateMe is an Android application.
 At the launch of the application, it will display current wireless information such as the number of surround wireless access points and GSM cell towers.
 It will also make a single localisation request using the wireless network.
-This application was used for experiments in Section \ref{sec:andro-perso-research}.
-It was a simple way to create a localisation request and observe the according changes.
+This application was used for experiments in Section \ref{sec:andro-perso-research} as a simple way to create a localisation request and observe the according changes.
 
 
 \section{gen\_https.py}
@@ -109,6 +108,7 @@ optional arguments:
 \section{shodan-dcs.py}
 
 This program uses the Shodan search engine presented in Section \ref{sec:shodanhq} to retrieve DLink DCS-2130 cameras indexed.
+An API key should be created at \url{http://shodanhq.com} and used for the variable \texttt{SHODAN\_API\_KEY}.
 The use of this script is explained in Section \ref{sec:dcs-web-access}.
 
 \begin{verbatim}

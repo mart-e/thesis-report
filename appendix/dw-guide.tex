@@ -9,12 +9,12 @@
 
 The installation of the mobile application is similar to the installation of most Android application.
 
-\begin{enumerate}
-\item Retrieve the file DroiDWatcher.apk from the CDROM\footnote{The file can also be downloaded at \url{https://gitorious.org/martin-trigaux-thesis/droidwatcher/blobs/raw/HEAD/mobile/DroidWatcher.apk}} to the Android device
+\begin{enumeratealt}
+\item Retrieve the file DroiDWatcher.apk from the CD-ROM\footnote{The file can also be downloaded at \url{https://gitorious.org/martin-trigaux-thesis/droidwatcher/blobs/raw/HEAD/mobile/DroidWatcher.apk}} to the Android device
 \item Open the file with the Android installer
-\item Accpet the requested permissions
+\item Accept the requested permissions
 \item Open the interface DroidWatcher in the menu pannel to launch the background application
-\end{enumerate}
+\end{enumeratealt}
 
 \subsection{Interface}
 \label{sec:dw-gui}
@@ -30,38 +30,37 @@ The application can be controlled through SMS commands sent to the phones runnin
 The messages are intercepted before arriving to the message application.
 If the message contains a pre-defined code, the phone will execute an action in consequence.
 
-\begin{itemize}
+\begin{itemizealt}
 \item The messages are not case sensitive.
 \item The match should be exact (no extra character).
 \item The application does not record the content of messages, the messages not containing the code will not be affected.
-\end{itemize}
+\end{itemizealt}
 
 \vspace{0.5cm}
 \texttt{BIGBRO} : starting code for a command.
-\begin{itemize}
+\begin{itemizealt}
 \item \texttt{LOCME} : reply with the last recorded location
 \item \texttt{GPSON} : turn the GPS on
 \item \texttt{WIFION} : turn the wireless on
 \item \texttt{SETSERVER[new\_server\_url]} : set
-  the url of the server, default
-  \url{http://watcher.dotzero.me/collect}
+  the url of the server
 %\item SETTHRESHOLD[new\_threshold] : set the collect threshold, in millisecond, below 60,000 is not adviced
-\end{itemize}
+\end{itemizealt}
 
 \vspace{0.5cm}
 Examples of correct messages:
-\begin{itemize}
+\begin{itemizealt}
 \item BIGBROGPSON
 \item bigbroSetServerhttp://watcher.dotzer.me/collect
 \item Ping
-\end{itemize}
+\end{itemizealt}
 
 \vspace{0.5cm}
 Examples of incorrect messages
-\begin{itemize}
+\begin{itemizealt}
 \item BIGBRO GPSON
 \item Ping!
-\end{itemize}
+\end{itemizealt}
 \vspace{0.5cm}
 To easily test if the application is running, the message \texttt{PING} can be send, the targeted cell phone replies with message containing \texttt{PONG}.\\
 
@@ -73,19 +72,19 @@ It was reported as working on v2 Android ROM and CyonengMod 7.
 
 \subsection{What data is collected by the application ?}
 
-\begin{itemize}
+\begin{itemizealt}
 \item Estimated location and time of the recording
 \item Google username
 \item IMSI (International Mobile Subscriber Identity)
 \item Phone number (if written in the SIM card, usually not)
-\end{itemize}
+\end{itemizealt}
 
 The Google username is collected to easily differentiate the users while the IMSI and phone number are to ensure the uniqueness.
 Note that the IMSI and phone number do not require any permission and that any application can collect it.
 
 \subsection{When run the application ?}
 
-The application start at the phone boots and when the user unlock its phone.
+The application starts at the phone boot and when the user unlocks its phone.
 Except if using Android 4.0 or above, killing the process will only stop it until the next time the phone is unlocked.
 Uninstalling the application \texttt{DroidWatcher} will fully remove it.
 
@@ -132,5 +131,5 @@ The following steps explain the deployment of the application on a Debian Lenny 
   and choose an admin password.
 \item Restart the apache module\\
   \texttt{\$ sudo service apache2 restart}
-\item Access the received location by going to \url{http://SERVERURL/admin} to log in and them access to the recorded location at \url{http://SERVERURL/}
+\item Access the received location by visiting \url{http://SERVERURL/admin} to log in and them access to the recorded location at \url{http://SERVERURL/}
 \end{enumerate}

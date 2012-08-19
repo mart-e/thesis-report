@@ -242,8 +242,8 @@ However malicious applications often use a fake interface (weather forecast, gam
 \label{sec:dw-difficult-cell}
 
 To compute the location of the user, a triangulation algorithm has been developed.
-This algorithm is however known as imprecise for several reason.
-A basic triangulation algorithm was used to compute circle intersections\footnote{Intersection of two circles by  Graeme McRae \url{http://2000clicks.com/mathhelp/GeometryConicSectionCircleIntersection.aspx}} but the unknown factor is the relation between the received signal strength and the distance from the cell tower.\\
+This algorithm uses a circle intersections~\cite{circle-inter} and a coordinates conversion~\cite{ibm-coordinates} algorithms to compute the triangulated coordinates.
+However the unknown factor is the relation between the received signal strength and the distance from the cell tower.\\
 
 To compute the location, the algorithm uses the signal strength of captured GSM cell towers nearby.
 The signal strength is a very fluctuating variable.
