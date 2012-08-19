@@ -68,7 +68,7 @@ The source code has finally been retrieved\footnote{The archive downloaded is av
 
 The installation and configuration of the software are realised using an ActiveX wizard utility provided with a CD-ROM included with the camera.
 This utility is used to configure the connectivity aspect of the camera and to secure the admin account.
-The administrator account is used to manage the configuration settings of the camera through a the web interface.\\
+The administrator account is used to manage the configuration settings of the camera through the web interface.\\
 
 This last point is positive as the procedure does not permit the configuration of the camera without setting a control access mechanism.
 %To access the main web interface, a username and password are required, preventing any unauthorised access to the interface.
@@ -81,7 +81,7 @@ At the launch of this wizard, messages broadcasted are exchanged to discover the
 These messages use a proprietary protocol but understandable to anybody listening to the traffic.
 The problem of this protocol is the fact that, in the case the camera already is configured for the first time, the authentication of the admin account is required and this communication is also broadcasted, communicating the administrator password in clear text over the network.\\
 
-Below are parts of an exchange between a laptop using the utility and a the camera.
+Below are parts of an exchange between a laptop using the utility and the camera.
 
 {\scriptsize
 \begin{verbatim}
@@ -133,9 +133,9 @@ While the meaning of each byte would require a larger study, it is however easy 
 \end{enumerate}
 
 %Updating the administrator password follows the same 
-The fact that all messages are broadcasted implies that, even on encrypted network using session keys such as WPA (which prevents monitoring the traffic of other users on a wireless network), the credentials are publicly transmitted.
+The fact that all messages are broadcasted implies that, even on encrypted network using session keys such as WPA (which prevents from monitoring the traffic of other users on a wireless network), the credentials are publicly transmitted.
 An attacker only needs to monitor the network to be able to retrieve an administrator access to the camera.
-However, the usage of the utility to reconfigure the network is supposed to be very rare and minimise the risk of such attack.
+However, the use of the utility to reconfigure the network is supposed to be very rare and minimise the risk of such attack.
 
 \section{Security against traffic monitoring}
 \label{sec:dcs-proto}
