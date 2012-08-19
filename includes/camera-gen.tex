@@ -115,9 +115,9 @@ A script detecting the model of D-Link cameras studied in Chapter \ref{chap:cam-
 Shodan\footnote{SHODAN - Computer Search Engine \url{http://www.shodanhq.com/}} is a search engine targeted at finding online devices.
 Instead of crawling the content of web pages, it scans IP ranges using headers, IP and ports to detect devices connected to the Internet.\\
 
-In the case of camera, this search engine can be used to detect web cameras available on the Internet.
-In case the camera interface is not protected by an access control mechanism, it is possible to find watch the video stream with the help of Shodan.
-The usage of an access control mechanism does not prevent the indexing of a camera by Shodan but helps to avoid unauthorised accesses.
+In the case of cameras, this search engine can be used to detect web cameras available on the Internet.
+In case the camera interface is not protected by an access control mechanism, it is possible to find and watch the video stream with the help of Shodan.
+The use of an access control mechanism does not prevent the indexing of a camera by Shodan but helps to avoid unauthorised accesses.
 Figure \ref{fig:shodan-dcs} shows an example of a search done to find D-Link DCS-2130 camera, finding 195 devices.
 
 \begin{figure}[h]
@@ -149,8 +149,8 @@ The exploitation of this vulnerability is facilitated by the existence of the Sh
 Using the query \texttt{netcam} which is used in the headers of TRENDnet cameras, the Shodan search engine lists IP addresses of TRENDnet cameras.
 Using this list, the vulnerability can be tested on a large number of devices.\\
 
-TRENDnet replied to this publication by proposing an update of the firmware that fixes the vulnerability and contacting registered owners to warm them about the potential threat.
-However it is very likely that most of the vulnerable devices will not be updated by their owners and still be exploitable in the future.\\
+TRENDnet replied to this publication by proposing an update of the firmware that fixes the vulnerability and contacting registered owners to warn them about the potential threat.
+However, it is very likely that most of the vulnerable devices will not be updated by their owners and will still be exploitable in the future.\\
 
 This vulnerability is an example of the danger of setting up such devices on the web.
 Even by protecting correctly and not publishing the URL to access the camera, owners of these devices are exposed to curious eyes as for the moment their camera is made accessible from the Internet.
