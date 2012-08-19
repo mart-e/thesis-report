@@ -412,7 +412,7 @@ The difference between the two devices can be explained by the fact that the cam
 \section{Burglar scenario}
 \label{sec:dcs-burglar}
 
-As an example of issues related to lack of security from a wireless camera, the scenario of a burglar (with some computer knowledge) planning to visit a building equipped with a DCS-2130 camera is detailed.
+As an example of issues related to the lack of security from a wireless camera, the scenario of a burglar (with some computer knowledge) planning to visit a building equipped with a DCS-2130 camera is detailed.
 This is one possible abuse showing concretely the danger of forgetting the privacy aspect while using this device.
 Another possible abuse for professionals would be industrial espionage.
 Two scenarios are discussed in detail below depending of the situation of the burglar.
@@ -430,7 +430,7 @@ Not every case may lead to an abuse of the camera.
 This first scenario represented in Figure \ref{fig:burglar-inside} is the case where the burglar is in the range of the wireless camera while planning the visit.
 To be able to abuse the camera, it first requires to penetrate the wireless network.
 To achieve this goal, the protection of the network is directly related to the feasibility of this step.
-In the case of open network or WEP network this is possible easily but if WPA or WPA2 is used, this may be more difficult\footnote{The wifi penetration techniques are not detailed in this section and left to the reader researches.}\\
+In the case of open network or WEP network this is possible easily but if WPA or WPA2 is used, this may be more difficult\footnote{The wifi penetration techniques are not detailed in this section and left to the reader's researches.}\\
 
 Once an access to the network is realised, the burglar has three main sources of information:
 \begin{enumerate}
@@ -452,7 +452,7 @@ The access to the video stream also helps the burglar to detect the precise empl
 \end{figure}
 
 The second abuse case represented in Figure \ref{fig:burglar-outside} is when the camera is accessible from the web using the public IP address.
-The requirements are harder to achieve than the previous abuse case as the burglar needs to know the IP address of the targeted house (no other efficient techniques than scanning large IP ranges).
+The requirements are harder to achieve than the previous abuse case since the burglar needs to know the IP address of the targeted house (no other efficient techniques than scanning large IP ranges).
 Another possible scenario would be the burglar deciding the visit of a building based on the availability of a camera and obtaining the location based on the observations and IP address.\\
 
 If the requirements are met, two possibilities of abuse are now possible:
@@ -466,13 +466,13 @@ However, during the experiments, some cameras where discovered as fully availabl
 
 \section{Security advises}
 \label{sec:dcs-security}
-To conclude the camera analysis, the usage of the camera without taking security measures is not considered as safe and is not recommended.
+To conclude the camera analysis, the use of the camera without taking security measures is not considered as safe and is not recommended.
 The owners of this model of camera should apply the following steps:
 
 \begin{itemizealt}
 \item Disable the guest account.
-\item If not used disable the RTSP stream.
-\item Secure efficiently the wifi network (WPA or WPA2 with a hard to guess password).
+\item If not used, disable the RTSP stream.
+\item Secure efficiently the wifi network (WPA or WPA2 with a password hard to guess).
 \item Use the web interface in HTTPS after making sure to import the certificate while in a secured environment\footnote{Wired connection, no potential attacker on the network...}.
 \item Cleanup regularly the cache file.
 \item Avoid configuring the camera when not necessary, especially using the installation utility.
@@ -486,7 +486,7 @@ Both the contact email address of the Benelux support and the community forum we
 Unfortunately none of the attempted communications have led to an answer.\\
 
 As it is possible the messages did not reach the adequate D-Link members, it is disappointing that it was not possible to contact them before the publication of this thesis.
-However, it is hoped that these issues will be noticed by D-Link and be fixed in future version of the firmware.
+However, it is hoped that these issues will be noticed by D-Link and be fixed in a future version of the firmware.
 
 \section{Future research}
 \label{sec:dcs-future}
@@ -513,10 +513,10 @@ A similar attack on Cisco IP surveillance camera has already been demonstrated~\
 While scanning the opened port of the device, every opened port had a clear purpose (HTTP, RTSP, UPnP, etc.) with the exception of the port 1010.
 This port is opened but during the tests it was found that this port was never used, nor did it reply to tried queries.\\
 
-A future research could determine what is the usage of this port and his eventual interest in the security analysis of the camera.
+A future research could determine what is the use of this port and its eventual interest in the security analysis of the camera.
 
 \subsection{Other models of cameras}
 
 The discussed issues have been detected for the selected camera.
 As the time and resources were limited, only the DCS-2130 model was studied.
-However it could be interesting to extend the researches to see if the issues mentioned also apply to other models of camera.
+However, it could be interesting to extend the researches to see if the issues mentioned also apply to other models of cameras.
