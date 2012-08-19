@@ -227,7 +227,7 @@ The author of this thesis owns a device with Android 2.3 and this device was use
 At the time of development, end of 2011, the fourth version of Android\footnote{The third version of the operating system was limited to tablet devices and not phones limiting greatly the propagation of this version of the system.} was just released and very few devices were capable of running it.
 Consequently the testing has been done mainly on devices running the second version of the operating system.\\
 
-An unexpected change introduced in the 4.0 version\footnote{The change was already present since the version 3.1 for tablets but reflected to smartphones only since the version 4.0} of Android is the way a device manages the start of an application in background.
+An unexpected change introduced in the 4.0 version\footnote{The change had already been present since the version 3.1 for tablets but reflected to smartphones only since the version 4.0} of Android is the way a device manages the start of an application in background.
 DroidWatcher has been conceived to be started when a device is booting or waked from idle.
 This feature supported the aim to be fully discrete and ensured that the application was not noticeable without analysis.
 With Android 4.0, an application can no longer start during the boot or after having been woken up if the interface has not been launched the first time~\cite{boot-restrictions}.\\
@@ -236,7 +236,7 @@ To fix this problem, an interface screen has been developed.
 This screen allows the user to see location information and basic configuration.\\
 
 This change is certainly an improvement in the security of a device as the need for a graphical interface will strongly reduce the possibility to run a malicious \emph{invisible} application.
-However malicious applications often use a fake interface (weather forecast, game, etc.) to hide the malicious behaviour of the software and this protection will therefore not affect these applications.
+However, malicious applications often use a fake interface (weather forecast, game, etc.) to hide the malicious behaviour of the software and this protection will therefore not affect these applications.
 
 \subsection{Cell tower triangulation}
 \label{sec:dw-difficult-cell}
@@ -248,8 +248,8 @@ However the unknown factor is the relation between the received signal strength 
 To compute the location, the algorithm uses the signal strength of captured GSM cell towers nearby.
 The signal strength is a very fluctuating variable.
 At the same distance to a cell tower, the signal varies if the device is inside or outside a building or if monitored by two different devices with different GSM receiver.
-The main imprecision ensues from the fact that all cell towers do not emit signal at the same signal strength (rural areas are usually covered with less cell towers emitting using higher signal strengths.\\
+The main imprecision ensues from the fact that all cell towers do not emit signal at the same signal strength (rural areas are usually covered with less cell towers emitting using higher signal strengths).\\
 
-As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas, the computation and weighting of the variables has been done based on personal observations.
+As efficient computation of the signal strength would have required long monitoring and observation on a large number of devices and areas, the computation and weighting of the variables have been done based on personal observations.
 This is known as imprecise but achieves the purpose of being able to record a reasonable approximation of the location at any time when GSM connectivity is available.\\
 

@@ -1,4 +1,3 @@
-
 \chapter{Security analysis: case study of D-Link DCS-2130}
 \label{chap:cam-dcs}
 
@@ -6,7 +5,7 @@
 \label{sec:dcs-intro}
 
 As part of this thesis, it has been decided to analyse the security aspects of one model of wireless digital camera, the D-Link DCS-2130.
-The camera has been selected as being recently released (2011), having good reviews, a large choice of features\footnote{Technical details about the device can be found on D-Link website at \url{http://www.dlink.com/}} and being at reasonable price range (around 100€).
+The camera has been selected as being recently released (2011), having good reviews, a large choice of features\footnote{Technical details about the device can be found on D-Link website at \url{http://www.dlink.com/}} and being at reasonable price range (around €100).
 No previous security researches were found to be done on this model of camera.
 The aim was to select a common camera and take it as a representative example of the personal wireless camera market.\\
 
@@ -18,7 +17,7 @@ The aim was to select a common camera and take it as a representative example of
 \end{figure}
 
 Some of the vulnerabilities and security aspects analysed in this chapter are specific to this model of camera.
-However as weaknesses have been discovered on other models of cameras (as showed the TRENDnet hack) it is believed similar issues can be discovered in other models.\\
+However, as weaknesses have been discovered on other models of cameras (as showed the TRENDnet hack), it is believed similar issues can be discovered in other models.\\
 
 \section{DCS-2130 features}
 \label{sec:dcs-pres}
@@ -34,7 +33,7 @@ The selected camera model is a D-Link DCS-2130 and is represented in Figure \ref
 \item Audio: G.726
 \end{itemizealt}
 
-The DCS-2130 has also features such as motion detection allowing to program conditional chain of events (eg: if a motion is detected, upload current pictures to a FTP server).
+The DCS-2130 has also features such as motion detection allowing to program conditional chains of events (eg: if a motion is detected, upload current pictures to a FTP server).
 The camera is provided with an installation utility to configure it from a computer to be able to connect to the wireless network.
 % TOCHECK correction "and can be configured blabla
 Watching the video stream and configuration of the system can be done using a web interface.
@@ -46,7 +45,7 @@ Watching the video stream and configuration of the system can be done using a we
 As many embedded devices, D-Link uses a Linux kernel and open source software such as Busybox which are released under a GPL licence.
 A clause in this licence requires to make available the source code of the software using code under GPL if binaries are proposed (which is the case of D-Link).
 In 2006, the Court of Frankfurt issued that D-Link was violating the GPL licence on a network-attached storage device~\cite{dlink-gpl-viol}.
-Following that ruling, D-Link published the source code of several of its devices on their website\footnote{D-Link GPL Source Code Support \url{http://tsd.dlink.com.tw/GPL.asp}} including the DCS-2130.\\
+Following that ruling, D-Link published the source code of several of their devices on their website\footnote{D-Link GPL Source Code Support \url{http://tsd.dlink.com.tw/GPL.asp}} including the DCS-2130.\\
 
 Even if D-Link technically provides the source code of the software on their website, many difficulties have been faced to obtain the archive file.
 The difficulties were:
