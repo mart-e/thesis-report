@@ -144,7 +144,7 @@ As mentioned in Section \ref{sec:dcs-pres}, the camera supports several protocol
 These protocols are not all as secure and while only monitoring the network an attacker could retrieve sensible information.\\
 
 The monitoring of a network using free tools such as \emph{tcpdump} is possible while an attacker is connected to the same network as the camera and when the wireless network traffic is not encrypted or using WEP\footnote{Unlike WPA/WPA2, WEP does not use unique session keys for each user.}.
-On encrypted traffic, an attacker could apply an ARP spoofing attack to force the traffic to transit by its computer and read the content of packages.
+On encrypted traffic, an attacker could apply an ARP spoofing attack to force the traffic to transit by his computer and read the content of packages.
 
 \subsection{HTTP authentication}
 
@@ -206,7 +206,7 @@ This means that an attacker could issue a forged certificate pretending to be th
 \section{Guest account}
 \label{sec:dcs-guest}
 
-During the analysis of the camera, it was revealed that the exported configuration file mentioned in Section \ref{sec:dcs-config} contains also the information about the different users allowed to access the camera with their access right level as shown below.
+During the analysis of the camera, it was revealed that the exported configuration file mentioned in Section \ref{sec:dcs-config} also contains the information about the different users allowed to access the camera with their access right level as shown below.
 
 {\scriptsize
 \begin{verbatim}
@@ -229,12 +229,12 @@ While the obligation to set up a password for the administrator account is posit
 \subsection{Guest account access}
 \label{sec:dcs-guest-rights}
 
-The guest account is configured with an access level of two, this level prevents the guest user to modify the configuration of the system but is enough to both watching the video stream and retrieving snapshots of the video using a specific URL.\\
+The guest account is configured with an access level of two, this level prevents the guest user from modifying the configuration of the system but is enough to both watch the video stream and retrieve snapshots of the video using a specific URL.\\
 
 In the firmware source code, the web interface is powered by the open source web server Boa\footnote{Boa Webserver \url{http://www.boa.org/}}.
 To resolve the different URLs, this webserver lists all the possible URI with the associated function to execute and the access rights required to access the URI\footnote{In the firmware source code, see \texttt{/apps/public/boa-0.94.13/src/request.c} line 6700}.
 Using this list, it is possible to identify what the guest account is capable of.
-Fortunately, the guest account appears to be able only to access the stream of the camera and some moderately important information such as the firmware version.
+Fortunately, the guest account appears to be able to access only the stream of the camera and some moderately important information such as the firmware version.
 
 \subsection{Account suppression}
 \label{sec:dcs-guest-suppression}
@@ -258,9 +258,9 @@ In the webserver source code, the case of removing the guest user is refused as 
 }
 
 This piece of code (typographical error in the original code) is highly surprising as a clear addition from D-Link as an effort to prevent the removal of the guest account (identified by the variable \texttt{i == 1} here).
-The reason of this effort is unknown and left to the reader interpretation but it leads to an important security breach as it facilitates the unauthorised viewing of the video stream.\\
+The reason of this effort is unknown and left to the reader's interpretation but it leads to an important security breach as it facilitates the unauthorised viewing of the video stream.\\
 
-As the modification or removal of the guest user is not possible using the web interface, another procedure as been discovered:
+As the modification or removal of the guest user is not possible using the web interface, another procedure has been discovered:
 
 \begin{enumerate}
 \item Export the configuration file
@@ -280,7 +280,7 @@ The video stream can be accessed using any compatible third party software using
 Through the admin interface, it is possible to disable, change the port number or rename the access path.\\
 
 Even if technically possible\footnote{The RTSP protocol can implement a basic access control such as it is done on HTTP to access the web interface. However it is not possible to enable this feature on this model of camera.}, the system does not implement any access control mechanism.
-If an attacker has access to the associated port (554 by default), it is possible to stream the video, even without necessity to use to the guest account.\\
+If an attacker has access to the associated port (554 by default), it is possible to stream the video, even without necessity to use the guest account.\\
 
 If not used, it is recommended to disable this protocol.
 
@@ -319,12 +319,12 @@ The only possible mitigation is a regular cleanup of the log file in the adminis
 \label{sec:dcs-web-access}
 
 As mentioned in Section \ref{sec:cam-connect}, it is possible to configure a network to access a camera from outside of the network.
-However, this access may create the possibility for attacker to access the camera.
+However, this access may create the possibility for attackers to access the camera.
 Using the previously mentioned vulnerabilities, intrusions are possible to login as guest account or to access the log file.\\
 
 As mentioned in Section \ref{sec:cam-detection-hidden}, it is possible to scan a network in order to discover hidden IP cameras.
 While making a request to an IP address, the headers of the reply are specific to the IP device and make it possible to easily identify the presence of cameras.
-The reply headers of a request shown below contains the identifier \texttt{Basic realm="DCS-2130"} which can be used.
+The reply headers of a request shown below contain the identifier \texttt{Basic realm="DCS-2130"} which can be used.
 
 {\scriptsize
 \begin{verbatim}
@@ -375,7 +375,7 @@ This is the consequence of combination of the unknown presence of the guest acco
 \label{sec:dcs-random}
 
 Random numbers are used in many security protocols.
-The unpredictability of these random numbers are essential to ensure the secrecy while generating keys or initialisation vectors.
+The unpredictability of these random numbers is essential to ensure the secrecy while generating keys or initialisation vectors.
 The generation of true random numbers is a common challenge in computer sciences as a computer is deterministic.
 Instead, devices use arbitrary inputs such as disk moves or network noise to generate pseudo-random numbers.
 However, on small embedded devices such as wireless cameras, there is not as many possible inputs as on a personal computer (no hard drive for instance).
@@ -412,7 +412,7 @@ The difference between the two devices can be explained by the fact that the cam
 \section{Burglar scenario}
 \label{sec:dcs-burglar}
 
-As an example of issues related to lack of security from a wireless camera, the scenario of a burglar (with some computer knowledge) planning to visit a building equipped with a DCS-2130 camera is detailed.
+As an example of issues related to the lack of security from a wireless camera, the scenario of a burglar (with some computer knowledge) planning to visit a building equipped with a DCS-2130 camera is detailed.
 This is one possible abuse showing concretely the danger of forgetting the privacy aspect while using this device.
 Another possible abuse for professionals would be industrial espionage.
 Two scenarios are discussed in detail below depending of the situation of the burglar.
@@ -430,7 +430,7 @@ Not every case may lead to an abuse of the camera.
 This first scenario represented in Figure \ref{fig:burglar-inside} is the case where the burglar is in the range of the wireless camera while planning the visit.
 To be able to abuse the camera, it first requires to penetrate the wireless network.
 To achieve this goal, the protection of the network is directly related to the feasibility of this step.
-In the case of open network or WEP network this is possible easily but if WPA or WPA2 is used, this may be more difficult\footnote{The wifi penetration techniques are not detailed in this section and left to the reader researches.}\\
+In the case of open network or WEP network this is possible easily but if WPA or WPA2 is used, this may be more difficult\footnote{The wifi penetration techniques are not detailed in this section and left to the reader's researches.}\\
 
 Once an access to the network is realised, the burglar has three main sources of information:
 \begin{enumerate}
@@ -452,7 +452,7 @@ The access to the video stream also helps the burglar to detect the precise empl
 \end{figure}
 
 The second abuse case represented in Figure \ref{fig:burglar-outside} is when the camera is accessible from the web using the public IP address.
-The requirements are harder to achieve than the previous abuse case as the burglar needs to know the IP address of the targeted house (no other efficient techniques than scanning large IP ranges).
+The requirements are harder to achieve than the previous abuse case since the burglar needs to know the IP address of the targeted house (no other efficient techniques than scanning large IP ranges).
 Another possible scenario would be the burglar deciding the visit of a building based on the availability of a camera and obtaining the location based on the observations and IP address.\\
 
 If the requirements are met, two possibilities of abuse are now possible:
@@ -466,13 +466,13 @@ However, during the experiments, some cameras where discovered as fully availabl
 
 \section{Security advises}
 \label{sec:dcs-security}
-To conclude the camera analysis, the usage of the camera without taking security measures is not considered as safe and is not recommended.
+To conclude the camera analysis, the use of the camera without taking security measures is not considered as safe and is not recommended.
 The owners of this model of camera should apply the following steps:
 
 \begin{itemizealt}
 \item Disable the guest account.
-\item If not used disable the RTSP stream.
-\item Secure efficiently the wifi network (WPA or WPA2 with a hard to guess password).
+\item If not used, disable the RTSP stream.
+\item Secure efficiently the wifi network (WPA or WPA2 with a password hard to guess).
 \item Use the web interface in HTTPS after making sure to import the certificate while in a secured environment\footnote{Wired connection, no potential attacker on the network...}.
 \item Cleanup regularly the cache file.
 \item Avoid configuring the camera when not necessary, especially using the installation utility.
@@ -486,7 +486,7 @@ Both the contact email address of the Benelux support and the community forum we
 Unfortunately none of the attempted communications have led to an answer.\\
 
 As it is possible the messages did not reach the adequate D-Link members, it is disappointing that it was not possible to contact them before the publication of this thesis.
-However, it is hoped that these issues will be noticed by D-Link and be fixed in future version of the firmware.
+However, it is hoped that these issues will be noticed by D-Link and be fixed in a future version of the firmware.
 
 \section{Future research}
 \label{sec:dcs-future}
@@ -513,10 +513,10 @@ A similar attack on Cisco IP surveillance camera has already been demonstrated~\
 While scanning the opened port of the device, every opened port had a clear purpose (HTTP, RTSP, UPnP, etc.) with the exception of the port 1010.
 This port is opened but during the tests it was found that this port was never used, nor did it reply to tried queries.\\
 
-A future research could determine what is the usage of this port and his eventual interest in the security analysis of the camera.
+A future research could determine what is the use of this port and its eventual interest in the security analysis of the camera.
 
 \subsection{Other models of cameras}
 
 The discussed issues have been detected for the selected camera.
 As the time and resources were limited, only the DCS-2130 model was studied.
-However it could be interesting to extend the researches to see if the issues mentioned also apply to other models of camera.
+However, it could be interesting to extend the researches to see if the issues mentioned also apply to other models of cameras.
