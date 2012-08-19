@@ -85,7 +85,7 @@ The locations received are stored in a file on the SD card.\\
 
 The surrounding cell data are also collected for future location.
 The cell towers identifiers and signal strengths are recorded at the same frequency as the GPS and network locations.
-The geographical coordinates of the collected GSM cell towers are retrieved once the phone is connected to the Internet and computed afterwards by using triangulation.
+The geographical coordinates of the collected GSM cell towers are retrieved once the phone is connected to the Internet and computed afterwards by using trilateration.
 
 \subsection{Internet actions}
 \label{sec:dw-internet-actions}
@@ -94,7 +94,7 @@ Periodically and when the wireless is enabled on the smartphone, the application
 When it is the case, the application takes two actions:
 
 \begin{itemizealt}
-\item Retrieving the geographical coordinates of the collected GSM cell towers and computing the previous locations using triangulation
+\item Retrieving the geographical coordinates of the collected GSM cell towers and computing the previous locations using trilateration
 \item Synchronising the collected locations to the remote server
 \end{itemizealt}
 
@@ -102,8 +102,8 @@ The coordinates of the GSM towers are collected using an unofficial Google datab
 This database has been selected as it is one of the most complete compared to the other free alternatives.
 However, due to its unofficial state, it is possible the data will not be available in the future.\\
 
-Using the geographical coordinates of the cell towers, the application is able to compute by triangulation of the previous location of the device.
-The method developed to triangulate a device is explained in Section \ref{sec:dw-cell-triangu}.
+Using the geographical coordinates of the cell towers, the application is able to compute by trilateration of the previous location of the device.
+The trilateration method developed is explained in Section \ref{sec:dw-cell-triangu}.
 
 \subsection{SMS management}
 \label{sec:dw-sms-manag}
@@ -128,18 +128,16 @@ However, it is important for a user to understand that such flaws exist and, eve
 
 %\emph{TODO: tester sur un Android 4.0}
 
-\section{Cell tower triangulation}
+\section{Cell tower trilateration}
 
 \label{sec:dw-cell-triangu}
 
-
-
 When a device needs to record the current location but is not capable to access the Internet, the program records the surrounding cell towers information.
-The described triangulation algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connected to the Internet.
+The described trilateration algorithm is applied once the coordinates of the collected cell towers are retrieved, the next time the smartphone is connected to the Internet.
 
 \subsection{Scenarios}
 
-To triangulate a device using the cell towers, the following scenarios have been considered:
+For the trilateration of a device using the cell towers, the following scenarios have been considered:
 
 \begin{enumerate}
 \item One GSM tower is within range
@@ -168,7 +166,7 @@ If more than three GSM towers are within range, the closest towers are determine
 \begin{figure}[h]
   \centering
   \includegraphics[width=8cm]{images/tower-schema.png}
-  \caption{Triangulation scenario with 3 GSM towers}
+  \caption{Trilateration scenario with 3 GSM towers}
   \label{fig:triangulation-scenario-3}
 \end{figure}
 The third scenario is illustrated in Figure \ref{fig:triangulation-scenario-3}.
@@ -238,11 +236,11 @@ This screen allows the user to see location information and basic configuration.
 This change is certainly an improvement in the security of a device as the need for a graphical interface will strongly reduce the possibility to run a malicious \emph{invisible} application.
 However, malicious applications often use a fake interface (weather forecast, game, etc.) to hide the malicious behaviour of the software and this protection will therefore not affect these applications.
 
-\subsection{Cell tower triangulation}
+\subsection{Cell tower trilateration}
 \label{sec:dw-difficult-cell}
 
-To compute the location of the user, a triangulation algorithm has been developed.
-This algorithm uses a circle intersections~\cite{circle-inter} and a coordinates conversion~\cite{ibm-coordinates} algorithms to compute the triangulated coordinates.
+To compute the location of the user, a trilateration algorithm has been developed.
+This algorithm uses a circle intersections~\cite{circle-inter} and a coordinates conversion~\cite{ibm-coordinates} algorithms to compute the trilaterated coordinates.
 However the unknown factor is the relation between the received signal strength and the distance from the cell tower and lead to imprecision in the algorithm.\\
 
 To compute the location, the algorithm uses the signal strength of captured GSM cell towers nearby.
