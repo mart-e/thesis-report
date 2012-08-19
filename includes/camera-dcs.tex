@@ -206,7 +206,7 @@ This means that an attacker could issue a forged certificate pretending to be th
 \section{Guest account}
 \label{sec:dcs-guest}
 
-During the analysis of the camera, it was revealed that the exported configuration file mentioned in Section \ref{sec:dcs-config} contains also the information about the different users allowed to access the camera with their access right level as shown below.
+During the analysis of the camera, it was revealed that the exported configuration file mentioned in Section \ref{sec:dcs-config} also contains the information about the different users allowed to access the camera with their access right level as shown below.
 
 {\scriptsize
 \begin{verbatim}
@@ -229,12 +229,12 @@ While the obligation to set up a password for the administrator account is posit
 \subsection{Guest account access}
 \label{sec:dcs-guest-rights}
 
-The guest account is configured with an access level of two, this level prevents the guest user to modify the configuration of the system but is enough to both watching the video stream and retrieving snapshots of the video using a specific URL.\\
+The guest account is configured with an access level of two, this level prevents the guest user from modifying the configuration of the system but is enough to both watch the video stream and retrieve snapshots of the video using a specific URL.\\
 
 In the firmware source code, the web interface is powered by the open source web server Boa\footnote{Boa Webserver \url{http://www.boa.org/}}.
 To resolve the different URLs, this webserver lists all the possible URI with the associated function to execute and the access rights required to access the URI\footnote{In the firmware source code, see \texttt{/apps/public/boa-0.94.13/src/request.c} line 6700}.
 Using this list, it is possible to identify what the guest account is capable of.
-Fortunately, the guest account appears to be able only to access the stream of the camera and some moderately important information such as the firmware version.
+Fortunately, the guest account appears to be able to access only the stream of the camera and some moderately important information such as the firmware version.
 
 \subsection{Account suppression}
 \label{sec:dcs-guest-suppression}
