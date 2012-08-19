@@ -132,7 +132,7 @@ Such requests can be run in background by any application that has the correct p
 The DroidWatcher application relies on this fact to monitor the location of the user in background.\\
 
 To show the ease of retrieving such information, a python script has been developed~\cite{soft-locdump} to parse the content of these two files and produce a GPS trace file in GPX format\footnote{GPX is a XML file format listing geographical coordinates with timestamp and allowing to reproduce the movement of a device} representing the approximate movement of the device.
-However, a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the manufacturer warranty.}, this could prevent malicious applications retrieving these data.
+However, since a root access to the phone is required to access these files\footnote{Most of the time, granting a root access requires a system manipulation and voids the manufacturer warranty.}, this could prevent malicious applications retrieving this data.
 This cache folder is only created when the \emph{Use wireless networks} option is enabled in the Android settings.
 However, this option is often required by common applications such as Google Maps which may lead to a large percentage of devices having this option enabled.
 
@@ -164,7 +164,7 @@ Some users considered the collected data by the Google Cars and Android devices 
 In November 2011, in reaction to criticism, Google created a way to opt out recording of its access point.
 The proposition of Google is to end the ESSID of the wireless access point with \texttt{\_nomap}.
 The next time it is scanned by a Google Car or an Android device, the access point is removed from the database.
-Google hopes than over time, the \texttt{\_nomap} string will be adopted by other location providers~\cite{nomap}.\\
+Google hopes that over time, the \texttt{\_nomap} string will be adopted by other location providers~\cite{nomap}.\\
 
 This proposition was received with much scepticism and did not satisfy the pro-privacy groups.
 The main complain was the need of an action from the user to explicitly opt out his access point while people want a way to explicitly opt in instead.
@@ -201,7 +201,6 @@ The applications used to implement the analyses are presented in the appendix \r
 
 To carry out the experiments, a rooted smartphone using Android 2.3 was used.
 As most of the location information, including the cache databases files, is located in restricted part of the system, the rooting was necessary to explore the whole content of the phone.
-The root process and implications are discussed in the introduction.
 
 \subsubsection*{About root access}
 
@@ -374,7 +373,7 @@ The content of the identifier file \texttt{gls.platform.key} is different to the
 \subsubsection{Conclusions}
 
 The traceability is limited due to this constraint.
-Although it is relatively easy to change this value, it is quite clear that very few users are aware of the existence of this value and will apply this manipulation regularly.
+Although it is relatively easy to change this value, it is quite clear that very few users are aware of the existence of this value and thus will not apply this manipulation.
 
 
 % \subsection{Android API}

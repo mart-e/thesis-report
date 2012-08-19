@@ -10,7 +10,7 @@ Android runs on top of a Linux kernel which is yet reputed to be virus-free.\\
 The aim of this chapter is to explain in detail the current security mechanisms used to protect the users against malicious applications.
 Using the presented information, a user should be able to reduce his infection risk by adopting simple security principles.
 The focus of this chapter is the application capabilities and propagation.
-Different security threads are examined and the associated risks are evaluated.
+Different security threats are examined and the associated risks are evaluated.
 The different procedures from the publication to the installation of an application on a device are particularly examined.
 
 The forensic aspect of information retrieval from a device without the owner's consent has not been analysed here.\\
@@ -34,18 +34,30 @@ The full list of permissions with a brief description is available on the Androi
 These permissions are defined in the configuration file \texttt{AndroidManifest.xml} present in every application.
 Without the correct permission, an application throws an exception when the method accessing the forbidden resource is launched.
 
-\begin{lstlisting}[breaklines,caption={Example of permission violation log},label={lst:gpsexception},numbers=none]
+{\scriptsize
+\begin{verbatim}
 E/AndroidRuntime( 1274): FATAL EXCEPTION: main
-E/AndroidRuntime( 1274): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.gpstest/com.example.gpstest.MainActivity}: java.lang.SecurityException: Provider gps requires ACCESS_FINE_LOCATION permission
+E/AndroidRuntime( 1274): java.lang.RuntimeException: Unable to start activity
+   ComponentInfo{com.example.gpstest/com.example.gpstest.MainActivity}: 
+   java.lang.SecurityException: Provider gps requires ACCESS_FINE_LOCATION permission
 ...
-E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps requires ACCESS_FINE_LOCATION permission
+E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps
+   requires ACCESS_FINE_LOCATION permission
 ...
-\end{lstlisting}
+\end{verbatim}
+}
+% \begin{lstlisting}[breaklines,caption={Example of permission violation log},label={lst:gpsexception},numbers=none]
+% E/AndroidRuntime( 1274): FATAL EXCEPTION: main
+% E/AndroidRuntime( 1274): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.gpstest/com.example.gpstest.MainActivity}: java.lang.SecurityException: Provider gps requires ACCESS_FINE_LOCATION permission
+% ...
+% E/AndroidRuntime( 1274): Caused by: java.lang.SecurityException: Provider gps requires ACCESS_FINE_LOCATION permission
+% ...
+% \end{lstlisting}
 
-In Listing \ref{lst:gpsexception} is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
+In above trace is shown the Android debugger trace of an application requesting the location of the device using the GPS location provider without having requested the \texttt{ACCESS\_FINE\_LOCATION} permission.
 If the error is not caught properly, the execution of the application is interrupted and the user receives a notification of the crash of the application.\\
 
-The permission processed is conceived to control the access to information and to not a phone characteristic.
+The permission process is conceived to control the access to information and to not a phone characteristic.
 For instance, there is no permission to use the GPS but one to access a precise location whatever the source of the information.
 The \texttt{ACCESS\_COARSE\_LOCATION} permission is not limited to the use of the high level \texttt{LocationManager} methods but it is also required for an application to retrieve the surrounding cell towers information (as these towers have a unique identifier, this lower level information could also be used to locate the user\footnote{This method is used in the DroidWatcher application to estimate the location even when no network connectivity is available}).
 
@@ -68,14 +80,14 @@ Only an in-depth analysis such as network monitoring can detect malicious behavi
 
 Finally, if a user disagrees with the need of a suspicious permission, he has no other choice than not to install the application.
 There is no possibility to partially accept the permissions.
-Considering this restriction, it is clear than in most cases, the user will accept any permissions without regards of their type, in order to use the particular application.
+Considering this restriction, it is clear that in most cases, the user will accept any permissions regardless of their type, in order to use the particular application.
 
 \section{Installation of applications}
 
 Unlike iOS where the App Store is the only permitted source of applications\footnote{Alternative markets and applications distributions exist on iOS but they require jail-breaking which is not allowed by Apple}, the Android operating system permits several ways to install an application.
 
 \subsection{Play Store}
-By default\footnote{The Play Store is available only on official Android devices approved by Google. The Android operating system is open source which allows the port on many devices but the Android Play Store application is closed sources and compatible with only the official Android devices.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
+By default\footnote{The Play Store is available only for official Android devices approved by Google. To enforce this requirement and keep a strong control on application business, the Android Play Store application is not open source.}, the Android Play Store (formerly named Android Market before its merging with Google Music) is the only source of applications.
 Once a Google account is linked to the user's phone, the user can use the Google Play Store application which lists the available applications and allows quick installation.
 Figure \ref{fig:market} shows an example of the interface of the application.\\
 
@@ -96,7 +108,7 @@ The Android Play Store has several features that can be handy for the average us
 \end{itemizealt}
 
 On the website \url{https://play.google.com/store}, the content of the Android Play Store is available from a browser.
-An major feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
+A major feature of this website is the possibility, once logged with the associated Google account, to select applications to install.
 The next time the Android device is connected to the Internet, it will automatically download and install the selected applications without any user interaction required.
 A simple notice is displayed on the phone once the application is installed.\\
 
